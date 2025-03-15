@@ -1,0 +1,39 @@
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-primary {
+  border: 3px solid white;
+  background-image: var(--gradient-001);
+  border-radius: 10px;
+  background-size: 300% 100%;
+  moz-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+
+/* TODO: Arrumar o hover */
+.btn-primary:hover {
+  background-position: 100% 0;
+  moz-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+
+.btn-primary * {
+  color: white;
+}
+
+.btn-large {
+  padding: 40px;
+  font-size: 3em;
+}
+
+.btn-medium {
+  padding: 13px;
+  font-size: 1.5em;
+}

@@ -1,0 +1,23 @@
+.frame {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+.content {
+	background: url(/src/assets/wallpaper-mobile.png) no-repeat;
+	background-size: cover;
+	background-position: center;
+  width: 356px;
+	position: relative;
+	overflow: hidden;
+	height: 80vh;
+}
+
+@media (max-width: 650px) {
+  .content {
+    width: 100vw;
+    height: 100vh;
+	}
+}
