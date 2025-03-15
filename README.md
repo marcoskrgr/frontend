@@ -1,12 +1,35 @@
-# React + Vite
+# Padrões de Contribuição
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto segue uma convenção específica para os commits e nomes de branchs. Abaixo estão as diretrizes para manter a consistência no código.
 
-Currently, two official plugins are available:
+## Padrão de Commits
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Os commits devem seguir o padrão:
 
-## Expanding the ESLint configuration
+### Exemplos de commits:
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **FEAT: Exportar tabela para PDF #12**
+- **FIX: Bug ao exportar PDF #18**
+- **REFACTOR: Passando o componente da tabela para a pasta commons**
+
+### Tipos de commits:
+
+- **FEAT:** Usado para a introdução de novas funcionalidades.
+- **FIX:** Usado para correções de bugs.
+- **REFACTOR:** Usado para mudanças no código que não alteram a funcionalidade, mas melhoram a estrutura do código.
+
+## Padrão de Branches
+
+Os nomes das branches devem seguir o padrão:
+
+
+### Exemplos de branches:
+
+- **QUIZ-78**
+- **HOME-64**
+
+### Diretrizes:
+
+- **ESCOPO:** Deve refletir a funcionalidade ou módulo principal sendo trabalhado.
+- **NUMERODATAREFA:** O número da tarefa ou issue correspondente.
+
