@@ -1,35 +1,38 @@
-# Padrões de Contribuição
+<details>
+  <summary>Padrão de branch</summary>
+    
+  - **ESCOPO:** Deve refletir a funcionalidade ou tela que está sendo trabalhada.
+  - **NUMERODATAREFA:** O número da tarefa ou issue correspondente.
+    
+  ### Exemplos de branches:
+    Tarefa: Tela/modal de Prêmios (#1)
+    Nome da Branch: AWARD-1
 
-Este projeto segue uma convenção específica para os commits e nomes de branchs. Abaixo estão as diretrizes para manter a consistência no código.
+    Tarefa: Tela/modal de Prêmios (#3)
+    Nome da Branch: LOGIN-3
+    
+</details>
 
-## Padrão de Commits
+<details>
+  <summary>Padrão de Contribuição</summary>
+  
+  - **Mensagens de Commit:** Devem seguir o formato:  
+    ```
+    [NOME DA BRANCH] - [Descrição da alteração]
+    ```
+  
+  ### Exemplos de branches:
+  
+  - **Tarefa:** Tela/modal de Prêmios (#1)  
+    - **Nome da Branch:** `AWARD-1`  
+    - **Exemplo de Commit:** `AWARD-1 - adicionar modal de prêmios`  
 
-Os commits devem seguir o padrão:
+  - **Tarefa:** Tela de Login (#3)  
+    - **Nome da Branch:** `LOGIN-3`  
+    - **Exemplo de Commit:** `LOGIN-3 - corrigir validação do formulário`  
 
-### Exemplos de commits:
+</details>
 
-- **FEAT: Exportar tabela para PDF #12**
-- **FIX: Bug ao exportar PDF #18**
-- **REFACTOR: Passando o componente da tabela para a pasta commons**
-
-### Tipos de commits:
-
-- **FEAT:** Usado para a introdução de novas funcionalidades.
-- **FIX:** Usado para correções de bugs.
-- **REFACTOR:** Usado para mudanças no código que não alteram a funcionalidade, mas melhoram a estrutura do código.
-
-## Padrão de Branches
-
-Os nomes das branches devem seguir o padrão:
-
-
-### Exemplos de branches:
-
-- **QUIZ-78**
-- **HOME-64**
-
-### Diretrizes:
 
 - **ESCOPO:** Deve refletir a funcionalidade ou módulo principal sendo trabalhado.
 - **NUMERODATAREFA:** O número da tarefa ou issue correspondente.
-
