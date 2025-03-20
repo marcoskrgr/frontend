@@ -1,33 +1,29 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import classNames from 'classnames'
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
 
-import styles from './style.module.css';
+import styles from "./style.module.css";
 
-function Button({size, type, icon, text}) {
+function Button({size, type, icon, text, onClick}) {
+	const buttonClasses = classNames(styles.btn, {
+		[styles[`btn-${size}`]]: size,
+		[styles[`btn-${type}`]]: type
+	});
 
-  const buttonClasses = classNames(styles.btn, {
-    [styles[`btn-${size}`]]: size,
-    [styles[`btn-${type}`]]: type
-  });
-
-  return (
-    <div>
-      <button className={buttonClasses}>
-        {/* usar boxicon */}
-        <i class='bx bx-play'></i>
-        {/* {icon && <i className={`fas fa-${icon}`}></i>} */}
-        {text}
-      </button>
-    </div>
-  )
+	return (
+		<button onClick={onClick} className={buttonClasses}>
+			{icon && <i className={`bx bx-${icon}`}></i>}
+			{text}
+		</button>
+	);
 }
 
 Button.propTypes = {
-  size: PropTypes.string,
-  type: PropTypes.string,
-  icon: PropTypes.string,
-  text: PropTypes.string 
-}
+	size: PropTypes.string,
+	type: PropTypes.string,
+	icon: PropTypes.string,
+	text: PropTypes.string,
+	onClick: PropTypes.func
+};
 
-export default Button
+export default Button;
