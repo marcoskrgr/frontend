@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import { Home } from "../pages";
+import { Home, Register } from "../pages";
 import Frame from "../components/common/Frame";
 
 const routes = createBrowserRouter([
@@ -9,6 +9,13 @@ const routes = createBrowserRouter([
     element: <Frame />,
     children: [
       { path: "/", element: <Home /> },
+    ],
+  },
+  {
+    path: "/",
+    element: <Frame />,
+    children: [
+      { path: "/register", element: <Register /> },
     ],
   },
 ]);
