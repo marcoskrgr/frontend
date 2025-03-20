@@ -33,6 +33,6 @@
 
 </details>
 
-
-- **ESCOPO:** Deve refletir a funcionalidade ou módulo principal sendo trabalhado.
-- **NUMERODATAREFA:** O número da tarefa ou issue correspondente.
+<details>
+  <summary>Extensões</summary>
+</details>
