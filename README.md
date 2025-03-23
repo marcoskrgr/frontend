@@ -25,6 +25,18 @@ Obs: Caso utilize a extensão `ES7+ React/Redux/React-Native snippets`, o atalho
 </details>
 
 <details>
+  <summary>Ordem de importação</summary>
+
+  1. React
+  2. Bibliotecas
+  3. Componentes
+  4. CSS
+
+![image](https://github.com/user-attachments/assets/7e4101d6-09d9-4597-8a6f-088a1215a164)
+
+</details>
+
+<details>
   <summary>Padrão de Contribuição</summary>
   
   - **Mensagens de Commit:** Devem seguir o formato:  
@@ -43,6 +55,7 @@ Obs: Caso utilize a extensão `ES7+ React/Redux/React-Native snippets`, o atalho
     - **Exemplo de Commit:** `LOGIN-3 - corrigir validação do formulário`  
 
 </details>
+
 
 <details>
   <summary>Extensões</summary>
