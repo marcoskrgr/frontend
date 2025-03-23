@@ -1,3 +1,4 @@
+import Map from './Map';
 import Home from './Home';
 
-export { Home };
+export { Home, Map };

@@ -1,11 +1,14 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
+import Modal from "../../components/Home/Modal";
 import Button from "../../components/common/Button";
 import Tickets from "../../components/Home/Tickets";
+
 import styles from "./style.module.css";
-import Modal from "../../components/Home/Modal";
 
 function Home() {
+	const navigate = useNavigate();
 	const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
 	const [isAwardsModalOpen, setIsAwardsModalOpen] = useState(false);
 
@@ -15,7 +18,7 @@ function Home() {
 			<Tickets />
 			<img className={styles["logo-game"]} src="../../../src/assets/GameLogo.svg" alt="Logo do game" />
 			<div className={styles["buttons"]}>
-				<Button type="primary" size="large" icon="play"/>
+				<Button type="primary" size="large" icon="play" onClick={() => navigate("/map")} />
 				<div className={styles["buttons-right"]}>
 					<Button type="primary" size="medium" icon="trophy" onClick={() => setIsAwardsModalOpen(true)} />
 					<Button type="primary" size="medium" icon="help-circle" onClick={() => setIsAboutModalOpen(true)} />
