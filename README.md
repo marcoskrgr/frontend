@@ -38,6 +38,6 @@
 </details>
 
 <details>
-  <summary>Vue -> React</summary>
+  <summary>React -> Vue</summary>
 </details>
 
