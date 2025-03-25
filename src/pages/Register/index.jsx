@@ -1,8 +1,12 @@
 import React from "react";
 import styles from "./style.module.css";
 import TextInput from "../../components/Login/TextInput";
+import Button from "../../components/common/Button";
 
 function Register() {
+  let inputList = document.getElementsByTagName('input');
+  console.log(inputList)
+
   return (
     <div className={styles["content"]}>
       <img
@@ -11,8 +15,7 @@ function Register() {
         alt="Logo da SoftExpert"
       />
 
-      <form>
-
+      <form className={styles["form"]}>
         <TextInput
           id={"name"}
           label="Nome"
@@ -42,7 +45,7 @@ function Register() {
           id={"phone"}
           label="Telefone"
           isRequired={true}
-          type={"number"}
+          type={"tel"}
           onChange={() => {}}
           validType={"phone"}
         />
@@ -65,8 +68,14 @@ function Register() {
           validType={"confpassword"}
         />
 
-        <button type="submit">Enviar</button>
+        <button className={styles["button"]}  type="submit">
+          Continuar
+        </button>
+
       </form>
+
+      <a className={styles["a"]} href="#">já possui login?</a>
+
     </div>
   );
 }

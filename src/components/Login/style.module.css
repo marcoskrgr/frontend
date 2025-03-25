@@ -1,0 +1,38 @@
+.inputWrapper {
+	display: flex;
+	flex-direction: column;
+	margin-top: 0dvh;
+}
+
+.input {
+	display: flex;
+	width: 100%;
+	height: 4dvh;
+	border-radius: 10px;
+	border: none;
+	outline: none;
+	background: var(--soft-core-blue);
+	color: var(--soft-white);
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+.gradient {
+	display: flex;
+	width: 100%;
+	border-radius: 10px;
+	padding: 3px;
+	background-image: var(--gradient-001);
+	-webkit-transition: background-image 0.2s ease-in-out;
+	transition: background-image 0.2s ease-in-out;
+}
+
+.error {
+	background-image: var(--gradient-red) !important;
+}
+
+.label {
+	color: var(--soft-white);
+	padding-left: 5%;
+	padding-right: 5%;
+}

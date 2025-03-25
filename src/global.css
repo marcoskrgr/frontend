@@ -2,16 +2,21 @@
 
 :root {
 	--expert-horizon: #0075ff;
+	--future-flow: #005BC7;
+	--soft-core-blue: #002080;
 	--expert-vision: #101c40;
 	--green-balance: #009182;
 	--soft-evergreen: #00e883;
 	--expert-inspire: #d262ff;
 	--deep-connection: #58016a;
+	--soft-white: #F9FAFA;
 	--text-gray: #b2b5cc;
 	--gold: #ffb43a;
 	--silver: #515151;
 	--bronze: #a4682c;
 	--gradient-001: linear-gradient(to top, #0075ff 0%, #00c8ff 100%);
+	--gradient-001-dark: linear-gradient(to top, #0063d4 0%, #0098c2 100%);
+	--gradient-red: linear-gradient(to top, #FF7D7E 0%, #B40048 100%);
 }
 
 * {

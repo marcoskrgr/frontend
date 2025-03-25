@@ -1,15 +1,15 @@
 export const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-        return { isValid: false, message: "Formato de e-mail inválido!" };
+        return { isValid: false, message: "E-mail inválido!" };
     }
     return { isValid: true, message: "" };
 };
 
 export const validatePhone = (phone) => {
-    const phoneRegex = /^\d{10,11}$/;
+    const phoneRegex = /(\(?\d{2}\)?\s)?(\d{4,5}\-\d{4})/;
     if (!phoneRegex.test(phone)) {
-        return { isValid: false, message: "Telefone deve ter 10 ou 11 números!" };
+        return { isValid: false, message: "Telefone inválido!" };
     }
     return { isValid: true, message: "" };
 };
