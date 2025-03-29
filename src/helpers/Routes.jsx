@@ -9,15 +9,9 @@ const routes = createBrowserRouter([
     element: <Frame />,
     children: [
       { path: "/", element: <Home /> },
-    ],
-  },
-  {
-    path: "/",
-    element: <Frame />,
-    children: [
       { path: "/register", element: <Register /> },
     ],
-  },
+  }
 ]);
 
 export default routes;

@@ -1,11 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./style.module.css";
 import TextInput from "../../components/Login/TextInput";
 import Button from "../../components/common/Button";
 
 function Register() {
-  let inputList = document.getElementsByTagName('input');
-  console.log(inputList)
+  const [valid, setValid] = useState(false);
+
+  const handleChange = (event) => {
+    let inputList = document.getElementsByTagName("input");
+
+    /* por algum motivo sempre fica 1 validação atrás, tipo eu termino de preencher e fica invalido
+     * ai atualizo mais um vez e fica valido
+     * Pedir ajuda pra geos
+     */
+    Array.from(inputList).forEach((input) => {
+      if (input.dataset.isvalid === "false" || input.value === "") {
+        setValid(false);
+      } else {
+        setValid(true);
+      }
+    })
+  };
 
   return (
     <div className={styles["content"]}>
@@ -21,15 +36,15 @@ function Register() {
           label="Nome"
           isRequired={true}
           type={"text"}
-          onChange={() => {}}
+          onChange={handleChange}
         />
 
         <TextInput
-          id={"email"}
+          id={"surname"}
           label="Sobrenome"
           isRequired={true}
           type={"text"}
-          onChange={() => {}}
+          onChange={handleChange}
         />
 
         <TextInput
@@ -37,7 +52,7 @@ function Register() {
           label="E-mail"
           isRequired={true}
           type={"text"}
-          onChange={() => {}}
+          onChange={handleChange}
           validType={"email"}
         />
 
@@ -46,7 +61,7 @@ function Register() {
           label="Telefone"
           isRequired={true}
           type={"tel"}
-          onChange={() => {}}
+          onChange={handleChange}
           validType={"phone"}
         />
 
@@ -55,7 +70,7 @@ function Register() {
           label="Senha"
           isRequired={true}
           type={"password"}
-          onChange={() => {}}
+          onChange={handleChange}
           validType={"password"}
         />
 
@@ -64,18 +79,22 @@ function Register() {
           label="Confirmar Senha"
           isRequired={true}
           type={"password"}
-          onChange={() => {}}
+          onChange={handleChange}
           validType={"confpassword"}
         />
 
-        <button className={styles["button"]}  type="submit">
+        <button
+          className={(valid ? " " : styles["disabled"]) + " " + styles["button"]}
+          disabled={valid ? false : true}
+          type="submit"
+        >
           Continuar
         </button>
-
       </form>
 
-      <a className={styles["a"]} href="#">já possui login?</a>
-
+      <a className={styles["a"]} href="#">
+        já possui login?
+      </a>
     </div>
   );
 }
