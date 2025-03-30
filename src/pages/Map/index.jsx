@@ -8,39 +8,39 @@ import PlayerProfile from "../../components/Map/PlayerProfile";
 
 import styles from "./style.module.css";
 
+const columns = [
+	{id: 4, title: "Backlog"},
+	{id: 3, title: "To-do"},
+	{id: 2, title: "In progress"},
+	{id: 1, title: "Done"}
+];
+
+const cards = [
+	{id: 4, title: "Task #4", route: "/", difficulty: "hard", tags: [{label: "BUG", color: "red"}], description: "Resolver bugs do sistema"},
+	{
+		id: 3,
+		title: "Task #3",
+		route: "/wordle",
+		difficulty: "medium",
+		tags: [{label: "TASK", color: "blue"}],
+		description: "Escrever documentação"
+	},
+	{
+		id: 2,
+		title: "Task #2",
+		route: "/memory",
+		difficulty: "easy",
+		tags: [{label: "REFACTOR", color: "yellow"}],
+		description: "Pair programming com o scrum"
+	},
+	{id: 1, title: "Task #1", route: "/quiz", difficulty: "easy", description: "Responder o quiz de treinamento"}
+];
+
 function Map() {
 	const {name, tickets, level} = useUser();
 
 	const contentRef = useRef(null);
 	const lastCardRef = useRef(null);
-
-	const cards = [
-		{id: 4, title: "Task #4", route: "/", difficulty: "hard", tags: [{label: "BUG", color: "red"}], description: "Resolver bugs do sistema"},
-		{
-			id: 3,
-			title: "Task #3",
-			route: "/wordle",
-			difficulty: "medium",
-			tags: [{label: "TASK", color: "blue"}],
-			description: "Escrever documentação"
-		},
-		{
-			id: 2,
-			title: "Task #2",
-			route: "/memory",
-			difficulty: "easy",
-			tags: [{label: "REFACTOR", color: "yellow"}],
-			description: "Pair programming com o scrum"
-		},
-		{id: 1, title: "Task #1", route: "/quiz", difficulty: "easy", description: "Responder o quiz de treinamento"}
-	];
-
-	const columns = [
-		{id: 4, title: "Backlog"},
-		{id: 3, title: "To-do"},
-		{id: 2, title: "In progress"},
-		{id: 1, title: "Done"}
-	];
 
 	const getColumnCards = (columnTitle) => {
 		return cards.filter((card) => {
