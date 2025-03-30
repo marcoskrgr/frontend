@@ -12,7 +12,6 @@ function PlayerProfile() {
 		<div className={styles["player-profile"]}>
 			<div className={styles["player-image"]}>
 				<div className={profileClasses}></div>
-				<div className={styles["level"]}></div>
 			</div>
 			<div className={styles["name-tickets"]}>
 				<div className={styles["name"]}>JORGE BENITEZ</div>

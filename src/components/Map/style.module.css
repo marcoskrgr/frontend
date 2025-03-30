@@ -122,14 +122,14 @@
 }
 
 .name-tickets {
-	margin-left: 50px;
+	margin-left: 58px;
 }
 
 .player-profile .name, .player-profile .tickets {
 	border: 3px solid var(--expert-vision);
 	background-color: var(--expert-horizon);
   color: white;
-	padding: 6px 23px 6px 55px;
+	padding: 6px 30px 6px 47px;
   border-radius: 14px;
 }
 

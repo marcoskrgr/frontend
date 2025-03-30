@@ -1,12 +1,12 @@
 import React, {useEffect, useRef} from "react";
+import {Link} from "react-router-dom";
 
 import Card from "../../components/Map/Card";
 import Column from "../../components/Map/Column";
-import PlayerProfile from "../../components/Map/PlayerProfile";
 import {useUser} from "../../helpers/context/UserContext";
+import PlayerProfile from "../../components/Map/PlayerProfile";
 
 import styles from "./style.module.css";
-import {Link} from "react-router-dom";
 
 function Map() {
 	const {name, tickets, level} = useUser();
