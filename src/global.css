@@ -26,6 +26,10 @@
 	box-sizing: border-box;
 }
 
+a {
+	text-decoration: none;
+}
+
 body {
 	/* background-color: #022280; */
 	background-color: #800202;
