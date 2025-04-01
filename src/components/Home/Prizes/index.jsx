@@ -7,7 +7,6 @@ function Prizes() {
   return (
     <div className={styles.container}>
       
-      {/* Logo Section */}
       <div className={styles["logo-section"]}>
         <div className={styles.logo}>
             <img src={SoftExpertLogoBlue} alt="SoftExpert Logo" />
@@ -15,7 +14,6 @@ function Prizes() {
         </div>
       </div>
       
-      {/* Instructions */}
       <div className={styles.instructions}>
         <h2>Como a premiação funciona?</h2>
         <ol>
@@ -25,7 +23,6 @@ function Prizes() {
         </ol>
       </div>
       
-      {/* Available Prizes */}
       <div className={styles.prizes}>
         <h2>Prêmios disponíveis:</h2>
         {[1, 1, 1].map((num, index) => (

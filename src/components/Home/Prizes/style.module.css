@@ -17,8 +17,6 @@
 
   }
   
-  
-  /* Logo Section */
   .logo-section {
     display: flex;
     justify-content: center;
@@ -31,8 +29,6 @@
     align-items: center;
   }
 
-  
-  /* Instructions */
   .instructions {
     padding: 0 23px;
     margin-bottom: 24px;
@@ -57,7 +53,6 @@
     font-size: 15px;
   }
   
-  /* Prizes */
   .prizes {
     padding: 0 23px;
   }
