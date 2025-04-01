@@ -21,15 +21,13 @@
 
 .tickets-length span:nth-child(2) {
   color: var(--expert-horizon);
-	font-size: 1.6rem;
-  
+  font-size: 1.6rem;
 }
 
 .tickets-length span:nth-child(3) {
   font-size: 1.6rem;
   color: white;
 }
-
 .modal {
   position: absolute;
   bottom: -100vh;
@@ -37,6 +35,7 @@
   height: 100%;
   width: 100vw;
   transition: all 0.5s ease-in-out;
+  overflow-y: auto;
 }
 
 .modal.show {
@@ -49,6 +48,19 @@
   cursor: pointer;
   font-weight: bold;
   text-align: center;
-  padding: 21px 0;
-  clip-path: polygon(0% 0%, 100% 0%, 99.94% -2.43%, 50% 100%, 0.10% -1.09%);
+  padding: 20px 0;
+
+
+  clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 50% 100%, 0% 70%);
+}
+
+.modal .content {
+  flex: 1;
+  overflow-y: auto; 
+  padding-bottom: 20px; 
+}
+
+.modal .header h2 {
+  font-size: 2rem;
+  margin: 0;
 }

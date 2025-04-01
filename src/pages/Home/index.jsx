@@ -4,6 +4,7 @@ import Button from "../../components/common/Button";
 import Tickets from "../../components/Home/Tickets";
 import styles from "./style.module.css";
 import Modal from "../../components/Home/Modal";
+import About from "../../components/Home/About";
 
 function Home() {
 	const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
@@ -21,7 +22,9 @@ function Home() {
 					<Button type="primary" size="medium" icon="help-circle" onClick={() => setIsAboutModalOpen(true)} />
 				</div>
 			</div>
-			<Modal title="Sobre" show={isAboutModalOpen} onClose={() => setIsAboutModalOpen(false)}>Sobre o jogo</Modal>
+			<Modal title="Sobre" show={isAboutModalOpen} onClose={() => setIsAboutModalOpen(false)}>
+				<About />
+			</Modal>
 			<Modal title="Prêmios" show={isAwardsModalOpen} onClose={() => setIsAwardsModalOpen(false)}>Prêmios</Modal>
 		</div>
 	);
