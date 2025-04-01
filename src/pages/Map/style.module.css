@@ -1,0 +1,7 @@
+.content {
+  padding: 160px 40px 100px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 12vh;
+  overflow-x: scroll;
+}

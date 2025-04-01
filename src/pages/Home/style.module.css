@@ -7,10 +7,11 @@
 	justify-content: space-between;
 	flex-direction: column;
 	align-items: center;
+	overflow: hidden;
 }
 
 .content .logo-soft:nth-child(1) {
-	width: 10vw;
+	width: 180px;
 }
 
 .content .logo-game {
