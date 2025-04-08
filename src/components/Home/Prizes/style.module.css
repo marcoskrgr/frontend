@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Inter", sans-serif !important;
   }
   
   body {
@@ -14,8 +15,9 @@
     background-color: white;
     min-height: 100vh;
     position: relative;
-
+    padding: 0 30px;
   }
+
   
   .logo-section {
     display: flex;
