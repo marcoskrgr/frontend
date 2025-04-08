@@ -1,15 +1,11 @@
 import React from "react";
 import Hexagon from "../../common/Hexagon";
 import styles from "./style.module.css";
+import { credits } from "./credits";
+
 
 function About() {
-  const credits = [
-    { name: "João Da Silva", position: "Desenvolvedor FrontEnd" },
-    { name: "Maria De Fátima", position: "Desenvolvedor FrontEnd" },
-    { name: "Pedro Guzini", position: "Desenvolvedor FrontEnd" },
-    { name: "Ana Maria", position: "Desenvolvedor FrontEnd" },
-    { name: "Lucas Antonete", position: "Desenvolvedor FrontEnad" }
-  ];
+  const credits_list = credits;
   
   return (
     <>
@@ -36,7 +32,7 @@ function About() {
         <p>E que rolem os créditos</p>
       </div>
       <div className={styles["displayCredits"]}>
-        {credits.map((credit, index) => (
+        {credits_list.map((credit, index) => (
           <div
             key={index}
             className={

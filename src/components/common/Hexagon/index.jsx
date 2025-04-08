@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Hexagon({ size = 200, children }) {
+function Hexagon({ size = 200, src, alt = 'Hexagon Image' }) {
   const dimensionW = typeof size === 'number' ? `${size}px` : size;
   const dimensionH = typeof size === 'number' ? `${size * 0.86602540378}px` : size;
 
@@ -11,24 +11,19 @@ function Hexagon({ size = 200, children }) {
     clipPath: 'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    overflow: 'hidden'
   };
 
-  const innerStyle = {
-    width: '94%',
-    height: '94%',
-    backgroundColor: '#ccc',
-    clipPath: 'inherit',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
+  const imgStyle = {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover'
   };
 
   return (
     <div style={containerStyle}>
-      <div style={innerStyle}>
-        {children}
-      </div>
+      <img src={src} alt={alt} style={imgStyle} />
     </div>
   );
 }
