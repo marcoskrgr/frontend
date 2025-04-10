@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Modal from "../../components/Home/Modal";
 import Button from "../../components/common/Button";
 import Tickets from "../../components/Home/Tickets";
+import About from "../../components/Home/About";
 
 import styles from "./style.module.css";
 
@@ -24,7 +25,9 @@ function Home() {
 					<Button type="primary" size="medium" icon="help-circle" onClick={() => setIsAboutModalOpen(true)} />
 				</div>
 			</div>
-			<Modal title="Sobre" show={isAboutModalOpen} onClose={() => setIsAboutModalOpen(false)}>Sobre o jogo</Modal>
+			<Modal title="Sobre" show={isAboutModalOpen} onClose={() => setIsAboutModalOpen(false)}>
+				<About />
+			</Modal>
 			<Modal title="Prêmios" show={isAwardsModalOpen} onClose={() => setIsAwardsModalOpen(false)}>Prêmios</Modal>
 		</div>
 	);
