@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 import Modal from "../../components/Home/Modal";
 import Button from "../../components/common/Button";
 import Tickets from "../../components/Home/Tickets";
 import About from "../../components/Home/About";
+import Prizes from "../../components/Home/Prizes";
 
 import styles from "./style.module.css";
 
@@ -28,7 +29,9 @@ function Home() {
 			<Modal title="Sobre" show={isAboutModalOpen} onClose={() => setIsAboutModalOpen(false)}>
 				<About />
 			</Modal>
-			<Modal title="Prêmios" show={isAwardsModalOpen} onClose={() => setIsAwardsModalOpen(false)}>Prêmios</Modal>
+			<Modal title="Prêmios" show={isAwardsModalOpen} onClose={() => setIsAwardsModalOpen(false)}>
+				<Prizes />
+			</Modal>
 		</div>
 	);
 }
