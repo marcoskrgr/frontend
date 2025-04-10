@@ -26,12 +26,8 @@ function Home() {
 					<Button type="primary" size="medium" icon="help-circle" onClick={() => setIsAboutModalOpen(true)} />
 				</div>
 			</div>
-			<Modal title="Sobre" show={isAboutModalOpen} onClose={() => setIsAboutModalOpen(false)}>
-				<About />
-			</Modal>
-			<Modal title="Prêmios" show={isAwardsModalOpen} onClose={() => setIsAwardsModalOpen(false)}>
-				<Prizes />
-			</Modal>
+			<Modal title="Sobre" show={isAboutModalOpen} onClose={() => setIsAboutModalOpen(false)}><About /></Modal>
+			<Modal title="Prêmios" show={isAwardsModalOpen} onClose={() => setIsAwardsModalOpen(false)}><Prizes /></Modal>
 		</div>
 	);
 }

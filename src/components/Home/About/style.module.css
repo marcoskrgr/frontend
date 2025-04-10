@@ -1,21 +1,15 @@
 .logo {
-	width: 100vw;
+	width: 200px;
+  margin-top: 24px;
+  margin-bottom: 32px;
 	display: flex;
 	justify-content: start;
 	align-items: start;
 }
 
-.logo img {
-	margin-left: 85px;
-	margin-top: 20px;
-}
-
 .desc-container {
-	width: 95vw;
 	display: flex;
 	justify-content: flex-start;
-	margin-left: 20px;
-	margin-top: 20px;
 	align-items: center;
 }
 
@@ -42,23 +36,26 @@
 	display: flex;
 	flex-direction: column;
 	margin-top: 20px;
-	padding: 0 1rem;
+}
+
+
+.credit-left, .credit-right {
+	border-radius: 8px;
+	display: flex;
+	gap: 10px;
+
 }
 
 .credit-left {
 	align-self: flex-start;
 	padding: 10px;
-	border-radius: 8px;
-	display: flex;
-	gap: 10px;
+	padding-left: 0;
 }
 
 .credit-right {
 	align-self: flex-end;
 	padding: 10px;
-	border-radius: 8px;
-	display: flex;
-	gap: 10px;
+	padding-right: 0;
 }
 
 .credit-left .text {
@@ -80,14 +77,12 @@
 .name {
 	font-weight: 700;
 	font-size: 16px;
-	font-family: "Inter", Helvetica, sans-serif, sans-serif !important;
 }
 
 .position {
 	font-size: 14px;
 	color: gray;
 	font-weight: 600;
-	font-family: "Inter", Helvetica, sans-serif, sans-serif !important;
 }
 
 .hex {
