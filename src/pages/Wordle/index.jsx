@@ -1,7 +1,7 @@
 import {useState, useCallback} from "react";
 
 import Grid from "@components/Wordle";
-import Keyboard from "@components/Wordle/Keyboard.jsx";
+import Keyboard from "@components/Wordle/Keyboard";
 import GameHeader from "@components/common/GameHeader";
 
 import styles from "@components/Wordle/styles.module.css";
@@ -12,6 +12,7 @@ const CONFIG = {
 	SECRET_WORD: "LIVRO"
 };
 
+// ! Essas validações vão vir do back 
 export default function Wordle() {
 	const [guesses, setGuesses] = useState([]);
 	const [currentGuess, setCurrentGuess] = useState("");
