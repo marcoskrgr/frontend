@@ -1,19 +1,12 @@
-import React, {useState, useEffect} from "react";
-
+import React, { useState, useEffect } from "react";
 import style from "./style.module.css";
 
-function GameHeader({task, initialTime = 60}) {
+function GameHeader({ task, initialTime = 0 }) {
 	const [timer, setTimer] = useState(initialTime);
 
 	useEffect(() => {
 		const interval = setInterval(() => {
-			setTimer((prevTimer) => {
-				if (prevTimer <= 0) {
-					clearInterval(interval);
-					return 0;
-				}
-				return prevTimer - 1;
-			});
+			setTimer((prevTimer) => prevTimer + 1);
 		}, 1000);
 
 		return () => clearInterval(interval);
