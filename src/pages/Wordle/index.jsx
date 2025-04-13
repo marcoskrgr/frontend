@@ -1,10 +1,10 @@
 import { useState, useCallback } from 'react';
 
-import Grid from '@components/Wordle/Grid';
+import Grid from '@components/Wordle';
 import Keyboard from '@components/Wordle/Keyboard.jsx';
 import GameHeader from '@components/common/GameHeader';
 
-import styles from '@components/Wordle/Grid/styles.module.css';
+import styles from '@components/Wordle/styles.module.css';
 
 const CONFIG = {
   MAX_ATTEMPTS: 6,

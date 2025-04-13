@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Grid/styles.module.css";
+import styles from "./styles.module.css";
 
 const QWERTY = [
   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],

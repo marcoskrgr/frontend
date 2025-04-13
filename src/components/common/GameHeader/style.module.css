@@ -2,7 +2,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2vh 2vw;
+  padding: 2vh 47px;
+  margin-bottom: 2vh;
 }
 
 .header > div {
