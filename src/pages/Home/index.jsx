@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 
-import Modal from "../../components/Home/Modal";
-import Button from "../../components/common/Button";
-import Tickets from "../../components/Home/Tickets";
-import About from "../../components/Home/About";
-import Prizes from "../../components/Home/Prizes";
+import About from "@components/Home/About";
+import Button from "@components/common/Button";
+import Modal from "@components/Home/Modal";
+import Prizes from "@components/Home/Prizes";
+import Tickets from "@components/Home/Tickets";
 
 import styles from "./style.module.css";
 

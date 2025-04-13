@@ -1,0 +1,199 @@
+:root {
+  --gray-bg: #323232;
+  --gray-gradient: linear-gradient(to bottom, #545C65 0%, #262626 100%);
+  --gray-inner: #323232;
+  --green-gradient: linear-gradient(to bottom, #00E883 0%, #101C40 100%);
+  --green-inner: #009182;
+  --gold-gradient: linear-gradient(to bottom, #FFD900 0%, #DD8100 100%);
+  --gold-inner: #EEAF00;
+  --active-gradient: linear-gradient(to bottom, #4A90E2 0%, #1C3A6D 100%);
+  --active-inner: #357ABD;
+}
+
+.container {
+  max-width: 400px;
+  margin: 40px auto;
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.form {
+  margin-bottom: 1rem;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  text-align: center;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.input:disabled {
+  background-color: #f0f0f0;
+  cursor: not-allowed;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.grid .row {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+/* Estilo para a row ativa */
+.grid .activeRow .cell {
+  background-color: var(--active-inner);
+}
+
+.grid .activeRow .cell::before {
+  background: var(--active-gradient);
+}
+
+.grid .activeRow .cell::after {
+  background-color: var(--active-inner);
+}
+
+.cell,
+.key {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 2px;
+  position: relative;
+  z-index: 0;
+  border-radius: 6px;
+  color: white;
+  overflow: hidden;
+  background-color: var(--gray-bg);
+}
+
+.cell {
+  background-color: #cccccc47;
+  border-radius: 6px;
+}
+
+.key {
+  width: 28px;
+  height: 50px;
+  margin: 0 3px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.cell::before,
+.key::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  z-index: -1;
+  border-radius: 8px;
+}
+
+.cell::after,
+.key::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  right: 3px;
+  bottom: 3px;
+  z-index: -1;
+  border-radius: 6px;
+}
+
+.enter {
+  width: 79px;
+}
+
+.gray::before,
+.key.gray::before,
+.key::before {
+  background: var(--gray-gradient);
+}
+
+.gray::after,
+.key.gray::after,
+.key::after {
+  background-color: var(--gray-inner);
+}
+
+.green::before,
+.key.green::before {
+  background: var(--green-gradient);
+}
+
+.green::after,
+.key.green::after {
+  background-color: var(--green-inner);
+}
+
+.goldenrod::before,
+.key.goldenrod::before {
+  background: var(--gold-gradient);
+}
+
+.goldenrod::after,
+.key.goldenrod::after {
+  background-color: var(--gold-inner);
+}
+
+.key.green {
+  background-color: var(--green-inner) !important;
+}
+
+.key.goldenrod {
+  background-color: var(--gold-inner);
+}
+
+.message {
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.keyboard {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -30%);
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.key:active {
+  transform: scale(0.95);
+}
