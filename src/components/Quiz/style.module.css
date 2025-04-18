@@ -1,0 +1,127 @@
+.quiz-container {
+  min-height: 100vh;
+  background-color: #2F2F6F;
+  color: #FFFFFF;
+  font-family: 'Press Start 2P', cursive;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 48px;
+}
+
+.score-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.score-icon {
+  width: 32px;
+  height: 32px;
+  color: #F2C94C;
+  fill: #F2C94C;
+}
+
+.score-text,
+.task-text,
+.timer-text {
+  font-size: 1.5rem;
+}
+
+.timer-text {
+  font-variant-numeric: tabular-nums;
+}
+
+.quiz-main {
+  flex: 1;
+  max-width: 48rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.quiz-question {
+  font-size: 1.875rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  line-height: 1.4;
+  max-width: 100%;
+}
+
+.answers-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.answer-button {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background-color: #149CE6;
+  border: none;
+  border-radius: 0.5rem;
+  color: #FFFFFF;
+  font-size: 1.25rem;
+  font-weight: bold;
+  font-family: 'Press Start 2P', cursive;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.answer-button:hover:not(:disabled) {
+  background-color: #1290D4;
+  transform: translateY(-2px);
+}
+
+.answer-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.answer-selected-correct {
+  background-color: #27AE60 !important;
+}
+
+.answer-selected-incorrect {
+  background-color: #EB5757 !important;
+}
+
+.answer-correct {
+  background-color: #27AE60;
+  opacity: 0.8;
+}
+
+.answer-incorrect {
+  background-color: #EB5757;
+  opacity: 0.6;
+}
+
+.next-button {
+  margin-top: 2rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #F2C94C;
+  border: none;
+  border-radius: 0.5rem;
+  color: #2F2F6F;
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: 'Press Start 2P', cursive;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.next-button:hover {
+  background-color: #d4b846;
+  transform: translateY(-2px);
+}
