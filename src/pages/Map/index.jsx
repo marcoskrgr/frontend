@@ -1,10 +1,10 @@
 import React, {useEffect, useRef} from "react";
 import {Link} from "react-router-dom";
 
-import Card from "../../components/Map/Card";
-import Column from "../../components/Map/Column";
+import Card from "@components/Map/Card";
+import Column from "@components/Map/Column";
 import {useUser} from "../../helpers/context/UserContext";
-import PlayerProfile from "../../components/Map/PlayerProfile";
+import PlayerProfile from "@components/Map/PlayerProfile";
 
 import styles from "./style.module.css";
 
