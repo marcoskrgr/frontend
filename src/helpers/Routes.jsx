@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import { Home, Map } from "../pages";
+import { Home, Map, Memory } from "../pages";
 import Frame from "../components/common/Frame";
 
 const routes = createBrowserRouter([
@@ -10,6 +10,7 @@ const routes = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/map", element: <Map /> },
+      { path: "/memory", element: <Memory /> },
     ],
   },
 ]);

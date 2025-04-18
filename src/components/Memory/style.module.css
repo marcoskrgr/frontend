@@ -1,0 +1,27 @@
+.grid-container {
+    display: flex;
+    flex-direction: column;
+    width: 356px;
+    padding: 1rem;
+    margin: auto;
+  }
+  
+  .row-of-4 {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    /* gap: 1px; */
+    margin-top: -25px;
+  }
+  
+  .row-of-3 {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    /* gap: 1px; */
+    margin-top: -25px;
+  }
+  
+  .align {
+    width: 356px;
+  }
