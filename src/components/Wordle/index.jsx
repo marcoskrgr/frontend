@@ -1,9 +1,31 @@
-import React from 'react'
+import React from "react";
 
-function index() {
-  return (
-    <div>index</div>
-  )
+import Button from "./Button";
+
+import styles from "./styles.module.css";
+
+const MAX_ATTEMPTS = 6;
+const WORD_LENGTH = 5;
+
+function Grid({guesses, currentGuess, getLetterColor, isGameOver}) {
+	return (
+		<div className={styles.grid}>
+			{Array.from({length: MAX_ATTEMPTS}).map((_, rowIndex) => {
+				const guess = guesses[rowIndex] || (rowIndex === guesses.length ? currentGuess : "");
+				const letters = guess.padEnd(WORD_LENGTH, " ").split("");
+				const isActiveRow = !isGameOver && rowIndex === guesses.length;
+
+        return (
+					<div key={`row-${rowIndex}`} className={`${styles.row} ${isActiveRow ? styles.activeRow : ""}`}>
+						{letters.map((letter, colIndex) => {
+							const color = rowIndex < guesses.length ? getLetterColor(letter, colIndex, guesses[rowIndex]) : "";
+							return <Button key={`${rowIndex}-${colIndex}`} letter={letter} color={color} />;
+						})}
+					</div>
+				);
+			})}
+		</div>
+	);
 }
 
-export default index
+export default Grid;

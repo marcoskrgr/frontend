@@ -1,0 +1,30 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2vh 47px;
+  margin-bottom: 2vh;
+}
+
+.header > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header img {
+  width: 20px;
+}
+
+.header * {
+  color: white !important;
+}
+
+.task:nth-child(2) {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+span {
+  font-size: 19px;
+}

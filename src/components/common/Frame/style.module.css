@@ -12,6 +12,10 @@
   width: 356px;
 	position: relative;
 	overflow: hidden;
+  height: 80vh;
+}
+
+.content > div {
 	height: 80vh;
 }
 
@@ -19,5 +23,9 @@
   .content {
     width: 100vw;
     height: 100vh;
+	}
+
+	.content > div {
+		height: 100vh;
 	}
 }
