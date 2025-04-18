@@ -1,7 +1,17 @@
+.inputList {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
+}
+
 .inputWrapper {
 	display: flex;
 	flex-direction: column;
-	margin-top: 0dvh;
+}
+
+.inputList .inputWrapper:not(:first-child) {
+	margin-top: 1dvh;
 }
 
 .input {
@@ -35,4 +45,5 @@
 	color: var(--soft-white);
 	padding-left: 5%;
 	padding-right: 5%;
+	margin-bottom: 2%;
 }

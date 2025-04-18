@@ -1,5 +1,6 @@
 import React from "react";
-import { validateEmail, validatePhone, validatePassword } from "./validTypes";
+import PropTypes from "prop-types";
+import { validateEmail, validatePhone, validatePassword, formatPhone } from "./validTypes";
 import Input from "./Input";
 import styles from "./style.module.css";
 
@@ -13,6 +14,7 @@ function TextInputList({ data, setData }) {
 
       const password = updated.find((inp) => inp.id === "password");
       const confPass = updated.find((inp) => inp.id === "confPass");
+      const phone = updated.find((inp) => inp.id === "phone");
       let canSubmit = true
 
       updated.forEach((inp) => {
@@ -40,8 +42,10 @@ function TextInputList({ data, setData }) {
           }
           break;
         case "phone":
+          value = formatPhone(value)
+
           if (!validatePhone(value)) {
-            updated.find((inp) => inp.id === "phone").error = "Telefone inválido";
+            phone.error = "Telefone inválido";
           }
           break;
         default:
@@ -61,8 +65,10 @@ function TextInputList({ data, setData }) {
           key={inp.id}
           id={inp.id}
           type={inp.type}
+          inputMode={inp.inputMode}
           label={inp.label}
           isRequired={inp.isRequired}
+          alignCenter={inp.alignCenter}
           value={inp.value}
           error={inp.error}
           onChange={handleInputChange}
@@ -71,5 +77,10 @@ function TextInputList({ data, setData }) {
     </div>
   );
 }
+
+TextInputList.propTypes = {
+  data: PropTypes.object.isRequired,
+  setData: PropTypes.func.isRequired
+};
 
 export default TextInputList;

@@ -14,31 +14,40 @@
 	margin-bottom: 4dvh;
 }
 
+.formFooter {
+	display: flex;
+	flex-direction: column;
+	height: 20%;
+	padding-top: 5%;
+	align-items: center;
+}
+
 .a {
 	color: var(--soft-white);
-	margin-top: 2dvh;
+	margin: 1dvh 0;
 	text-decoration: none;
 }
 
 .button {
 	background-image: var(--gradient-001);
 	height: 5dvh;
+	width: 100%;
 	border: 3px var(--soft-white) solid;
 	border-radius: 10px;
 	color: var(--soft-white);
 	font-size: larger;
 }
 
-.button:active {
-	background-image: var(--gradient-001-dark) !important;
-	border-color: var(--text-gray) !important;
-	color: var(--text-gray) !important;
-}
-
 .disabled {
 	background: var(--future-flow) !important;
 	border-color: var(--expert-vision) !important;
 	color: var(--expert-vision) !important;
+}
+
+.button:active {
+	background-image: var(--gradient-001-dark);
+	border-color: var(--text-gray);
+	color: var(--text-gray);
 }
 
 .form {
