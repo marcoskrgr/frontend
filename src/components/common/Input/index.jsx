@@ -3,15 +3,16 @@ import classNames from 'classnames'
 
 import styles from './style.module.css'
 
-function Input({ isValid = true, label = '', customStyle = {}, ...props }) {
-  const inputClass = classNames(styles.input, {
-    [styles.invalid]: !isValid,
+function Input({ isValid = null, label = '', customStyle = {}, ...props }) {
+  const inputClass = classNames(styles.wrapper, {
+    [styles.invalid]: isValid === false,
+    [styles.valid]: isValid,
   })
 
   return (
-    <div className={styles.wrapper} style={customStyle}>
+    <div className={inputClass} style={customStyle}>
       <input
-        className={inputClass}
+        className={styles["input"]}
         placeholder={label}
         {...props}
       />

@@ -52,20 +52,13 @@ function Phrase() {
 			<div className={styles["content"]}>
 				<span>Preencha com a frase do momento!</span>
 				<Input
-					customStyle={
-						wasSubmitted
-							? isCorrect
-								? {background: "linear-gradient(to top, #00E883 0%, #009182 100%)"}
-								: {background: "linear-gradient(to top, #FF7D7E 0%, #B40048 100%)"}
-							: {}
-					}
 					label="Digite aqui..."
 					value={phrase}
-					isValid={!showError}
+					isValid={wasSubmitted ? !showError : null}
 					onChange={handleChange}
 				/>
 				<Button
-					isDisabled={false}
+					isDisabled={phrase.length < 1}
 					type="primary"
 					size="small"
 					text={buttonLabel}

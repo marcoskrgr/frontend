@@ -22,5 +22,9 @@
 }
 
 .invalid {
-  box-shadow: 0 0 0 2px #dc3545;
+  background: linear-gradient(to top, #FF7D7E 0%, #B40048 100%) !important;
+}
+
+.valid {
+  background: linear-gradient(to top, #00E883 0%, #009182 100%) !important;
 }
