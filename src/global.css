@@ -32,11 +32,9 @@ a {
 }
 
 body {
-	/* background-color: #022280; */
-	background-color: #800202;
+	background-color: #022280;
   overflow-x: hidden;
   overflow-y: auto;
-  padding: 10px;
 }
 
 body::-webkit-scrollbar {
