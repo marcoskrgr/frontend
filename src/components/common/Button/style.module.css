@@ -28,6 +28,16 @@
   color: white;
 }
 
+.btn-disabled {
+  background-color: var(--future-flow);
+  background-image: none;
+  border-color: var(--expert-vision) !important;
+}
+
+.btn-disabled * {
+  color: var(--expert-vision) !important;
+}
+
 .btn-large {
   padding: 35px;
   font-size: 4em;
@@ -36,4 +46,9 @@
 .btn-medium {
   padding: 13px;
   font-size: 1.5em;
+}
+
+.btn-small {
+  padding: 8px;
+  font-size: 1em;
 }

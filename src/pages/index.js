@@ -1,5 +1,6 @@
 import Map from './Map';
 import Home from './Home';
 import Wordle from './Wordle';
+import Phrase from './Phrase';
 
-export { Home, Map, Wordle};
+export { Home, Map, Phrase, Wordle};

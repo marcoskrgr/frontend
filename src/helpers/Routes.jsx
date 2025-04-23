@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import { Home, Map, Wordle } from "../pages";
+import { Home, Map, Phrase, Wordle } from "../pages";
 import Frame from "@components/common/Frame";
 
 const routes = createBrowserRouter([
@@ -11,6 +11,7 @@ const routes = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/map", element: <Map /> },
       { path: "/wordle", element: <Wordle /> },
+      { path: "/phrase", element: <Phrase /> },
     ],
   },
 ]);

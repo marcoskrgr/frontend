@@ -5,7 +5,7 @@ import Tag from "./Tag";
 
 import styles from "./style.module.css";
 
-function Card({title, description, difficulty, tags = [], profile}) {
+function Card({title, description, difficulty, tags = []}) {
 	const cardClasses = classNames(styles["card"], {
 		[styles["easy"]]: difficulty === "easy",
 		[styles["medium"]]: difficulty === "medium",
