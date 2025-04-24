@@ -6,6 +6,7 @@
 	--soft-core-blue: #002080;
 	--expert-vision: #101c40;
 	--green-balance: #009182;
+	--future-flow: #005BC7;
 	--soft-evergreen: #00e883;
 	--expert-inspire: #d262ff;
 	--deep-connection: #58016a;
@@ -36,11 +37,9 @@ a {
 }
 
 body {
-	/* background-color: #022280; */
-	background-color: #800202;
+	background-color: #022280;
   overflow-x: hidden;
   overflow-y: auto;
-  padding: 10px;
 }
 
 body::-webkit-scrollbar {

@@ -30,3 +30,8 @@
 	flex-direction: column;
 	gap: 1vh;
 }
+
+.buttons-left {
+	position: absolute;
+	left: -10px;
+}

@@ -3,7 +3,7 @@ import React, { createContext, useContext, useState } from "react";
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [level, setLevel] = useState(1);
+  const [level, setLevel] = useState(4);
   const [name, setName] = useState("Jorge Benitez");
   const [tickets, setTickets] = useState(10);
 

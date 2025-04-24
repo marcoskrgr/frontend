@@ -47,3 +47,34 @@
 	padding-right: 5%;
 	margin-bottom: 2%;
 }
+
+.wrapper {
+  background: linear-gradient(to bottom, #0af, #0ff);
+  padding: 3px;
+  border-radius: 16px;
+  display: inline-block;
+  box-shadow: 0 4px 4px 0px #00000025;
+}
+
+.input {
+  background-color: #002377;
+  color: white;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 13px;
+  outline: none;
+  width: 100%;
+  font-size: 16px;
+}
+
+.input::placeholder {
+  color: #9bb0da;
+}
+
+.invalid {
+  background: linear-gradient(to top, #FF7D7E 0%, #B40048 100%) !important;
+}
+
+.valid {
+  background: linear-gradient(to top, #00E883 0%, #009182 100%) !important;
+}
