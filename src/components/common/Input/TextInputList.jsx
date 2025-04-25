@@ -1,86 +1,69 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { validateEmail, validatePhone, validatePassword, formatPhone } from "./validTypes";
+import {validateEmail, validatePhone, validatePassword, formatPhone} from "./validTypes";
 import Input from "./Input";
 import styles from "./style.module.css";
 
-function TextInputList({ data, setData }) {
+function TextInputList({data, setData}) {
+	function handleInputChange(id, value) {
+		setData((prevInputs) => {
+      const getInput = (id) => updated.find((inp) => inp.id === id);
+			const updated = prevInputs.inputs.map((inp) => (inp.id === id ? {...inp, value} : {...inp}));
+			const password = getInput("password");
+			const confPass = getInput("confPass");
+			const email = getInput("email");
+			const phone = getInput("phone");
 
-  function handleInputChange(id, value) {
-    setData((prevInputs) => {
-      const updated = prevInputs.inputs.map((inp) =>
-        inp.id === id ? { ...inp, value } : { ...inp }
-      );
+			let canSubmit = true;
 
-      const password = updated.find((inp) => inp.id === "password");
-      const confPass = updated.find((inp) => inp.id === "confPass");
-      const phone = updated.find((inp) => inp.id === "phone");
-      let canSubmit = true
+			switch (id) {
+				case "password":
+					password.error = !validatePassword(password.value) ? "A senha deve ter pelo menos 10 dígitos, letras e números!" : "";
+					confPass.error = confPass.value && password.value != confPass.value ? "Senhas não coincidem" : "";
+					break;
+				case "confPass":
+					confPass.error = confPass.value !== password.value ? "Senhas não coincidem" : "";
+					break;
+				case "email":
+					email.error = !validateEmail(value) ? "E-mail inválido" : "";
+					break;
+				case "phone":
+					value = formatPhone(value);
+					phone.error = !validatePhone(value) ? "Telefone inválido" : "";
+					break;
+				default:
+					break;
+			}
 
-      updated.forEach((inp) => {
-        inp.error = "";
-      });
+			canSubmit = !updated.some((inp) => !inp.value || inp.error);
 
-      switch (id) {
-        case "password":
-          if (!validatePassword(password.value)) {
-            password.error = "A senha deve ter pelo menos 10 dígitos, letras e números!";
-          }
+			return {...prevInputs, inputs: updated, canSubmit: canSubmit};
+		});
+	}
 
-          if (confPass.value && password.value !== confPass.value) {
-            confPass.error = "Senhas não coincidem";
-          }
-          break;
-        case "confPass":
-          if (confPass.value !== password.value) {
-            confPass.error = "Senhas não coincidem";
-          }
-          break;
-        case "email":
-          if (!validateEmail(value)) {
-            updated.find((inp) => inp.id === "email").error = "E-mail inválido";
-          }
-          break;
-        case "phone":
-          value = formatPhone(value)
-
-          if (!validatePhone(value)) {
-            phone.error = "Telefone inválido";
-          }
-          break;
-        default:
-          break;
-      }
-
-      canSubmit = !updated.some(inp => !inp.value || inp.error);
-
-      return { ...prevInputs, inputs: updated, canSubmit: canSubmit};
-    });
-  }
-
-  return (
-    <div className={styles["inputList"]}>
-      {data.inputs.map((inp) => (
-        <Input
-          key={inp.id}
-          id={inp.id}
-          type={inp.type}
-          inputMode={inp.inputMode}
-          label={inp.label}
-          isRequired={inp.isRequired}
-          alignCenter={inp.alignCenter}
-          value={inp.value}
-          error={inp.error}
-          onChange={handleInputChange}
-        />
-      ))}
-    </div>
-  );
+	return (
+		<div className={styles["inputList"]}>
+			{data.inputs.map((inp) => (
+				<Input
+					key={inp.id}
+					id={inp.id}
+					type={inp.type}
+					inputMode={inp.inputMode}
+					label={inp.label}
+					isRequired={inp.isRequired}
+					alignCenter={inp.alignCenter}
+					value={inp.value}
+					error={inp.error}
+					onChange={handleInputChange}
+				/>
+			))}
+		</div>
+	);
 }
 
 TextInputList.propTypes = {
-  data: PropTypes.object.isRequired,
-  setData: PropTypes.func.isRequired
+	data: PropTypes.object.isRequired,
+	setData: PropTypes.func.isRequired
 };
 
 export default TextInputList;

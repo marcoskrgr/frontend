@@ -1,16 +1,20 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import TextInputList from "../../../components/common/Input/TextInputList";
+import React, {useState} from "react";
+import {useNavigate, Link} from "react-router-dom";
+import TextInputList from "@components/common/Input/TextInputList";
+import Button from "@components/common/Button";
 import confirmPhoneInputs from "./confirmPhoneInputs";
 import styles from "../../Register/style.module.css";
 
 function ConfirmPhone() {
-    const [inputs, setInputs] = useState(confirmPhoneInputs);
+	const navigate = useNavigate();
+	const [inputs, setInputs] = useState(confirmPhoneInputs);
 	const isValid = inputs.canSubmit;
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log(inputs);
+
+		navigate("/");
 	};
 
 	return (
@@ -21,18 +25,18 @@ function ConfirmPhone() {
 				<TextInputList data={inputs} setData={setInputs} />
 
 				<div className={styles["formFooter"]}>
-					<Link to={"/confirm-phone"} style={{width: "100%"}}>
-						<button
-							className={(isValid ? " " : styles["disabled"]) + " " + styles["button"]}
-							disabled={isValid ? false : true}
-							type="submit">
-							Continuar
-						</button>
-					</Link>
+					<Button
+						isDisabled={!isValid}
+						type="primary"
+						size="small"
+						text={"Continuar"}
+						onClick={handleSubmit}
+						customStyle={{width: "100%"}}
+					/>
 
-					<a className={styles["a"]} href="#">
+					<Link className={styles["a"]} to={"/"}>
 						já possui login?
-					</a>
+					</Link>
 				</div>
 			</form>
 		</div>
