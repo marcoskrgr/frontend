@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import styles from './style.module.css'
 
 function Input({ isValid = null, label = '', customStyle = {}, ...props }) {
-  const inputClass = classNames(styles.wrapper, {
+  const inputClass = classNames(styles.gradient, {
     [styles.invalid]: isValid === false,
     [styles.valid]: isValid,
   })

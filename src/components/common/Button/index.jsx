@@ -12,7 +12,7 @@ function Button({size, type, icon, text, onClick, isDisabled, customStyle = {}})
 	});
 
 	return (
-		<button style={customStyle} onClick={!isDisabled && onClick} className={buttonClasses}>
+		<button style={customStyle} onClick={!isDisabled && onClick} disabled={isDisabled} className={buttonClasses}>
 			{icon && <i className={`bx ${icon}`}></i>}
 			<span>{text}</span>
 		</button>
