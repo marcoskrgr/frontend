@@ -148,7 +148,7 @@ const questions = [
     <div className={styles["quiz-container"]}>
       <header className={styles["quiz-header"]}>
         <div className={styles["score-container"]}>
-          <img src={Vector} alt="Score Icon" />
+          <img src={Vector} alt="Score Icon" className={styles["score-icon"]} />
           <span className={styles["score-text"]}>{score}</span>
         </div>
         <div className={styles["task-text"]}>

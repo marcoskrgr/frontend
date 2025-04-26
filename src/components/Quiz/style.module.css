@@ -11,9 +11,10 @@
 
 .quiz-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
-  margin-bottom: 48px;
+  margin-bottom: 2rem;
+  font-size: 25px;
 }
 
 .score-container {
@@ -23,20 +24,13 @@
 }
 
 .score-icon {
-  width: 32px;
-  height: 32px;
-  color: #F2C94C;
-  fill: #F2C94C;
-}
-
-.score-text,
-.task-text,
-.timer-text {
-  font-size: 1.5rem;
+  width: 24px;
+  height: 24px;
 }
 
 .timer-text {
   font-variant-numeric: tabular-nums;
+  font-size: 20px;
 }
 
 .quiz-main {
@@ -147,12 +141,13 @@
 .answer-button p {
   margin: 0.1rem 0;
   line-height: 1.2;
-  font-family: 'Bungee Color', sans-serif;
+  font-family: "Bungee", sans-serif;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 12px;
   line-height: 100%;
   letter-spacing: 0%;
   text-align: center;
+  vertical-align: middle;
 }
 
 .next-button {
