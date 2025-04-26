@@ -1,6 +1,6 @@
 .quiz-container {
   min-height: 100vh;
-  background-color: #2F2F6F;
+  background-image: url('/src/assets/wallpaper-mobile.png');
   color: #FFFFFF;
   font-family: 'Press Start 2P', cursive;
   padding: 24px;
@@ -51,7 +51,7 @@
 .quiz-question {
   font-size: 25px;
   color: #FFFFFF;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   line-height: 1.4;
   max-width: 100%;
   overflow-wrap: break-word;
@@ -68,25 +68,26 @@
   width: 90%;
   height: 1px;
   background-color: #B3B5CC;
-  margin: 0 0 2rem 0;
-  border: 3px solid #B3B5CC;
-  border-radius: 0.5rem;
+  margin: 0 0 1.7rem 0;
+  border: 1.7px solid #B3B5CC;
+  border-radius: 1rem;
 }
 
 .answers-container {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .answer-button {
   position: relative;
   width: 100%;
+  height: 5.2rem;
   padding: 1rem 1.5rem;
   background-color: #005BC7;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   color: #FFFFFF;
   cursor: pointer;
   transition: background-color 0.2s, transform 0.1s;
@@ -101,8 +102,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  border-radius: 0.5rem; 
-  padding: 2px; 
+  border-radius: 1rem; 
+  padding: 4px; 
   background: linear-gradient(90deg, #0075FF, #00C8FF);
   -webkit-mask:
       linear-gradient(#fff 0 0) content-box,
