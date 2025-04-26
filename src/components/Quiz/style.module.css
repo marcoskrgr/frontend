@@ -49,11 +49,28 @@
 }
 
 .quiz-question {
-  font-size: 1.875rem;
-  text-align: center;
+  font-size: 25px;
+  color: #FFFFFF;
   margin-bottom: 2rem;
   line-height: 1.4;
   max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  font-family: Bungee;
+  font-weight: 400;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.quiz-line {
+  width: 90%;
+  height: 1px;
+  background-color: #B3B5CC;
+  margin: 0 0 2rem 0;
+  border: 3px solid #B3B5CC;
+  border-radius: 0.5rem;
 }
 
 .answers-container {
@@ -64,18 +81,38 @@
 }
 
 .answer-button {
+  position: relative;
   width: 100%;
   padding: 1rem 1.5rem;
-  background-color: #149CE6;
+  background-color: #005BC7;
   border: none;
   border-radius: 0.5rem;
   color: #FFFFFF;
-  font-size: 1.25rem;
-  font-weight: bold;
-  font-family: 'Press Start 2P', cursive;
-  letter-spacing: 0.05em;
   cursor: pointer;
   transition: background-color 0.2s, transform 0.1s;
+  vertical-align: middle;
+  overflow: visible;
+}
+
+.answer-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 0.5rem; 
+  padding: 2px; 
+  background: linear-gradient(90deg, #0075FF, #00C8FF);
+  -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+  mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: destination-out;
+  z-index: 1;
 }
 
 .answer-button:hover:not(:disabled) {
@@ -106,6 +143,17 @@
   opacity: 0.6;
 }
 
+.answer-button p {
+  margin: 0.1rem 0;
+  line-height: 1.2;
+  font-family: 'Bungee Color', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+}
+
 .next-button {
   margin-top: 2rem;
   padding: 0.75rem 1.5rem;
@@ -124,4 +172,12 @@
 .next-button:hover {
   background-color: #d4b846;
   transform: translateY(-2px);
+}
+
+
+.answer-button {
+  transition: border-color 0.2s, background 0.2s, transform 0.1s;
+}
+.answer-button:active {
+  transform: scale(0.98);
 }
