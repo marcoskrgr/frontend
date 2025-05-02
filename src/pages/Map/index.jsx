@@ -1,10 +1,10 @@
 import React, {useEffect, useRef} from "react";
 import {Link} from "react-router-dom";
 
-import Card from "../../components/Map/Card";
-import Column from "../../components/Map/Column";
+import Card from "@components/Map/Card";
+import Column from "@components/Map/Column";
 import {useUser} from "../../helpers/context/UserContext";
-import PlayerProfile from "../../components/Map/PlayerProfile";
+import PlayerProfile from "@components/Map/PlayerProfile";
 
 import styles from "./style.module.css";
 
@@ -16,12 +16,12 @@ const columns = [
 ];
 
 const cards = [
-	{id: 4, title: "Task #4", route: "/", difficulty: "hard", tags: [{label: "BUG", color: "red"}], description: "Resolver bugs do sistema"},
+	{id: 4, title: "Task #4", route: "/phrase", difficulty: "easy", tags: [{label: "TASK"}], description: "Conversar com o pessoal do estande"},
 	{
 		id: 3,
 		title: "Task #3",
 		route: "/wordle",
-		difficulty: "medium",
+		difficulty: "hard",
 		tags: [{label: "TASK", color: "blue"}],
 		description: "Escrever documentação"
 	},
@@ -37,7 +37,7 @@ const cards = [
 ];
 
 function Map() {
-	const {name, tickets, level} = useUser();
+	const {level} = useUser();
 
 	const contentRef = useRef(null);
 	const lastCardRef = useRef(null);

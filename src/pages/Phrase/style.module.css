@@ -1,0 +1,22 @@
+.container {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12vh;
+}
+
+.container .logo {
+  width: 180px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+}
+
+.content span {
+  color: white;
+}
