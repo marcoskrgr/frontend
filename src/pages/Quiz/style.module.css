@@ -89,7 +89,7 @@
   overflow: visible;
 }
 
-.answer-button::after {
+.answer-button-normal::after {
   content: "";
   position: absolute;
   top: 0;
@@ -99,6 +99,48 @@
   border-radius: 1rem; 
   padding: 4px; 
   background: linear-gradient(90deg, #0075FF, #00C8FF);
+  -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+  mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: destination-out;
+  z-index: 1;
+}
+
+.answer-incorrect::after, .answer-selected-incorrect::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 1rem; 
+  padding: 4px; 
+  background: linear-gradient(180deg, #FF7D7E, #B40048);
+  -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+  mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: destination-out;
+  z-index: 1;
+}
+
+.answer-correct::after, .answer-selected-correct::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 1rem; 
+  padding: 4px; 
+  background: linear-gradient(180deg, #00E883, #101C40);
   -webkit-mask:
       linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
