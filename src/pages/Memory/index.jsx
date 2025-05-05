@@ -1,12 +1,12 @@
 import React from "react";
 import GridMemory from "../../components/Memory/GridMemory";
-import HeaderMemory from "../../components/Memory/Title";
+import GameHeader from "@components/common/GameHeader";
 
 function Memory(){
     return(
         <div>
             <div className="grid-container">
-                <HeaderMemory taskName="Task 4" initialTime={180} score={0} gameStarted={true} />
+                <GameHeader />
                 <GridMemory />
             </div>
         </div>
