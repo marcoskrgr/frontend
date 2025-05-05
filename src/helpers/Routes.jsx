@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import { Home, Map, Wordle, Register, ConfirmPhone, Phrase, Memory } from "../pages";
+import { Home, Map, Wordle, Register, ConfirmPhone, Phrase, Quiz, Memory } from "../pages";
 import Frame from "@components/common/Frame";
 
 const routes = createBrowserRouter([
@@ -15,6 +15,7 @@ const routes = createBrowserRouter([
       { path: "/memory", element: <Memory /> },
       { path: "/wordle", element: <Wordle /> },
       { path: "/phrase", element: <Phrase /> },
+      { path: "/quiz", element: <Quiz /> },
     ],
   }
 ]);
