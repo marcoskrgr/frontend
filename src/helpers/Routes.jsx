@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 import Frame from "@components/common/Frame";
 import ProtectedRoute from "./ProtectedRoute";
-import {Home, Map, Wordle, Register, ConfirmPhone, Phrase, Quiz, Memory} from "../pages";
+import {Home, Map, Wordle, Register, ConfirmPhone, Login, Phrase, Quiz, Memory} from "../pages";
 
 const routes = createBrowserRouter([
 	{
@@ -11,6 +11,7 @@ const routes = createBrowserRouter([
 		children: [
 			{path: "/", element: <Home />},
 			{path: "/register", element: <Register />},
+      { path: "/login", element: <Login /> },
 			{path: "/confirm-phone", element: <ConfirmPhone />},
 			{
 				element: <ProtectedRoute />,
