@@ -9,7 +9,9 @@ export default defineConfig({
       '@components': path.resolve(__dirname, './src/components'),
       '@helpers': path.resolve(__dirname, './src/helpers'),
       '@assets': path.resolve(__dirname, './src/assets'),
-      '@utils': path.resolve(__dirname, './src/utils')
+      '@utils': path.resolve(__dirname, './src/utils'),
+      '@controllers': path.resolve(__dirname, './src/controllers'),
+      '@repositories': path.resolve(__dirname, './src/repositories'),
     }
   }
 })
