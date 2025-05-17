@@ -1,23 +1,24 @@
-import React from 'react'
-import classNames from 'classnames'
+import React from "react";
+import classNames from "classnames";
 
-import styles from './style.module.css'
+import styles from "./style.module.css";
 
-function Input({ isValid = null, label = '', customStyle = {}, ...props }) {
+function Input({ id, label, value, onChange, error, isValid, customStyle = {}, ...props }) {
   const inputClass = classNames(styles.gradient, {
-    [styles.invalid]: isValid === false,
-    [styles.valid]: isValid,
-  })
+    [styles.invalid]: isValid === false || error,
+    [styles.valid]: isValid === true && !error,
+  });
 
   return (
-    <div className={inputClass} style={customStyle}>
-      <input
-        className={styles["input"]}
-        placeholder={label}
-        {...props}
-      />
-    </div>
-  )
+    <>
+      <label className={styles.label} htmlFor={id}>
+        {error || label}
+      </label>
+      <div className={inputClass} style={customStyle}>
+        <input id={id} className={styles.input} value={value} onChange={(e) => onChange(id, e.target.value)} {...props} />
+      </div>
+    </>
+  );
 }
 
-export default Input
+export default Input;

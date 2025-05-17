@@ -1,13 +1,18 @@
 import React, {useState} from "react";
 import {useNavigate, Link} from "react-router-dom";
-import TextInputList from "@components/common/Input/TextInputList";
+
 import Button from "@components/common/Button";
-import confirmPhoneInputs from "./confirmPhoneInputs";
+
 import styles from "../../Register/style.module.css";
 
 function ConfirmPhone() {
 	const navigate = useNavigate();
-	const [inputs, setInputs] = useState(confirmPhoneInputs);
+	const [inputs, setInputs] = useState({
+    canSubmit: false,
+    inputs: [
+      { id: "code", label: "Preencha com o código enviado ao seu Telefone!", inputMode: "numeric", isRequired: true, alignCenter: true, type: "number", error: "", value: "" }
+    ]
+  });
 	const isValid = inputs.canSubmit;
 
 	const handleSubmit = (e) => {
@@ -22,8 +27,8 @@ function ConfirmPhone() {
 			<img className={styles["logo-soft"]} src="../../../src/assets/SoftExtendedLogo.png" alt="Logo da SoftExpert" />
 
 			<form className={styles["form"]} onSubmit={handleSubmit}>
-				<TextInputList data={inputs} setData={setInputs} />
-
+{/* 				<TextInputList data={inputs} setData={setInputs} />
+ */}
 				<div className={styles["formFooter"]}>
 					<Button
 						isDisabled={!isValid}
