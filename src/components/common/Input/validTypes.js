@@ -9,7 +9,7 @@ export const validatePhone = (phone) => {
 };
  
 export const validatePassword = (password) => {
-  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{10,}$/;
+  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{6,}$/;
   return passwordRegex.test(password);
 };
 

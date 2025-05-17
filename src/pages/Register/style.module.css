@@ -17,9 +17,12 @@
 .formFooter {
 	display: flex;
 	flex-direction: column;
-	height: 20%;
-	padding-top: 5%;
+	gap: 10px;
 	align-items: center;
+}
+
+.formFooter p {
+	color: rgb(250, 72, 72)
 }
 
 .a {

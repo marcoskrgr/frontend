@@ -1,33 +1,40 @@
-import {AuthRepository} from "@repositories/auth";
+import React, { useState } from "react";
+import { AuthRepository } from "@repositories/auth";
 
 export function createAuthController() {
+	const [loading, setLoading] = useState(false);
+	const [status, setStatus] = useState("null");
+	
 	const authRepository = AuthRepository();
-
-	let loading = false;
 
 	async function login(data) {
 		try {
-			loading = true;
+			setLoading(true);
 			const userData = await authRepository.login(data);
 			return userData;
 		} finally {
-			loading = false;
+			setLoading(false);
 		}
 	}
 
 	async function register(data) {
 		try {
-			loading = true;
+			setLoading(true);
 			const userData = await authRepository.register(data);
+			setStatus("success")
 			return userData;
+		} catch(e) {
+			setStatus("failed")
+			console.error(e)
 		} finally {
-			loading = false;
+			setLoading(false);
 		}
 	}
 
 	return {
 		login,
+		status,
 		register,
-		loading
+		loading,
 	};
 }

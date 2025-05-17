@@ -10,14 +10,14 @@ function Input({ id, label, value, onChange, error, isValid, customStyle = {}, .
   });
 
   return (
-    <>
+    <div className={styles["wrapper"]}>
       <label className={styles.label} htmlFor={id}>
         {error || label}
       </label>
       <div className={inputClass} style={customStyle}>
         <input id={id} className={styles.input} value={value} onChange={(e) => onChange(id, e.target.value)} {...props} />
       </div>
-    </>
+    </div>
   );
 }
 

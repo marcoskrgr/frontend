@@ -3,22 +3,22 @@ import {useNavigate, Link} from "react-router-dom";
 import Input from "@components/common/Input";
 import Button from "@components/common/Button";
 import styles from "../style.module.css";
-import {formatPhone, validateEmail, validatePassword, validatePhone} from "@components/common/Input/validTypes";
-import { createAuthController } from "@controllers/auth";
+import {validateEmail, validatePassword} from "@components/common/Input/validTypes";
+import {createAuthController} from "@controllers/auth";
 
 const initialInputs = [
 	{id: "firstName", label: "Nome", isRequired: true, type: "text", value: ""},
 	{id: "lastName", label: "Sobrenome", isRequired: true, type: "text", value: ""},
 	{id: "email", label: "E-mail", isRequired: true, type: "email", value: ""},
-	{id: "password", label: "Senha", isRequired: true, type: "password", value: ""},
-	{id: "confPass", label: "Confirmar Senha", isRequired: true, type: "password", value: ""}
+	{id: "password", label: "Senha", isRequired: true, type: "text", value: ""},
+	{id: "confPass", label: "Confirmar Senha", isRequired: true, type: "text", value: ""}
 ];
 
 function Register() {
 	const navigate = useNavigate();
 	const [inputs, setInputs] = useState(initialInputs);
 
-	const authController = createAuthController();
+	const {register, loading, status} = createAuthController();
 
 	const handleInputChange = (id, value) => {
 		const updatedInputs = inputs.map((input) => {
@@ -28,13 +28,8 @@ function Register() {
 				if (value.length > 5) {
 					if (id === "email" && !validateEmail(value)) {
 						error = "E-mail inválido";
-					} else if (id === "phone") {
-						const formattedPhone = formatPhone(value);
-						if (!validatePhone(formattedPhone)) {
-							error = "Telefone inválido";
-						}
 					} else if (id === "password" && !validatePassword(value)) {
-						error = "A senha deve ter pelo menos 10 dígitos, letras e números!";
+						error = "A senha deve ter pelo menos 6 dígitos, letras, números e um caracter especial!";
 					} else if (id === "confPass" && value !== inputs.find((i) => i.id === "password").value) {
 						error = "Senhas não coincidem";
 					}
@@ -57,7 +52,7 @@ function Register() {
 
 	const canSubmit = inputs.every((i) => i.value && !i.error);
 
-  const handleSubmit = async (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 
 		const userData = {};
@@ -67,12 +62,10 @@ function Register() {
 			}
 		});
 
-		try {
-			await authController.register(userData);
+		await register(userData);
+
+		if (status === "success") {
 			navigate("/confirm-phone");
-		} catch (error) {
-			console.error("Erro ao registrar usuário:", error.response?.data || error.message);
-			alert("Erro ao registrar usuário: " + (error.response?.data?.message || error.message));
 		}
 	};
 	return (
@@ -92,10 +85,12 @@ function Register() {
 					/>
 				))}
 				<div className={styles.formFooter}>
+					{status === "failed" && <p>Ops! Algo saiu do previsto. Tente de novo em alguns instantes.</p>}
 					<Button
-						isDisabled={!canSubmit}
+						isDisabled={!canSubmit || status === "failed"}
 						type="primary"
 						size="small"
+						loadin={loading}
 						text="Continuar"
 						onClick={handleSubmit}
 						customStyle={{width: "100%"}}
