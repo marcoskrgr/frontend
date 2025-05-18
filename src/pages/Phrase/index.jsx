@@ -52,6 +52,7 @@ function Phrase() {
 			<div className={styles["content"]}>
 				<span>Preencha com a frase do momento!</span>
 				<Input
+					id="phrase"
 					label="Digite aqui..."
 					value={phrase}
 					isValid={wasSubmitted ? !showError : null}

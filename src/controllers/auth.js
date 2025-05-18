@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import { AuthRepository } from "@repositories/auth";
+import React, {useState} from "react";
+import {AuthRepository} from "@repositories/auth";
+import {useUser} from "@helpers/context/UserContext";
 
 export function createAuthController() {
 	const [loading, setLoading] = useState(false);
 	const [status, setStatus] = useState("null");
-	
+	const {token, setToken} = useUser();
+
 	const authRepository = AuthRepository();
 
 	async function login(data) {
@@ -20,12 +22,26 @@ export function createAuthController() {
 	async function register(data) {
 		try {
 			setLoading(true);
-			const userData = await authRepository.register(data);
-			setStatus("success")
-			return userData;
-		} catch(e) {
-			setStatus("failed")
-			console.error(e)
+			const response = await authRepository.register(data);
+			setToken(response.token);
+/* 			return response; */
+		} catch (e) {
+			setStatus("failed");
+			console.error(e);
+		} finally {
+			setLoading(false);
+		}
+	}
+
+	async function insertPhone(data) {
+		try {
+			setLoading(true);
+			const response = await authRepository.insertPhone(data, token);
+			setStatus("success");
+			return response;
+		} catch (e) {
+			setStatus("failed");
+			console.error(e);
 		} finally {
 			setLoading(false);
 		}
@@ -35,6 +51,7 @@ export function createAuthController() {
 		login,
 		status,
 		register,
-		loading,
+		insertPhone,
+		loading
 	};
 }

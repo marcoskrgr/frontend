@@ -18,9 +18,10 @@ function Register() {
 	const navigate = useNavigate();
 	const [inputs, setInputs] = useState(initialInputs);
 
-	const {register, loading, status} = createAuthController();
+	const {register, loading} = createAuthController();
 
-	const handleInputChange = (id, value) => {
+	const handleInputChange = (e) => {
+		const {id, value} = e.target;
 		const updatedInputs = inputs.map((input) => {
 			if (input.id === id) {
 				let error = "";
@@ -39,6 +40,7 @@ function Register() {
 			}
 			return input;
 		});
+
 		const password = updatedInputs.find((i) => i.id === "password");
 		const confPass = updatedInputs.find((i) => i.id === "confPass");
 		if (confPass && password && confPass.value !== password.value) {
@@ -63,11 +65,9 @@ function Register() {
 		});
 
 		await register(userData);
-
-		if (status === "success") {
-			navigate("/confirm-phone");
-		}
+		navigate("/confirm-phone");
 	};
+
 	return (
 		<div className={styles.content}>
 			<img className={styles.logoSoft} src="../../../src/assets/SoftExtendedLogo.png" alt="Logo da SoftExpert" />
@@ -85,12 +85,11 @@ function Register() {
 					/>
 				))}
 				<div className={styles.formFooter}>
-					{status === "failed" && <p>Ops! Algo saiu do previsto. Tente de novo em alguns instantes.</p>}
 					<Button
-						isDisabled={!canSubmit || status === "failed"}
+						isDisabled={!canSubmit}
 						type="primary"
 						size="small"
-						loadin={loading}
+						loading={loading}
 						text="Continuar"
 						onClick={handleSubmit}
 						customStyle={{width: "100%"}}

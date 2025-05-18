@@ -16,8 +16,18 @@ export function AuthRepository() {
 		return response.data;
 	}
 
+	async function insertPhone(data, token) {
+		const response = await axios.post(`${BASE_URL}/insert-phone`, data, {
+			headers: {
+				Authorization: token,
+			},
+		});
+		return response;
+	}
+
 	return {
 		login,
+		insertPhone,
 		register
 	};
 }

@@ -7,7 +7,11 @@ export const validatePhone = (phone) => {
   const phoneRegex = /(\(?\d{2}\)?\s)?(\d{4,5}\-\d{4})/;
   return phoneRegex.test(phone);
 };
- 
+
+export const unformatPhone = (phone) => {
+  return phone.replace(/\D/g, '');
+};
+
 export const validatePassword = (password) => {
   const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{6,}$/;
   return passwordRegex.test(password);

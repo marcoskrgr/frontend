@@ -15,7 +15,13 @@ function Input({ id, label, value, onChange, error, isValid, customStyle = {}, .
         {error || label}
       </label>
       <div className={inputClass} style={customStyle}>
-        <input id={id} className={styles.input} value={value} onChange={(e) => onChange(id, e.target.value)} {...props} />
+        <input
+          id={id}
+          className={styles.input}
+          value={value}
+          onChange={onChange} // Pass the event directly
+          {...props}
+        />
       </div>
     </div>
   );
