@@ -28,7 +28,7 @@ function Register() {
 			if (input.id === id) {
 				let error = "";
 
-				if (value.length > 5) {
+				if (value.length > 0) {
 					if (id === "email" && !validateEmail(value)) {
 						error = "E-mail inválido";
 					} else if (id === "password" && !validatePassword(value)) {
