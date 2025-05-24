@@ -12,14 +12,15 @@ export default defineConfig({
       '@utils': path.resolve(__dirname, './src/utils'),
       '@controllers': path.resolve(__dirname, './src/controllers'),
       '@repositories': path.resolve(__dirname, './src/repositories'),
+      '@stores': path.resolve(__dirname, './src/stores'),
     }
   },
   server: {
-    host: true, // ou '0.0.0.0'
-    port: 5173, // ou qualquer porta desejada
+    host: true,
+    port: 5173,
     cors: true,
     allowedHosts: [
-      'd2ad-2804-4050-bb6-de4f-5d35-5d3e-817b-e70d.ngrok-free.app', // ngrok
+      '33e9-2804-4050-bb6-de4f-a01a-18df-9bda-be62.ngrok-free.app'
     ],
   }
 })

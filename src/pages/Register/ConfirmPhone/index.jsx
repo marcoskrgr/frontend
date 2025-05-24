@@ -11,17 +11,15 @@ import {createAuthController} from "@controllers/auth";
 function ConfirmPhone() {
 	const navigate = useNavigate();
 
-	const {insertPhone, loading, status} = createAuthController();
+	const {insertPhone, confirmPhone} = createAuthController();
 
 	const [step, setStep] = useState("phone");
 	const [phone, setPhone] = useState("");
 	const [code, setCode] = useState("");
 	const [wasSubmitted, setWasSubmitted] = useState(false);
 	const [showError, setShowError] = useState(false);
+	const [isCorrect, setIsCorrect] = useState(false);
 	const [buttonLabel, setButtonLabel] = useState("confirmar");
-
-	const correctCode = "123456";
-	const isCorrect = code.trim() === correctCode;
 
 	const handlePhoneChange = (e) => {
 		const value = e.target.value;
@@ -32,36 +30,33 @@ function ConfirmPhone() {
 	const handlePhoneSubmit = () => {
 		if (validatePhone(phone)) {
 			const cleanPhone = unformatPhone(phone);
-			insertPhone({phone: cleanPhone});
-			setStep("code");
+			const response = insertPhone({phone: cleanPhone});
+			if (response) {
+				setStep("code");
+			}
 		}
 	};
 
 	const handleCodeChange = (e) => {
 		const value = e.target.value;
 		setCode(value);
-
-		if (showError) setShowError(false);
-		if (wasSubmitted) {
-			setWasSubmitted(false);
-			setButtonLabel("confirmar");
-		}
 	};
 
 	const handleCodeSubmit = () => {
 		setWasSubmitted(true);
 
-		if (isCorrect) {
-			setButtonLabel("✔️");
+		const response = confirmPhone({code: code});
+
+		if (response) {
+			setIsCorrect(true);
+			setButtonLabel(":)");
 			confetti({
 				particleCount: 120,
 				spread: 70,
 				origin: {y: 0.6}
 			});
-			setTimeout(() => navigate("/"), 1000);
 		} else {
-			setShowError(true);
-			setButtonLabel("X");
+			setButtonLabel(":(");
 		}
 	};
 
@@ -94,7 +89,7 @@ function ConfirmPhone() {
 							onChange={handleCodeChange}
 						/>
 						<Button
-							isDisabled={code.length < 4}
+							isDisabled={code.length < 4 || isCorrect}
 							type="primary"
 							size="small"
 							text={buttonLabel}
@@ -110,6 +105,7 @@ function ConfirmPhone() {
 					</>
 				)}
 			</div>
+			<div>{isCorrect && <Button type="primary" size="small" text="Partiu jogar" onClick={() => navigate("/map")} />}</div>
 		</div>
 	);
 }

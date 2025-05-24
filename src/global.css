@@ -71,6 +71,11 @@ button {
 	cursor: pointer;
 }
 
+input {
+	font-size: 15px;
+	font-family: "Inter" !important;
+}
+
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
     -webkit-appearance: none;

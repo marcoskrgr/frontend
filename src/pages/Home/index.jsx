@@ -12,10 +12,9 @@ import styles from "./style.module.css";
 
 function Home() {
 	const {level} = useUser();
-
 	const navigate = useNavigate();
 	const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
-	const [isAwardsModalOpen, setIsAwardsModalOpen] = useState(false);
+	const [isPrizesModalOpen, setIsPrizesModalOpen] = useState(false);
 
 	return (
 		<div className={styles["content"]}>
@@ -28,16 +27,21 @@ function Home() {
 						<Button type="primary" size="medium" icon="bxs-quote-alt-left" onClick={() => navigate("/phrase")} />
 					</div>
 				)}
-				<Button type="primary" size="large" icon="bx-play" onClick={() => navigate("/map")} />
+				<Button
+					type="primary"
+					size="large"
+					icon="bx-play"
+					onClick={() => (localStorage.getItem("authToken") === null ? navigate("/register") : navigate("/map"))}
+				/>
 				<div className={styles["buttons-right"]}>
-					<Button type="primary" size="medium" icon="bx-trophy" onClick={() => setIsAwardsModalOpen(true)} />
+					<Button type="primary" size="medium" icon="bx-trophy" onClick={() => setIsPrizesModalOpen(true)} />
 					<Button type="primary" size="medium" icon="bx-help-circle" onClick={() => setIsAboutModalOpen(true)} />
 				</div>
 			</div>
 			<Modal title="Sobre" show={isAboutModalOpen} onClose={() => setIsAboutModalOpen(false)}>
 				<About />
 			</Modal>
-			<Modal title="Prêmios" show={isAwardsModalOpen} onClose={() => setIsAwardsModalOpen(false)}>
+			<Modal title="Prêmios" show={isPrizesModalOpen} onClose={() => setIsPrizesModalOpen(false)}>
 				<Prizes />
 			</Modal>
 		</div>

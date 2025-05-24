@@ -1,7 +1,14 @@
 .wrapper {
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: 5px;
+}
+
+.wrapper p {
+	font-family: "inter";
+	color: white;
+	font-weight: 500;
+	font-size: 15px;
 }
 
 .input {
@@ -31,7 +38,6 @@
 
 .label {
 	color: var(--soft-white);
-	padding-inline: 13px;
 	margin-bottom: 4px;
 }
 

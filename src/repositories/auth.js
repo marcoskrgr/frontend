@@ -25,8 +25,28 @@ export function AuthRepository() {
 		return response;
 	}
 
+	async function confirmPhone(data, token) {
+		const response = await axios.post(`${BASE_URL}/confirm-phone`, data, {
+			headers: {
+				Authorization: token,
+			},
+		});
+		return response;
+	}
+
+	async function resendCode(data, token) {
+		const response = await axios.post(`${BASE_URL}/resend-code`, data, {
+			headers: {
+				Authorization: token,
+			},
+		});
+		return response;
+	}
+
 	return {
 		login,
+		confirmPhone,
+		resendCode,
 		insertPhone,
 		register
 	};

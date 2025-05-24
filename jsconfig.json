@@ -6,7 +6,8 @@
       "@controllers/*": ["controllers/*"],
       "@assets/*": ["assets/*"],
       "@helpers/*": ["helpers/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@stores/*": ["stores/*"]
     }
   }
 }

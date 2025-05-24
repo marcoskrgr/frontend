@@ -1,10 +1,12 @@
 import React, {useState} from "react";
 import {useNavigate, Link} from "react-router-dom";
+
 import Input from "@components/common/Input";
 import Button from "@components/common/Button";
-import styles from "../style.module.css";
-import {validateEmail, validatePassword} from "@components/common/Input/validTypes";
 import {createAuthController} from "@controllers/auth";
+import {validateEmail, validatePassword} from "@components/common/Input/validTypes";
+
+import styles from "../style.module.css";
 
 const initialInputs = [
 	{id: "firstName", label: "Nome", isRequired: true, type: "text", value: ""},
@@ -18,7 +20,7 @@ function Register() {
 	const navigate = useNavigate();
 	const [inputs, setInputs] = useState(initialInputs);
 
-	const {register, loading} = createAuthController();
+	const {register} = createAuthController();
 
 	const handleInputChange = (e) => {
 		const {id, value} = e.target;
@@ -64,32 +66,36 @@ function Register() {
 			}
 		});
 
-		await register(userData);
-		navigate("/confirm-phone");
+		const response = await register(userData);
+
+		if (response) {
+			navigate("/confirm-phone");
+		}
 	};
 
 	return (
-		<div className={styles.content}>
-			<img className={styles.logoSoft} src="../../../src/assets/SoftExtendedLogo.png" alt="Logo da SoftExpert" />
+		<div className={styles["container"]}>
+			<img className={styles.logo} src="../../../src/assets/SoftExtendedLogo.png" alt="Logo da SoftExpert" />
 			<form className={styles.form} onSubmit={handleSubmit}>
-				{inputs.map(({id, label, type, value, error, isRequired}) => (
-					<Input
-						key={id}
-						id={id}
-						type={type}
-						label={label}
-						isRequired={isRequired}
-						value={value}
-						error={error}
-						onChange={handleInputChange}
-					/>
-				))}
+				<div className={styles["fields"]}>
+					{inputs.map(({id, label, type, value, error, isRequired}) => (
+						<Input
+							key={id}
+							id={id}
+							type={type}
+							label={label}
+							isRequired={isRequired}
+							value={value}
+							error={error}
+							onChange={handleInputChange}
+						/>
+					))}
+				</div>
 				<div className={styles.formFooter}>
 					<Button
 						isDisabled={!canSubmit}
 						type="primary"
 						size="small"
-						loading={loading}
 						text="Continuar"
 						onClick={handleSubmit}
 						customStyle={{width: "100%"}}
