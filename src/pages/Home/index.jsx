@@ -5,8 +5,9 @@ import About from "@components/Home/About";
 import Button from "@components/common/Button";
 import Modal from "@components/Home/Modal";
 import Prizes from "@components/Home/Prizes";
-import Tickets from "@components/Home/Tickets";
+/* import Tickets from "@components/Home/Tickets"; */
 import {useUser} from "@helpers/context/UserContext";
+import { useAuthStore } from "@stores/useAuth";
 
 import styles from "./style.module.css";
 
@@ -15,11 +16,12 @@ function Home() {
 	const navigate = useNavigate();
 	const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
 	const [isPrizesModalOpen, setIsPrizesModalOpen] = useState(false);
+	const getToken = useAuthStore((state) => state.token);
 
 	return (
 		<div className={styles["content"]}>
 			<img className={styles["logo-soft"]} src="../../../src/assets/SoftExtendedLogo.png" alt="Logo da SoftExpert" />
-			<Tickets />
+			{/* <Tickets /> */}
 			<img className={styles["logo-game"]} src="../../../src/assets/GameLogo.svg" alt="Logo do game" />
 			<div className={styles["buttons"]}>
 				{level == 4 && (
@@ -31,7 +33,7 @@ function Home() {
 					type="primary"
 					size="large"
 					icon="bx-play"
-					onClick={() => (localStorage.getItem("authToken") === null ? navigate("/register") : navigate("/map"))}
+					onClick={() => (getToken === null ? navigate("/register") : navigate("/map"))}
 				/>
 				<div className={styles["buttons-right"]}>
 					<Button type="primary" size="medium" icon="bx-trophy" onClick={() => setIsPrizesModalOpen(true)} />

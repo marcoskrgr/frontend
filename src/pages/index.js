@@ -3,9 +3,9 @@ import Home from './Home';
 import Memory from './Memory';
 import Quiz from './Quiz';
 import Wordle from './Wordle';
-import Register from './Register/Register';
-import Login from './Login/';
-import ConfirmPhone from './Register/ConfirmPhone';
+import Register from './Auth/Register';
+import Login from './Auth/Login';
+import ConfirmPhone from './Auth/ConfirmPhone';
 import Phrase from './Phrase';
 
 
