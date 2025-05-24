@@ -1,6 +1,7 @@
 import React from "react";
 
 import Button from "./Button";
+import { LetterStatusEnum } from "../../constants/wordleConstants";
 
 import styles from "./styles.module.css";
 
@@ -11,19 +12,19 @@ function Grid({guesses, currentGuess, getLetterColor, isGameOver}) {
 	return (
 		<div className={styles.grid}>
 			{Array.from({length: MAX_ATTEMPTS}).map((_, rowIndex) => {
-				const guess = guesses[rowIndex] || (rowIndex === guesses.length ? currentGuess : "");
-				const letters = guess.padEnd(WORD_LENGTH, " ").split("");
+				const guess = guesses[rowIndex] || (rowIndex === guesses.length ? currentGuess : new Array(WORD_LENGTH).fill({ char: '' }));
 				const isActiveRow = !isGameOver && rowIndex === guesses.length;
 
-        return (
-					<div key={`row-${rowIndex}`} className={`${styles.row} ${isActiveRow ? styles.activeRow : ""}`}>
-						{letters.map((letter, colIndex) => {
-							const color = rowIndex < guesses.length ? getLetterColor(letter, colIndex, guesses[rowIndex]) : "";
-							return <Button key={`${rowIndex}-${colIndex}`} letter={letter} color={color} />;
-						})}
-					</div>
-				);
-			})}
+				return (
+							<div key={`row-${rowIndex}`} className={`${styles.row} ${isActiveRow ? styles.activeRow : ""}`}>
+								{guess.map(({ char, status }, colIndex) => {
+									const color = rowIndex < guesses.length ? getLetterColor(status) : "";
+									return <Button key={`${rowIndex}-${colIndex}`} letter={char} color={color} />;
+								})}
+							</div>
+						);
+					})
+			}
 		</div>
 	);
 }

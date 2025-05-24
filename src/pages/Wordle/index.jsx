@@ -1,8 +1,11 @@
-import {useState, useCallback} from "react";
+import { useState, useCallback, useEffect } from "react";
 
 import Grid from "@components/Wordle";
 import Keyboard from "@components/Wordle/Keyboard";
 import GameHeader from "@components/common/GameHeader";
+
+import { LetterStatusEnum } from "../../constants/wordleConstants";
+import { GameRepository } from "../../repositories/games";
 
 import styles from "@components/Wordle/styles.module.css";
 
@@ -12,72 +15,80 @@ const CONFIG = {
 	SECRET_WORD: "LIVRO"
 };
 
-// ! Essas validações vão vir do back 
+const getDefaultGuess = () => {
+	return new Array(CONFIG.WORD_LENGTH).fill({ char: '' });
+}
+
+const filledCharacterCount = (guess) => {
+	return guess.reduce((count, item) => {
+		return item.char === '' ? count - 1 : count;
+	}, CONFIG.WORD_LENGTH);
+}
+
+const addGuessCharacter = (guess, char) => {
+	const idx = guess.findIndex(item => item.char === '');
+
+	if (idx === -1) return guess;
+
+	return guess.map((item, i) => i === idx ? { ...item, char } : item);
+}
+
+const removeGuessCharacter = guess => {
+	return guess.map((item, i) => i === filledCharacterCount(guess) - 1 ? { ...item, char: '' } : item);
+}
+
 export default function Wordle() {
 	const [guesses, setGuesses] = useState([]);
-	const [currentGuess, setCurrentGuess] = useState("");
+	const [currentGuess, setCurrentGuess] = useState(getDefaultGuess());
 	const [isGameOver, setIsGameOver] = useState(false);
+	const { getTermData, termGuess } = GameRepository();
+
+	useEffect(() => {
+		const fetchData = async () => {
+			const { tries } = await getTermData();
+			setGuesses(tries)
+		}
+		fetchData();
+	}, []);
 
 	const handleKeyPress = useCallback(
-		(key) => {
+		async (key) => {
 			if (isGameOver) return;
 
 			const normalizedKey = key.toUpperCase();
 			if (normalizedKey === "ENTER") {
-				if (currentGuess.length === CONFIG.WORD_LENGTH) {
-					const newGuesses = [...guesses, currentGuess];
-					setGuesses(newGuesses);
-					setCurrentGuess("");
+				if (filledCharacterCount(currentGuess) === CONFIG.WORD_LENGTH) {
+					const fullWord = currentGuess.reduce((word, item) => word + item.char, "");
 
-					if (currentGuess === CONFIG.SECRET_WORD) {
+					const guessResult = await termGuess({ guess: fullWord });
+
+					setGuesses((prev) => [...prev, guessResult]);
+					setCurrentGuess(getDefaultGuess());
+
+					if (guessResult.every(letter => letter.status === LetterStatusEnum.CORRECT)) {
 						setIsGameOver(true);
 					}
 				}
 			} else if (normalizedKey === "BACKSPACE") {
-				setCurrentGuess((prev) => prev.slice(0, -1));
-			} else if (currentGuess.length < CONFIG.WORD_LENGTH && /^[A-Z]$/.test(normalizedKey)) {
-				setCurrentGuess((prev) => prev + normalizedKey);
+				setCurrentGuess((prev) => removeGuessCharacter(prev));
+			} else if (filledCharacterCount(currentGuess) < CONFIG.WORD_LENGTH && /^[A-Z]$/.test(normalizedKey)) {
+				setCurrentGuess((prev) => addGuessCharacter(prev, normalizedKey));
 			}
 		},
 		[currentGuess, guesses, isGameOver]
 	);
 
-	const getLetterColor = (letter, index, guess) => {
-		if (letter === CONFIG.SECRET_WORD[index]) return "green";
-		const letterCount = CONFIG.SECRET_WORD.split("").filter((l) => l === letter).length;
-		const guessedCount = guess
-			.slice(0, index + 1)
-			.split("")
-			.filter((l) => l === letter).length;
-		if (CONFIG.SECRET_WORD.includes(letter) && guessedCount <= letterCount) return "goldenrod";
+	const getColor = status => {
+		if (status === LetterStatusEnum.CORRECT) return "green";
+		if (status === LetterStatusEnum.INCORRECT_POSITION) return "goldenrod";
 		return "gray";
-	};
-
-	const getKeyColor = (key) => {
-		if (key === "ENTER" || key === "BACKSPACE") return "";
-
-		let color = "";
-
-		for (let guess of guesses) {
-			for (let i = 0; i < guess.length; i++) {
-				if (guess[i] === key) {
-					const currentColor = getLetterColor(key, i, guess);
-
-					if (currentColor === "green") return "green";
-					if (currentColor === "goldenrod") color = "goldenrod";
-					if (currentColor === "gray" && color !== "goldenrod" && color !== "green") color = "absent";
-				}
-			}
-		}
-
-		return color;
 	};
 
 	return (
 		<div className={styles.wordleContainer}>
 			<GameHeader task="Task 3" />
-			<Grid guesses={guesses} isGameOver={isGameOver}  currentGuess={currentGuess} getLetterColor={getLetterColor} />
-			<Keyboard onKeyPress={handleKeyPress} guesses={guesses} getLetterColor={getKeyColor} />
+			<Grid guesses={guesses} isGameOver={isGameOver}  currentGuess={currentGuess} getLetterColor={getColor} />
+			<Keyboard onKeyPress={handleKeyPress} guesses={guesses} getLetterColor={getColor} />
 		</div>
 	);
 }

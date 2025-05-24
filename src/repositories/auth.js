@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:4000/auth";
+const BASE_URL = import.meta.env.BASE_URL + "/auth";
 
 export function AuthRepository() {
 	async function login(data) {
