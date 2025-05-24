@@ -34,8 +34,8 @@ export function AuthRepository() {
 		return response;
 	}
 
-	async function resendCode(data, token) {
-		const response = await axios.post(`${BASE_URL}/resend-code`, data, {
+	async function resendCode(token) {
+		const response = await axios.post(`${BASE_URL}/resend-code`, null, {
 			headers: {
 				Authorization: token,
 			},

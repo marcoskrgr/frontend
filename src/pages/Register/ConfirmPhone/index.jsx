@@ -1,17 +1,17 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import confetti from "canvas-confetti";
 
 import Input from "@components/common/Input";
 import Button from "@components/common/Button";
 import {formatPhone, unformatPhone, validatePhone} from "@components/common/Input/validTypes";
-import styles from "../style.module.css";
 import {createAuthController} from "@controllers/auth";
+
+import styles from "../style.module.css";
 
 function ConfirmPhone() {
 	const navigate = useNavigate();
-
-	const {insertPhone, confirmPhone} = createAuthController();
+	const {insertPhone, confirmPhone, resendCode} = createAuthController();
 
 	const [step, setStep] = useState("phone");
 	const [phone, setPhone] = useState("");
@@ -20,43 +20,57 @@ function ConfirmPhone() {
 	const [showError, setShowError] = useState(false);
 	const [isCorrect, setIsCorrect] = useState(false);
 	const [buttonLabel, setButtonLabel] = useState("confirmar");
+	const [resendTimer, setResendTimer] = useState(0);
+
+	useEffect(() => {
+		let timer;
+		if (resendTimer > 0) {
+			timer = setTimeout(() => setResendTimer(resendTimer - 1), 1000);
+		}
+		return () => clearTimeout(timer);
+	}, [resendTimer]);
 
 	const handlePhoneChange = (e) => {
-		const value = e.target.value;
-		const formattedPhone = formatPhone(value);
+		const formattedPhone = formatPhone(e.target.value);
 		setPhone(formattedPhone);
 	};
 
-	const handlePhoneSubmit = () => {
+	const handlePhoneSubmit = async () => {
 		if (validatePhone(phone)) {
 			const cleanPhone = unformatPhone(phone);
-			const response = insertPhone({phone: cleanPhone});
+			const response = await insertPhone({phone: cleanPhone});
+
 			if (response) {
 				setStep("code");
+				setResendTimer(20);
 			}
 		}
 	};
 
 	const handleCodeChange = (e) => {
-		const value = e.target.value;
-		setCode(value);
+		setCode(e.target.value);
+		setShowError(false);
+		setButtonLabel("confirmar");
+		setWasSubmitted(false);
 	};
 
-	const handleCodeSubmit = () => {
+	const handleCodeSubmit = async () => {
 		setWasSubmitted(true);
-
-		const response = confirmPhone({code: code});
-
+		const response = await confirmPhone({code});
 		if (response) {
 			setIsCorrect(true);
 			setButtonLabel(":)");
-			confetti({
-				particleCount: 120,
-				spread: 70,
-				origin: {y: 0.6}
-			});
+			confetti({particleCount: 120, spread: 70, origin: {y: 0.6}});
 		} else {
 			setButtonLabel(":(");
+			setShowError(true);
+		}
+	};
+
+	const handleResendCode = () => {
+		if (resendTimer === 0) {
+			resendCode();
+			setResendTimer(20);
 		}
 	};
 
@@ -80,14 +94,18 @@ function ConfirmPhone() {
 
 				{step === "code" && (
 					<>
-						<Input
-							label="Código de verificação"
-							value={code}
-							type="number"
-							inputMode="numeric"
-							isValid={wasSubmitted ? !showError : null}
-							onChange={handleCodeChange}
-						/>
+						<div>
+							<Input
+								label="Código de verificação"
+								value={code}
+								type="number"
+								inputMode="numeric"
+								isValid={wasSubmitted ? !showError : null}
+								onChange={handleCodeChange}
+								disabled={isCorrect}
+							/>
+							<span className={styles["help-text"]}>Enviado para o telefone: {formatPhone(phone)}</span>
+						</div>
 						<Button
 							isDisabled={code.length < 4 || isCorrect}
 							type="primary"
@@ -101,6 +119,15 @@ function ConfirmPhone() {
 									: {width: "100%"}
 							}
 							onClick={handleCodeSubmit}
+						/>
+
+						<Button
+							isDisabled={resendTimer > 0 || isCorrect}
+							type="primary"
+							size="small"
+							text={resendTimer > 0 ? `Reenviar (${resendTimer}s)` : "Reenviar código"}
+							customStyle={{width: "100%", marginTop: "0.5rem"}}
+							onClick={handleResendCode}
 						/>
 					</>
 				)}

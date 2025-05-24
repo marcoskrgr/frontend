@@ -36,7 +36,7 @@ export function createAuthController() {
       return true;
     } catch (e) {
       console.error(e);
-      addToast(e.response?.data?.error || e.message);
+      addToast(e.response?.data || e.message);
       return false;
     } finally {
       setLoading(false);
@@ -50,7 +50,7 @@ export function createAuthController() {
       return true;
     } catch (e) {
       console.error(e);
-      addToast(e.response?.data?.error || e.message);
+      addToast(e.response?.data || e.message);
       return false;
     } finally {
       setLoading(false);
@@ -66,7 +66,21 @@ export function createAuthController() {
       return true;
     } catch (e) {
       console.error(e);
-      addToast(e.response?.data?.error || e.message);
+      addToast(e.response?.data || e.message);
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function resendCode() {
+    try {
+      setLoading(true);
+      await authRepository.resendCode(getTemporaryToken);
+      return true;
+    } catch (e) {
+      console.error(e);
+      addToast(e.response?.data || e.message);
       return false;
     } finally {
       setLoading(false);
@@ -78,6 +92,7 @@ export function createAuthController() {
     register,
     confirmPhone,
     insertPhone,
+    resendCode,
     loading,
   };
 }

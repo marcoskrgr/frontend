@@ -78,3 +78,9 @@
 	justify-content: space-between;
 	gap: 15px;
 }
+
+.help-text {
+	font-family: "Inter";
+	color: white !important;
+	font-size: 12px;
+}
