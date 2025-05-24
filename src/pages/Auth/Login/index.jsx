@@ -25,7 +25,7 @@ function Login() {
 					if (id === "email" && !validateEmail(value)) {
 						error = "E-mail inválido";
 					} else if (id === "password" && !validatePassword(value)) {
-						error = "A senha deve ter pelo menos 6 dígitos, letras, números e um caracter especial!";
+						error = "A senha deve ter pelo menos 8 dígitos, letras, números e um caracter especial!";
 					}
 				}
 				return {...input, value, error};

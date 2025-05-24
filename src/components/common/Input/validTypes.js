@@ -13,7 +13,7 @@ export const unformatPhone = (phone) => {
 };
 
 export const validatePassword = (password) => {
-  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{6,}$/;
+  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
   return passwordRegex.test(password);
 };
 

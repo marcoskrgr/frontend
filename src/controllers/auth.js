@@ -1,7 +1,8 @@
 import { useState } from "react";
+
+import { useAuthStore } from "@stores/useAuth";
 import { AuthRepository } from "@repositories/auth";
 import { useToast } from "@components/common/Toast/ToastProvider";
-import { useAuthStore } from "@stores/useAuth";
 
 export function createAuthController() {
   const [loading, setLoading] = useState(false);

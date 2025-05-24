@@ -12,7 +12,7 @@ const initialInputs = [
 	{id: "firstName", label: "Nome", isRequired: true, type: "text", value: ""},
 	{id: "lastName", label: "Sobrenome", isRequired: true, type: "text", value: ""},
 	{id: "email", label: "E-mail", isRequired: true, type: "email", value: ""},
-	{id: "password", label: "Senha", isRequired: true, type: "text", value: ""},
+	{id: "password", label: "Senha", isRequired: true, type: "password", value: ""},
 	{id: "confPass", label: "Confirmar Senha", isRequired: true, type: "text", value: ""}
 ];
 
@@ -32,7 +32,7 @@ function Register() {
 					if (id === "email" && !validateEmail(value)) {
 						error = "E-mail inválido";
 					} else if (id === "password" && !validatePassword(value)) {
-						error = "A senha deve ter pelo menos 6 dígitos, letras, números e um caracter especial!";
+						error = "A senha deve ter pelo menos 8 dígitos, letras, números e um caracter especial!";
 					} else if (id === "confPass" && value !== inputs.find((i) => i.id === "password").value) {
 						error = "Senhas não coincidem";
 					}
