@@ -5,25 +5,21 @@ export const useAuthStore = create(
   persist(
     (set) => ({
       token: null,
-      isPhoneConfirmed: false,
-      temporaryToken: null,
+      userData: null,
 
       setToken: (token) => set({ token }),
-      setIsPhoneConfirmed: (value) => set({ isPhoneConfirmed: value }),
-      setTemporaryToken: (tempToken) => set({ temporaryToken: tempToken }),
+      setUserData: (userData) => set({ userData }),
 
       clearAuth: () =>
         set({
           token: null,
-          isPhoneConfirmed: false,
-          temporaryToken: null,
+          userData: null,
         }),
     }),
     {
       name: 'auth-storage',
       partialize: (state) => ({
-        token: state.token,
-        isPhoneConfirmed: state.isPhoneConfirmed
+        token: state.token
       }),
     }
   )

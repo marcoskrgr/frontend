@@ -13,7 +13,7 @@ const initialInputs = [
 	{id: "lastName", label: "Sobrenome", isRequired: true, type: "text", value: ""},
 	{id: "email", label: "E-mail", isRequired: true, type: "email", value: ""},
 	{id: "password", label: "Senha", isRequired: true, type: "password", value: ""},
-	{id: "confPass", label: "Confirmar Senha", isRequired: true, type: "text", value: ""}
+	{id: "confPass", label: "Confirmar Senha", isRequired: true, type: "password", value: ""}
 ];
 
 function Register() {

@@ -8,6 +8,7 @@ import {formatPhone, unformatPhone, validatePhone} from "@components/common/Inpu
 import {createAuthController} from "@controllers/auth";
 
 import styles from "../style.module.css";
+import {useAuthStore} from "@stores/useAuth";
 
 function ConfirmPhone() {
 	const navigate = useNavigate();
@@ -22,13 +23,7 @@ function ConfirmPhone() {
 	const [buttonLabel, setButtonLabel] = useState("confirmar");
 	const [resendTimer, setResendTimer] = useState(0);
 
-	useEffect(() => {
-		let timer;
-		if (resendTimer > 0) {
-			timer = setTimeout(() => setResendTimer(resendTimer - 1), 1000);
-		}
-		return () => clearTimeout(timer);
-	}, [resendTimer]);
+	const userData = useAuthStore((state) => state.userData);
 
 	const handlePhoneChange = (e) => {
 		const formattedPhone = formatPhone(e.target.value);
@@ -73,6 +68,22 @@ function ConfirmPhone() {
 			setResendTimer(20);
 		}
 	};
+
+	useEffect(() => {
+		let timer;
+		if (resendTimer > 0) {
+			timer = setTimeout(() => setResendTimer(resendTimer - 1), 1000);
+		}
+		return () => clearTimeout(timer);
+	}, [resendTimer]);
+
+	useEffect(() => {
+		if (userData.fgPhoneVerified === 1) {
+			setStep("phone");
+		} else if (userData.fgPhoneVerified === 2) {
+			setStep("code");
+		}
+	}, [userData]);
 
 	return (
 		<div className={styles["container"]}>

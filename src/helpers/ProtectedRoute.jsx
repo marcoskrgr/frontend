@@ -3,10 +3,10 @@ import { useAuthStore } from "@stores/useAuth"
 
 export default function ProtectedRoute() {
   const token = useAuthStore((state) => state.token)
-  const isPhoneConfirmed = useAuthStore((state) => state.isPhoneConfirmed)
+  const userData = useAuthStore((state) => state.userData)
 
-  if (!token) return <Navigate to="/register" replace />
-  if (!isPhoneConfirmed) return <Navigate to="/confirm-phone" replace />
+  if (!token || !userData) return <Navigate to="/register" replace />
+  if (userData.fgPhoneVerified !== 3) return <Navigate to="/confirm-phone" replace />
 
   return <Outlet />
 }
