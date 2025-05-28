@@ -1,10 +1,12 @@
 import React, {useState} from "react";
 import {useNavigate, Link} from "react-router-dom";
+
 import Input from "@components/common/Input";
 import Button from "@components/common/Button";
+import {createAuthController} from "@controllers/auth";
+import {validateEmail, validatePassword} from "@components/common/Input/validTypes";
+
 import styles from "../style.module.css";
-import {formatPhone, validateEmail, validatePassword, validatePhone} from "@components/common/Input/validTypes";
-import { createAuthController } from "@controllers/auth";
 
 const initialInputs = [
 	{id: "firstName", label: "Nome", isRequired: true, type: "text", value: ""},
@@ -18,23 +20,19 @@ function Register() {
 	const navigate = useNavigate();
 	const [inputs, setInputs] = useState(initialInputs);
 
-	const authController = createAuthController();
+	const {register} = createAuthController();
 
-	const handleInputChange = (id, value) => {
+	const handleInputChange = (e) => {
+		const {id, value} = e.target;
 		const updatedInputs = inputs.map((input) => {
 			if (input.id === id) {
 				let error = "";
 
-				if (value.length > 5) {
+				if (value.length > 0) {
 					if (id === "email" && !validateEmail(value)) {
 						error = "E-mail inválido";
-					} else if (id === "phone") {
-						const formattedPhone = formatPhone(value);
-						if (!validatePhone(formattedPhone)) {
-							error = "Telefone inválido";
-						}
 					} else if (id === "password" && !validatePassword(value)) {
-						error = "A senha deve ter pelo menos 10 dígitos, letras e números!";
+						error = "A senha deve ter pelo menos 8 dígitos, letras, números e um caracter especial!";
 					} else if (id === "confPass" && value !== inputs.find((i) => i.id === "password").value) {
 						error = "Senhas não coincidem";
 					}
@@ -44,6 +42,7 @@ function Register() {
 			}
 			return input;
 		});
+
 		const password = updatedInputs.find((i) => i.id === "password");
 		const confPass = updatedInputs.find((i) => i.id === "confPass");
 		if (confPass && password && confPass.value !== password.value) {
@@ -57,7 +56,7 @@ function Register() {
 
 	const canSubmit = inputs.every((i) => i.value && !i.error);
 
-  const handleSubmit = async (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 
 		const userData = {};
@@ -67,30 +66,31 @@ function Register() {
 			}
 		});
 
-		try {
-			await authController.register(userData);
+		const response = await register(userData);
+
+		if (response) {
 			navigate("/confirm-phone");
-		} catch (error) {
-			console.error("Erro ao registrar usuário:", error.response?.data || error.message);
-			alert("Erro ao registrar usuário: " + (error.response?.data?.message || error.message));
 		}
 	};
+
 	return (
-		<div className={styles.content}>
-			<img className={styles.logoSoft} src="../../../src/assets/SoftExtendedLogo.png" alt="Logo da SoftExpert" />
+		<div className={styles["container"]}>
+			<img className={styles.logo} src="../../../src/assets/SoftExtendedLogo.png" alt="Logo da SoftExpert" />
 			<form className={styles.form} onSubmit={handleSubmit}>
-				{inputs.map(({id, label, type, value, error, isRequired}) => (
-					<Input
-						key={id}
-						id={id}
-						type={type}
-						label={label}
-						isRequired={isRequired}
-						value={value}
-						error={error}
-						onChange={handleInputChange}
-					/>
-				))}
+				<div className={styles["fields"]}>
+					{inputs.map(({id, label, type, value, error, isRequired}) => (
+						<Input
+							key={id}
+							id={id}
+							type={type}
+							label={label}
+							isRequired={isRequired}
+							value={value}
+							error={error}
+							onChange={handleInputChange}
+						/>
+					))}
+				</div>
 				<div className={styles.formFooter}>
 					<Button
 						isDisabled={!canSubmit}
@@ -100,7 +100,7 @@ function Register() {
 						onClick={handleSubmit}
 						customStyle={{width: "100%"}}
 					/>
-					<Link className={styles.a} to="/">
+					<Link className={styles.a} to="/login">
 						já possui login?
 					</Link>
 				</div>

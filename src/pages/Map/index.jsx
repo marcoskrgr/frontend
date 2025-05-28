@@ -9,14 +9,13 @@ import PlayerProfile from "@components/Map/PlayerProfile";
 import styles from "./style.module.css";
 
 const columns = [
-	{id: 4, title: "Backlog"},
 	{id: 3, title: "To-do"},
 	{id: 2, title: "In progress"},
 	{id: 1, title: "Done"}
 ];
 
 const cards = [
-	{id: 4, title: "Task #4", route: "/phrase", difficulty: "easy", tags: [{label: "TASK"}], description: "Conversar com o pessoal do estande"},
+	/* {id: 4, title: "Task #4", route: "/phrase", difficulty: "easy", tags: [{label: "TASK"}], description: "Conversar com o pessoal do estande"}, */
 	{
 		id: 3,
 		title: "Task #3",

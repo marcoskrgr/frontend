@@ -3,8 +3,10 @@ import Home from './Home';
 import Memory from './Memory';
 import Quiz from './Quiz';
 import Wordle from './Wordle';
-import Register from './Register/Register';
-import ConfirmPhone from './Register/ConfirmPhone';
+import Register from './Auth/Register';
+import Login from './Auth/Login';
+import ConfirmPhone from './Auth/ConfirmPhone';
 import Phrase from './Phrase';
 
-export {Home, Register, ConfirmPhone, Map, Wordle, Phrase, Quiz, Memory};
+
+export {Home, Register, Login, ConfirmPhone, Map, Wordle, Phrase, Quiz, Memory};
