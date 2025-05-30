@@ -16,12 +16,12 @@ export function AuthRepository() {
 
 	async function insertPhone(data) {
 		const response = await axiosInstance.post(`/auth/insert-phone`, data);
-		return response;
+		return response.data;
 	}
 
 	async function confirmPhone(data) {
 		const response = await axiosInstance.post(`/auth/confirm-phone`, data);
-		return response;
+		return response.data;
 	}
 
 	async function resendCode() {

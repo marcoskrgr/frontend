@@ -8,7 +8,7 @@ import {jwtDecode} from "jwt-decode";
 export function createAuthController() {
 	const [loading, setLoading] = useState(false);
 	const authRepository = AuthRepository();
-	const {addToast} = useToast();
+	const { addToast } = useToast();
 
 	const setToken = useAuthStore((state) => state.setToken);
 	const getToken = useAuthStore((state) => state.token);
@@ -49,7 +49,8 @@ export function createAuthController() {
 		try {
 			setLoading(true);
 			const response = await authRepository.insertPhone(data, getToken);
-			setUserData(jwtDecode(response.data.token));
+			setToken(response.token);
+			setUserData(jwtDecode(response.token));
 			return true;
 		} catch (e) {
 			console.error(e);
@@ -64,7 +65,8 @@ export function createAuthController() {
 		try {
 			setLoading(true);
 			const response = await authRepository.confirmPhone(data, getToken);
-			setUserData(jwtDecode(response.data.token));
+			setToken(response.token);
+			setUserData(jwtDecode(response.token));
 			return true;
 		} catch (e) {
 			console.error(e);

@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import {createBrowserRouter} from "react-router-dom";
 
 import Frame from "@components/common/Frame";
 import ProtectedRoute from "./ProtectedRoute";
@@ -11,14 +11,14 @@ const routes = createBrowserRouter([
 		children: [
 			{path: "/", element: <Home />},
 			{path: "/register", element: <Register />},
-      { path: "/login", element: <Login /> },
+			{path: "/login", element: <Login />},
 			{path: "/confirm-phone", element: <ConfirmPhone />},
 			{
 				element: <ProtectedRoute />,
 				children: [
 					{path: "/map", element: <Map />},
 					{path: "/wordle", element: <Wordle />},
-          { path: "/memory", element: <Memory /> },
+					{path: "/memory", element: <Memory />},
 					{path: "/phrase", element: <Phrase />},
 					{path: "/quiz", element: <Quiz />}
 				]

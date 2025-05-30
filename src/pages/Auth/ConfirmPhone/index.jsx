@@ -24,7 +24,7 @@ function ConfirmPhone() {
 	const [resendTimer, setResendTimer] = useState(0);
 
 	const userData = useAuthStore((state) => state.userData);
-	console.log(userData)
+
 	const handlePhoneChange = (e) => {
 		const formattedPhone = formatPhone(e.target.value);
 		setPhone(formattedPhone);
