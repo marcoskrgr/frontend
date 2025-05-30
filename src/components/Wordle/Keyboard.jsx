@@ -10,13 +10,14 @@ const QWERTY = [
 ];
 
 function Keyboard({onKeyPress, guesses, getLetterColor}) {
-	const getKeyColor = (key) => {
+	const getKeyColor = key => {
+
+		guesses = guesses.flat()
+
 		if (key === "ENTER" || key === "BACKSPACE") return "";
 		for (let guess of guesses) {
-			for (let i = 0; i < guess.length; i++) {
-				if (guess[i] === key) {
-					return getLetterColor(key, i, guess);
-				}
+			if (guess.char.toUpperCase() === key) {
+				return getLetterColor(guess.status);
 			}
 		}
 		return "";
