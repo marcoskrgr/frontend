@@ -5,7 +5,7 @@ import Button from "@components/common/Button";
 import {createAuthController} from "@controllers/auth";
 import {validateEmail, validatePassword} from "@components/common/Input/validTypes";
 import styles from "../style.module.css";
-import { useAuthStore } from "@stores/useAuth";
+import {useAuthStore} from "@stores/useAuth";
 
 const initialInputs = [
 	{id: "email", label: "E-mail", isRequired: true, type: "email", value: "", error: ""},
@@ -16,7 +16,6 @@ function Login() {
 	const navigate = useNavigate();
 	const [inputs, setInputs] = useState(initialInputs);
 	const {login} = createAuthController();
-	const userData = useAuthStore((state) => state.userData);
 
 	const handleInputChange = (e) => {
 		const {id, value} = e.target;
@@ -49,10 +48,9 @@ function Login() {
 		});
 
 		const response = await login(userData);
-
 		if (response) {
-			if (userData.fgPhoneVerified === 3) {
-				navigate("/home");
+			if (response.fgPhoneVerified === 3) {
+				navigate("/");
 			} else {
 				navigate("/confirm-phone");
 			}

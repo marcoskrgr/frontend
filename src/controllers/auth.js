@@ -20,7 +20,7 @@ export function createAuthController() {
 			const response = await authRepository.login(data);
 			setToken(response.token);
 			setUserData(jwtDecode(response.token));
-			return response;
+			return jwtDecode(response.token);
 		} catch (e) {
 			addToast(e.response?.data?.error || e.message);
 			return null;
@@ -49,7 +49,7 @@ export function createAuthController() {
 		try {
 			setLoading(true);
 			const response = await authRepository.insertPhone(data, getToken);
-			setUserData(jwtDecode(response.token));
+			setUserData(jwtDecode(response.data.token));
 			return true;
 		} catch (e) {
 			console.error(e);
@@ -64,7 +64,7 @@ export function createAuthController() {
 		try {
 			setLoading(true);
 			const response = await authRepository.confirmPhone(data, getToken);
-			setUserData(jwtDecode(response.token));
+			setUserData(jwtDecode(response.data.token));
 			return true;
 		} catch (e) {
 			console.error(e);
@@ -78,7 +78,7 @@ export function createAuthController() {
 	async function resendCode() {
 		try {
 			setLoading(true);
-			await authRepository.resendCode(getToken);
+			await authRepository.resendCode();
 			return true;
 		} catch (e) {
 			console.error(e);

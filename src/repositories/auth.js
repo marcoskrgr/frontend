@@ -1,10 +1,8 @@
-import axios from "axios";
-
-const BASE_URL = import.meta.env.BASE_URL + "/auth";
+import axiosInstance from "../plugins/axios.js";
 
 export function AuthRepository() {
 	async function login(data) {
-		const response = await axios.post(`${BASE_URL}/login`, data, {
+		const response = await axiosInstance.post(`/auth/login`, data, {
 			withCredentials: true
 		});
 
@@ -12,34 +10,22 @@ export function AuthRepository() {
 	}
 
 	async function register(data) {
-		const response = await axios.post(`${BASE_URL}/register`, data);
+		const response = await axiosInstance.post(`/auth/register`, data);
 		return response.data;
 	}
 
-	async function insertPhone(data, token) {
-		const response = await axios.post(`${BASE_URL}/insert-phone`, data, {
-			headers: {
-				Authorization: token,
-			},
-		});
+	async function insertPhone(data) {
+		const response = await axiosInstance.post(`/auth/insert-phone`, data);
 		return response;
 	}
 
-	async function confirmPhone(data, token) {
-		const response = await axios.post(`${BASE_URL}/confirm-phone`, data, {
-			headers: {
-				Authorization: token,
-			},
-		});
+	async function confirmPhone(data) {
+		const response = await axiosInstance.post(`/auth/confirm-phone`, data);
 		return response;
 	}
 
-	async function resendCode(token) {
-		const response = await axios.post(`${BASE_URL}/resend-code`, null, {
-			headers: {
-				Authorization: token,
-			},
-		});
+	async function resendCode() {
+		const response = await axiosInstance.post(`/auth/resend-code`);
 		return response;
 	}
 

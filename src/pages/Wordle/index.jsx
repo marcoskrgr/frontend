@@ -8,6 +8,7 @@ import { LetterStatusEnum } from "../../constants/wordleConstants";
 import { GameRepository } from "../../repositories/games";
 
 import styles from "@components/Wordle/styles.module.css";
+import { useAuthStore } from "@stores/useAuth";
 
 const CONFIG = {
 	MAX_ATTEMPTS: 6,
