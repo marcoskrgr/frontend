@@ -1,10 +1,11 @@
 import React, {useEffect, useRef} from "react";
-import {Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 import Card from "@components/Map/Card";
 import Column from "@components/Map/Column";
-import {useUser} from "../../helpers/context/UserContext";
+import {useAuthStore} from "@stores/useAuth";
 import PlayerProfile from "@components/Map/PlayerProfile";
+import {createAuthController} from "@controllers/auth";
 
 import styles from "./style.module.css";
 
@@ -15,9 +16,8 @@ const columns = [
 ];
 
 const cards = [
-	/* {id: 4, title: "Task #4", route: "/phrase", difficulty: "easy", tags: [{label: "TASK"}], description: "Conversar com o pessoal do estande"}, */
 	{
-		id: 3,
+		id: 1,
 		title: "Task #3",
 		route: "/wordle",
 		difficulty: "hard",
@@ -32,48 +32,61 @@ const cards = [
 		tags: [{label: "REFACTOR", color: "yellow"}],
 		description: "Pair programming com o scrum"
 	},
-	{id: 1, title: "Task #1", route: "/quiz", difficulty: "easy", description: "Responder o quiz de treinamento"}
+	{id: 3, title: "Task #1", route: "/quiz", difficulty: "easy", description: "Responder o quiz de treinamento"}
 ];
 
 function Map() {
-	const {level} = useUser();
-
+	const navigate = useNavigate()
+	const {fetchUserData} = createAuthController();
+	const userData = useAuthStore((state) => state.userData);
 	const contentRef = useRef(null);
 	const lastCardRef = useRef(null);
 
+	useEffect(() => {
+		fetchUserData();
+	}, []);
+
+	useEffect(() => {
+		if (lastCardRef.current) {
+			lastCardRef.current.scrollIntoView({behavior: "smooth", block: "end"});
+		}
+	}, [userData]);
+
+	const userTasks = userData?.tasks || [];
+	const sortedTasks = [...userTasks].sort((a, b) => a - b);
+	const currentTaskId = sortedTasks[sortedTasks.length - 1];
+
 	const getColumnCards = (columnTitle) => {
 		return cards.filter((card) => {
-			if (columnTitle === "In progress") return card.id === level;
-			if (columnTitle === "Done") return card.id < level;
-			if (columnTitle === "To-do") return card.id === level + 1;
-			if (columnTitle === "Backlog") return card.id > level + 1;
+			if (columnTitle === "In progress") return card.id === currentTaskId;
+			if (columnTitle === "Done") return userTasks.includes(card.id) && card.id !== currentTaskId;
+			if (columnTitle === "To-do") return !userTasks.includes(card.id);
 			return false;
 		});
 	};
 
 	const visibleColumns = columns.filter((column) => getColumnCards(column.title).length > 0);
 
-	useEffect(() => {
-		if (lastCardRef.current) {
-			lastCardRef.current.scrollIntoView({behavior: "smooth", block: "end"});
-		}
-	}, []);
-
 	return (
 		<div ref={contentRef} className={styles["content"]}>
-			<PlayerProfile />
 			{visibleColumns.map((column) => {
 				const columnCards = getColumnCards(column.title);
 				return (
 					<Column key={column.id} title={column.title} length={columnCards.length}>
 						{columnCards.map((card, index) => (
-							<Link key={card.title} to={card.route}>
-								<Card difficulty={card.difficulty} {...card} ref={index === cards.length - 1 ? lastCardRef : null} />
-							</Link>
-						))}
+							<Card
+								key={card.title}
+								onClick={() => navigate(card.route)}
+								difficulty={card.difficulty}
+								{...card}
+								isToDo={column.title === "To-do"}
+								ref={index === columnCards.length - 1 ? lastCardRef : null}
+								/>
+							))}
 					</Column>
 				);
 			})}
+	<PlayerProfile name={`${userData.firstName} ${userData.lastName}`} tickets={userData.tickets} />
 		</div>
 	);
 }

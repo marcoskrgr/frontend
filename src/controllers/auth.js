@@ -91,10 +91,25 @@ export function createAuthController() {
 		}
 	}
 
+	async function fetchUserData() {
+		try {
+			setLoading(true);
+			const response = await authRepository.fetchUserData();
+			console.log(response)
+			setUserData(response);
+		} catch (e) {
+			console.error(e);
+			addToast(e.response?.data || e.message);
+		} finally {
+			setLoading(false);
+		}
+	}
+
 	return {
 		login,
 		register,
 		confirmPhone,
+		fetchUserData,
 		insertPhone,
 		resendCode,
 		loading

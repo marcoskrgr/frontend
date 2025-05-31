@@ -42,22 +42,13 @@ body {
   overflow-y: auto;
 }
 
-body::-webkit-scrollbar {
-  width: 6px;
+::-webkit-scrollbar {
+  display: none;
 }
 
-body::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
-}
-
-body::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 10px;
-}
-
-body::-webkit-scrollbar-thumb:hover {
-  background: #555;
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none; 
 }
 
 body {

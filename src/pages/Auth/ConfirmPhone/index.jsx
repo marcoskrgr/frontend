@@ -3,12 +3,12 @@ import {useNavigate} from "react-router-dom";
 import confetti from "canvas-confetti";
 
 import Input from "@components/common/Input";
+import {useAuthStore} from "@stores/useAuth";
 import Button from "@components/common/Button";
-import {formatPhone, unformatPhone, validatePhone} from "@components/common/Input/validTypes";
 import {createAuthController} from "@controllers/auth";
+import {formatPhone, unformatPhone, validatePhone} from "@components/common/Input/validTypes";
 
 import styles from "../style.module.css";
-import {useAuthStore} from "@stores/useAuth";
 
 function ConfirmPhone() {
 	const navigate = useNavigate();
