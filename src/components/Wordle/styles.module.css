@@ -1,15 +1,3 @@
-:root {
-  --gray-bg: #323232;
-  --gray-gradient: linear-gradient(to bottom, #545C65 0%, #262626 100%);
-  --gray-inner: #323232;
-  --green-gradient: linear-gradient(to bottom, #00E883 0%, #101C40 100%);
-  --green-inner: #009182;
-  --gold-gradient: linear-gradient(to bottom, #FFD900 0%, #DD8100 100%);
-  --gold-inner: #EEAF00;
-  --active-gradient: linear-gradient(to bottom, #4A90E2 0%, #1C3A6D 100%);
-  --active-inner: #357ABD;
-}
-
 .container {
   max-width: 400px;
   margin: 40px auto;

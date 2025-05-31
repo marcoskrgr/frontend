@@ -36,7 +36,7 @@ const cards = [
 ];
 
 function Map() {
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 	const {fetchUserData} = createAuthController();
 	const userData = useAuthStore((state) => state.userData);
 	const contentRef = useRef(null);
@@ -81,12 +81,12 @@ function Map() {
 								{...card}
 								isToDo={column.title === "To-do"}
 								ref={index === columnCards.length - 1 ? lastCardRef : null}
-								/>
-							))}
+							/>
+						))}
 					</Column>
 				);
 			})}
-	<PlayerProfile name={`${userData.firstName} ${userData.lastName}`} tickets={userData.tickets} />
+			<PlayerProfile name={`${userData.firstName} ${userData.lastName}`} tickets={userData.tickets} />
 		</div>
 	);
 }

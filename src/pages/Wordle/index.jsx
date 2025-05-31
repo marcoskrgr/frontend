@@ -7,9 +7,6 @@ import GameHeader from "@components/common/GameHeader";
 import { LetterStatusEnum } from "../../constants/wordleConstants";
 import { GameRepository } from "../../repositories/games";
 
-import styles from "@components/Wordle/styles.module.css";
-import { useAuthStore } from "@stores/useAuth";
-
 const CONFIG = {
 	MAX_ATTEMPTS: 6,
 	WORD_LENGTH: 5,
@@ -82,14 +79,15 @@ export default function Wordle() {
 	const getColor = status => {
 		if (status === LetterStatusEnum.CORRECT) return "green";
 		if (status === LetterStatusEnum.INCORRECT_POSITION) return "goldenrod";
-		return "gray";
+		if (status === LetterStatusEnum.DONT_EXIST) return "gray";
+		return "absent";
 	};
 
 	return (
-		<div className={styles.wordleContainer}>
+		<>
 			<GameHeader task="Task 3" />
 			<Grid guesses={guesses} isGameOver={isGameOver}  currentGuess={currentGuess} getLetterColor={getColor} />
 			<Keyboard onKeyPress={handleKeyPress} guesses={guesses} getLetterColor={getColor} />
-		</div>
+		</>
 	);
 }
