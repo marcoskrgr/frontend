@@ -12,6 +12,45 @@
 	justify-content: space-between;
 }
 
+.locked {
+	position: absolute;
+	background-color: rgb(0 0 0 / 36%);
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	align-items: center;
+	left: 0;
+	bottom: 0;
+	height: 100%;
+}
+
+.locked i {
+	font-size: 3em;
+	color: #514e4e;
+}
+
+@keyframes shake {
+	0% {
+		transform: translateX(0);
+	}
+	25% {
+		transform: translateX(-5px);
+	}
+	50% {
+		transform: translateX(5px);
+	}
+	75% {
+		transform: translateX(-5px);
+	}
+	100% {
+		transform: translateX(0);
+	}
+}
+
+.shake {
+	animation: shake 0.4s ease;
+}
+
 .cards {
 	display: flex;
 	flex-direction: column;
@@ -105,38 +144,45 @@
 
 .profile.big:before {
 	top: 5px;
-  left: 5px;
-  height: 91px;
-  width: 91px;
+	left: 5px;
+	height: 91px;
+	width: 91px;
 }
 
 .player-image {
 	position: absolute;
-  bottom: -7px;
+	bottom: -7px;
 }
 
 .player-profile {
 	position: fixed;
-  z-index: 10;
-  top: 126px;
+	z-index: 10;
+	top: 126px;
 }
-
+/* 
 .name-tickets {
 	margin-left: 58px;
-}
+} */
 
-.player-profile .name, .player-profile .tickets {
+.player-profile .name,
+.player-profile .tickets {
 	border: 3px solid var(--expert-vision);
 	background-color: var(--expert-horizon);
-  color: white;
-	padding: 6px 30px 6px 47px;
-  border-radius: 14px;
+	color: white;
+	/* 	padding: 6px 30px 6px 47px; */
+	padding: 6px;
+	border-radius: 14px;
+}
+
+.player-profile .name {
+	border-bottom-left-radius: 0;
 }
 
 .player-profile .tickets {
 	width: fit-content;
-  border-top: 0;
-  border-top-right-radius: 0;
+	border-top: 0;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
 }
 
 .player-profile .tickets img {

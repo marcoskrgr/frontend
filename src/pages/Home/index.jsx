@@ -6,13 +6,11 @@ import Button from "@components/common/Button";
 import Modal from "@components/Home/Modal";
 import Prizes from "@components/Home/Prizes";
 /* import Tickets from "@components/Home/Tickets"; */
-import {useUser} from "@helpers/context/UserContext";
 import { useAuthStore } from "@stores/useAuth";
 
 import styles from "./style.module.css";
 
 function Home() {
-	const {level} = useUser();
 	const navigate = useNavigate();
 	const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
 	const [isPrizesModalOpen, setIsPrizesModalOpen] = useState(false);
@@ -24,11 +22,11 @@ function Home() {
 			{/* <Tickets /> */}
 			<img className={styles["logo-game"]} src="../../../src/assets/GameLogo.svg" alt="Logo do game" />
 			<div className={styles["buttons"]}>
-				{level == 4 && (
+	{/* 			{level == 4 && (
 					<div className={styles["buttons-left"]}>
 						<Button type="primary" size="medium" icon="bxs-quote-alt-left" onClick={() => navigate("/phrase")} />
 					</div>
-				)}
+				)} */}
 				<Button
 					type="primary"
 					size="large"

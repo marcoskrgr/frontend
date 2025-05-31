@@ -2,9 +2,7 @@ import axiosInstance from "../plugins/axios.js";
 
 export function AuthRepository() {
 	async function login(data) {
-		const response = await axiosInstance.post(`/auth/login`, data, {
-			withCredentials: true
-		});
+		const response = await axiosInstance.post(`/auth/login`, data);
 
 		return response.data;
 	}
@@ -15,24 +13,30 @@ export function AuthRepository() {
 	}
 
 	async function insertPhone(data) {
-		const response = await axiosInstance.post(`/auth/insert-phone`, data);
+		const response = await axiosInstance.post(`/auth/v2/insert-phone`, data);
 		return response.data;
 	}
 
 	async function confirmPhone(data) {
-		const response = await axiosInstance.post(`/auth/confirm-phone`, data);
+		const response = await axiosInstance.post(`/auth/v2/confirm-phone`, data);
 		return response.data;
 	}
 
 	async function resendCode() {
-		const response = await axiosInstance.post(`/auth/resend-code`);
+		const response = await axiosInstance.post(`/auth/v2/resend-code`);
 		return response;
+	}
+
+	async function fetchUserData() {
+		const response = await axiosInstance.get('/auth/v2/user-details');
+		return response.data;
 	}
 
 	return {
 		login,
 		confirmPhone,
 		resendCode,
+		fetchUserData,
 		insertPhone,
 		register
 	};

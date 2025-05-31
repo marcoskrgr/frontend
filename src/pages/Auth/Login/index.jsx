@@ -50,7 +50,7 @@ function Login() {
 		const response = await login(userData);
 		if (response) {
 			if (response.fgPhoneVerified === 3) {
-				navigate("/");
+				navigate("/map");
 			} else {
 				navigate("/confirm-phone");
 			}
