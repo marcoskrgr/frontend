@@ -18,6 +18,15 @@
 	--gold: #ffb43a;
 	--silver: #515151;
 	--bronze: #a4682c;
+	--gray-bg: #323232;
+  --gray-gradient: linear-gradient(to bottom, #545C65 0%, #262626 100%);
+  --gray-inner: #323232;
+  --green-gradient: linear-gradient(to bottom, #00E883 0%, #101C40 100%);
+  --green-inner: #009182;
+  --gold-gradient: linear-gradient(to bottom, #FFD900 0%, #DD8100 100%);
+  --gold-inner: #EEAF00;
+  --active-gradient: linear-gradient(to bottom, #4A90E2 0%, #1C3A6D 100%);
+  --active-inner: #357ABD;
 	--gradient-001: linear-gradient(to top, #0075ff 0%, #00c8ff 100%);
 	--gradient-001-dark: linear-gradient(to top, #0063d4 0%, #0098c2 100%);
 	--gradient-red: linear-gradient(to top, #FF7D7E 0%, #B40048 100%);
@@ -37,7 +46,7 @@ a {
 }
 
 body {
-	background-color: #022280;
+	background-color: #028013;
   overflow-x: hidden;
   overflow-y: auto;
 }

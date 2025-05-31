@@ -95,7 +95,6 @@ export function createAuthController() {
 		try {
 			setLoading(true);
 			const response = await authRepository.fetchUserData();
-			console.log(response)
 			setUserData(response);
 		} catch (e) {
 			console.error(e);

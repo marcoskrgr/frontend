@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 
+import {useAuthStore} from "@stores/useAuth";
 import style from "./style.module.css";
 
-function GameHeader({ task, initialTime = 0 }) {
+
+function GameHeader({task, initialTime = 0}) {
 	const [timer, setTimer] = useState(initialTime);
+
+	const userData = useAuthStore((state) => state.userData);
 
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -23,7 +27,7 @@ function GameHeader({ task, initialTime = 0 }) {
 		<div className={style["header"]}>
 			<div>
 				<img className={style["icon"]} src="../../../src/assets/Vector.svg" />
-				<span>12</span>
+				<span>{userData.tickets}</span>
 			</div>
 			<span className={style["task"]}>{task}</span>
 			<span>{formatTime(timer)}</span>
