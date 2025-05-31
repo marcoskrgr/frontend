@@ -21,10 +21,22 @@ export function GameRepository() {
 		return response.data;
 	}
 
+	async function getMemoryData() {
+		const response = await axiosInstance.get('/game/memory/');
+		return response.data;
+	}
+
+	async function memoryGuess(data) {
+		const response = await axiosInstance.post('/game/memory/guess', JSON.stringify(data));
+		return response.data;
+	}
+
 	return {
 		getTermData,
 		termGuess,
 		getQuizData,
-		quizGuess
+		quizGuess,
+		getMemoryData,
+		memoryGuess
 	};
 }
