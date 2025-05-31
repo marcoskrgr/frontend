@@ -82,7 +82,8 @@ export default function Wordle() {
 	const getColor = status => {
 		if (status === LetterStatusEnum.CORRECT) return "green";
 		if (status === LetterStatusEnum.INCORRECT_POSITION) return "goldenrod";
-		return "gray";
+		if (status === LetterStatusEnum.DONT_EXIST) return "gray";
+		return "absent";
 	};
 
 	return (

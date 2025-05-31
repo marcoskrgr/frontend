@@ -17,7 +17,9 @@ function Keyboard({onKeyPress, guesses, getLetterColor}) {
 		if (key === "ENTER" || key === "BACKSPACE") return "";
 		for (let guess of guesses) {
 			if (guess.char.toUpperCase() === key) {
-				return getLetterColor(guess.status);
+				let color = getLetterColor(guess.status);
+				if (color === "gray") return "absent";
+				return color
 			}
 		}
 		return "";
