@@ -1,64 +1,48 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Hexagon from "./HexagonMemory";
 import styles from "./style.module.css";
 
-import c_icon from "../../../src/assets/icons_memory/c_icon.png";
-import css_icon from "../../../src/assets/icons_memory/css_icon.png";
-import html_icon from "../../../src/assets/icons_memory/html_icon.png";
-import js_icon from "../../../src/assets/icons_memory/js_icon.png";
-import py_icon from "../../../src/assets/icons_memory/py_icon.png";
-import r_icon from "../../../src/assets/icons_memory/r_icon.png";
-import php_icon from "../../../src/assets/icons_memory/php_icon.png";
-import delphi_icon from "../../../src/assets/icons_memory/delphi_icon.png";
-import java_icon from "../../../src/assets/icons_memory/java_icon.png";
-
-const iconList = [
-  { src: c_icon, alt: "C" },
-  { src: css_icon, alt: "CSS" },
-  { src: html_icon, alt: "HTML" },
-  { src: js_icon, alt: "JavaScript" },
-  { src: py_icon, alt: "Python" },
-  { src: r_icon, alt: "R" },
-  { src: php_icon, alt: "PHP" },
-  { src: delphi_icon, alt: "Delphi" },
-  { src: java_icon, alt: "Java" },
-];
+import {GameRepository} from "../../repositories/games.js";
 
 function GridMemory() {
   const [cards, setCards] = useState([]);
-  const [selected, setSelected] = useState([]);
+  const selectedRef = useRef([]);
   const [attempts, setAttempts] = useState(0);
   const [gameFinished, setGameFinished] = useState(false);
-
-   const initializeGame = () => {
-    const duplicatedIcons = [...iconList, ...iconList].map((icon, index) => ({
-      id: index,
-      src: icon.src,
-      alt: icon.alt,
-      flipped: false,
-      matched: false,
-    }));
-
-    const shuffled = duplicatedIcons.sort(() => 0.5 - Math.random()).slice(0, 18);
-    setCards(shuffled);
-    setAttempts(0);
-    setGameFinished(false);
-    setSelected([]);
-  };
+  const { getMemoryData, memoryGuess } = GameRepository();
 
   useEffect(() => {
-    initializeGame();
+    const fetchData = async () => {
+      const response = await getMemoryData();
+
+      const shuffled = response.cards.sort(() => 0.5 - Math.random()).slice(0, 18);
+      setCards(shuffled);
+      setAttempts(response.guesses)
+
+      console.log(response)
+    }
+    fetchData();
   }, []);
 
   useEffect(() => {
-    if (selected.length === 2) {
-      const [first, second] = selected;
+    if (cards.length > 0 && cards.every((card) => card.guessed)) {
+      setGameFinished(true);
+    }
+  }, [cards]);
+
+  const handleGuess = async(cardId, pairId) => {
+    if (selectedRef.current.length === 2) {
+      const [first, second] = selectedRef.current;
+
+      const checkGuess = await memoryGuess({ cardId: cards[first].id, pairId: cards[second].id })
+
       setTimeout(() => {
         setCards((prevCards) => {
           const updatedCards = [...prevCards];
-          if (updatedCards[first].alt === updatedCards[second].alt) {
-            updatedCards[first].matched = true;
-            updatedCards[second].matched = true;
+
+          if (checkGuess) {
+            updatedCards[first].guessed = true;
+            updatedCards[second].guessed = true;
           } else {
             updatedCards[first].flipped = false;
             updatedCards[second].flipped = false;
@@ -67,24 +51,20 @@ function GridMemory() {
         });
 
         setAttempts((prev) => prev + 1);
-        setSelected([]);
+        selectedRef.current = [];
       }, 1000);
     }
-  }, [selected]);
-
-  useEffect(() => {
-    if (cards.length > 0 && cards.every((card) => card.matched)) {
-      setGameFinished(true);
-    }
-  }, [cards]);
+  }
 
   const handleClick = (index) => {
-    if (cards[index].flipped || cards[index].matched || selected.length === 2) return;
+    if (cards[index].flipped || cards[index].matched || selectedRef.current.length === 2) return;
 
     const updatedCards = [...cards];
     updatedCards[index].flipped = true;
     setCards(updatedCards);
-    setSelected((prev) => [...prev, index]);
+    // setSelected((prev) => [...prev, index]);
+    selectedRef.current = [...selectedRef.current, index];
+    handleGuess()
   };
 
   const renderRows = () => {
@@ -97,9 +77,9 @@ function GridMemory() {
             <Hexagon
               key={card.id}
               size={100}
-              srcBack={card.src}
-              flipped={card.flipped || card.matched}
-              stage={card.matched ? 3 : 2}
+              srcBack={card.image}
+              flipped={card.flipped || card.guessed}
+              stage={card.guessed ? 3 : 2}
               onClick={() => handleClick(i + idx)}
             />
           ))}
@@ -114,9 +94,9 @@ function GridMemory() {
               <Hexagon
                 key={card.id}
                 size={100}
-                srcBack={card.src}
-                flipped={card.flipped || card.matched}
-                stage={card.matched ? 3 : 2}
+                srcBack={card.image}
+                flipped={card.flipped || card.guessed}
+                stage={card.guessed ? 3 : 2}
                 onClick={() => handleClick(i + 4 + idx)}
               />
             ))}

@@ -70,11 +70,15 @@ function Hexagon({
     zIndex: 2,
   };
 
-  const imgStyleBack = {
-    width: "65%",
-    height: "65%",
+  const imgStyleBack = srcBack => ({
+    width: "90%",
+    height: "90%",
     zIndex: 2,
-  };
+    backgroundImage: `url(${srcBack})`,
+    backgroundPosition: 'center',
+    backgroundSize: 'contain',
+    backgroundRepeat: 'no-repeat'
+  });
 
   return (
     <div style={outerStyle} onClick={onClick}>
@@ -85,7 +89,7 @@ function Hexagon({
         </div>
         <div style={{ ...faceStyle(true), transform: "rotateY(180deg)" }}>
           <div style={borderStyle}></div>
-          <img src={srcBack} alt="Verso" style={imgStyleBack} />
+          <div style={imgStyleBack(srcBack)}></div>
         </div>
       </div>
     </div>
