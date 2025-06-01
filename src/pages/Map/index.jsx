@@ -32,7 +32,7 @@ const cards = [
 		difficulty: "easy",
 		tags: [{label: "REFACTOR", color: "yellow"}],
 		description: "Pair programming com o scrum"
-	},
+	}
 ];
 
 function Map() {
@@ -63,31 +63,31 @@ function Map() {
 			return false;
 		});
 	};
-	
-	
 
 	const visibleColumns = columns.filter((column) => getColumnCards(column.title).length > 0);
 
 	return (
 		<div ref={contentRef} className={styles["content"]}>
-			{visibleColumns.map((column) => {
-				const columnCards = getColumnCards(column.title);
-				return (
-					<Column key={column.id} title={column.title} length={columnCards.length}>
-						{columnCards.map((card, index) => (
-							<Card
-								key={card.title}
-								onClick={() => navigate(card.route)}
-								difficulty={card.difficulty}
-								{...card}
-								isToDo={column.title === "To-do"}
-								ref={index === columnCards.length - 1 ? lastCardRef : null}
-							/>
-						))}
-					</Column>
-				);
-			})}
 			<PlayerProfile name={`${userData.firstName} ${userData.lastName}`} tickets={userData.tickets} />
+			<div className={styles["columns"]}>
+				{visibleColumns.map((column) => {
+					const columnCards = getColumnCards(column.title);
+					return (
+						<Column key={column.id} title={column.title} length={columnCards.length}>
+							{columnCards.map((card, index) => (
+								<Card
+									key={card.title}
+									onClick={() => navigate(card.route)}
+									difficulty={card.difficulty}
+									{...card}
+									isToDo={column.title === "To-do"}
+									ref={index === columnCards.length - 1 ? lastCardRef : null}
+								/>
+							))}
+						</Column>
+					);
+				})}
+			</div>
 		</div>
 	);
 }

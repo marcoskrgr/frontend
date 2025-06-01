@@ -1,10 +1,10 @@
 import React from "react";
+import classNames from "classnames";
 import {useNavigate} from "react-router-dom";
 
 import Button from "../Button";
 
 import styles from "./styles.module.css";
-import classNames from "classnames";
 
 function FinishModal({time, showModal}) {
 	const navigate = useNavigate();

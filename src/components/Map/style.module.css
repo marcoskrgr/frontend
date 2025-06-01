@@ -155,9 +155,9 @@
 }
 
 .player-profile {
-	position: fixed;
+/* 	position: fixed;
 	z-index: 10;
-	top: 126px;
+	top: 25px; */
 }
 /* 
 .name-tickets {
