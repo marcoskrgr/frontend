@@ -5,6 +5,7 @@ import Input from "@components/common/Input";
 import Button from "@components/common/Button";
 import {createAuthController} from "@controllers/auth";
 import {validateEmail, validatePassword} from "@components/common/Input/validTypes";
+import SoftExtendedLogo from "../../../assets/SoftExtendedLogo.png";
 
 import styles from "../style.module.css";
 
@@ -75,7 +76,7 @@ function Register() {
 
 	return (
 		<div className={styles["container"]}>
-			<img className={styles.logo} src="../../../src/assets/SoftExtendedLogo.png" alt="Logo da SoftExpert" />
+			<img className={styles.logo} src={SoftExtendedLogo} alt="Logo da SoftExpert" />
 			<form className={styles.form} onSubmit={handleSubmit}>
 				<div className={styles["fields"]}>
 					{inputs.map(({id, label, type, value, error, isRequired}) => (

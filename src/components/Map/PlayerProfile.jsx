@@ -1,7 +1,8 @@
 import React from "react";
-import classNames from "classnames";
+/* import classNames from "classnames"; */
 
 import styles from "./style.module.css";
+import Ticket from "../../assets/Vector.svg";
 
 function PlayerProfile({name, tickets}) {
 	/* const profileClasses = classNames(styles["profile"], {
@@ -16,7 +17,7 @@ function PlayerProfile({name, tickets}) {
 			<div className={styles["name-tickets"]}>
 				<div className={styles["name"]}>{name}</div>
 				<div className={styles["tickets"]}>
-					<img className={styles["icon"]} src="../../../src/assets/Vector.svg" />
+					<img className={styles["icon"]} src={Ticket} />
 					{tickets}
 				</div>
 			</div>

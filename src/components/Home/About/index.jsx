@@ -2,13 +2,14 @@ import React from "react";
 
 import Hexagon from "../../common/Hexagon";
 import {credits} from "./credits";
+import SoftExpertLogoBlue from "../../../assets/SoftExtendedLogoBlue.png";
 
 import styles from "./style.module.css";
 
 function About() {
 	return (
 		<div className={styles["container"]}>
-			<img className={styles["logo"]} src="../../../src/assets/SoftExtendedLogoBlue.png" alt="Logo da SoftExpert" />
+			<img className={styles["logo"]} src={SoftExpertLogoBlue} alt="Logo da SoftExpert" />
 			<div className={styles["desc-container"]}>
 				<div className={styles["desc"]}>
 					Este jogo foi desenvolvido para ser apresentado em eventos, trazendo uma experiência interativa e envolvente para os

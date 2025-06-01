@@ -6,6 +6,8 @@ import Button from "@components/common/Button";
 import Modal from "@components/Home/Modal";
 import Prizes from "@components/Home/Prizes";
 import Tickets from "@components/Home/Tickets";
+import SoftExtendedLogo from "../../assets/SoftExtendedLogo.png";
+import GameLogo from "../../assets/GameLogo.svg";
 import { useAuthStore } from "@stores/useAuth";
 
 import styles from "./style.module.css";
@@ -19,9 +21,9 @@ function Home() {
 
 	return (
 		<div className={styles["content"]}>
-			<img className={styles["logo-soft"]} src="../../../src/assets/SoftExtendedLogo.png" alt="Logo da SoftExpert" />
+			<img className={styles["logo-soft"]} src={SoftExtendedLogo} alt="Logo da SoftExpert" />
 			{userData?.tickets > 0 &&  <Tickets />}
-			<img className={styles["logo-game"]} src="../../../src/assets/GameLogo.svg" alt="Logo do game" />
+			<img className={styles["logo-game"]} src={GameLogo} alt="Logo do game" />
 			<div className={styles["buttons"]}>
 	{/* 			{level == 4 && (
 					<div className={styles["buttons-left"]}>

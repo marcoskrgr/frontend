@@ -1,11 +1,14 @@
 import React, {useState} from "react";
 import {useNavigate, Link} from "react-router-dom";
+
 import Input from "@components/common/Input";
 import Button from "@components/common/Button";
 import {createAuthController} from "@controllers/auth";
+import LoginGameLogo from "../../../assets/LoginGameLogo.svg";
+import SoftExtendedLogo from "../../../assets/SoftExtendedLogo.png";
 import {validateEmail, validatePassword} from "@components/common/Input/validTypes";
+
 import styles from "../style.module.css";
-import {useAuthStore} from "@stores/useAuth";
 
 const initialInputs = [
 	{id: "email", label: "E-mail", isRequired: true, type: "email", value: "", error: ""},
@@ -59,8 +62,8 @@ function Login() {
 
 	return (
 		<div className={styles["container"]}>
-			<img className={styles.logo} src="../../../src/assets/SoftExtendedLogo.png" alt="Logo da SoftExpert" />
-			<img className={styles.logoLogin} src="../../../src/assets/LoginGameLogo.svg" alt="Logo da SoftExpert" />
+			<img className={styles.logo} src={SoftExtendedLogo} alt="Logo da SoftExpert" />
+			<img className={styles.logoLogin} src={LoginGameLogo} alt="Logo da SoftExpert" />
 			<form className={styles.form} onSubmit={handleSubmit}>
 				<div className={styles["fields"]}>
 					{inputs.map(({id, label, type, value, error, isRequired}) => (

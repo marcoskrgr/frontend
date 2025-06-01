@@ -6,6 +6,7 @@ import Input from "@components/common/Input";
 import {useAuthStore} from "@stores/useAuth";
 import Button from "@components/common/Button";
 import {createAuthController} from "@controllers/auth";
+import SoftExtendedLogo from "../../../assets/SoftExtendedLogo.png";
 import {formatPhone, unformatPhone, validatePhone} from "@components/common/Input/validTypes";
 
 import styles from "../style.module.css";
@@ -87,7 +88,7 @@ function ConfirmPhone() {
 
 	return (
 		<div className={styles["container"]}>
-			<img className={styles["logo"]} src="../../../src/assets/SoftExtendedLogo.png" alt="Logo da Softexpert" />
+			<img className={styles["logo"]} src={SoftExtendedLogo} alt="Logo da Softexpert" />
 			<div className={styles["content"]}>
 				{step === "phone" && (
 					<>

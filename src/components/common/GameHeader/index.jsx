@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
 
 import {useAuthStore} from "@stores/useAuth";
+import Ticket from "../../../assets/Vector.svg";
+
 import style from "./style.module.css";
 
 
@@ -26,7 +28,7 @@ function GameHeader({task, initialTime = 0}) {
 	return (
 		<div className={style["header"]}>
 			<div>
-				<img className={style["icon"]} src="../../../src/assets/Vector.svg" />
+				<img className={style["icon"]} src={Ticket} />
 				<span>{userData.tickets}</span>
 			</div>
 			<span className={style["task"]}>{task}</span>

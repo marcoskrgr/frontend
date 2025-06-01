@@ -4,6 +4,7 @@ import confetti from "canvas-confetti";
 
 import Input from "@components/common/Input";
 import Button from "@components/common/Button";
+import SoftExtendedLogo from "../../assets/SoftExtendedLogo.png";
 
 import styles from "./style.module.css";
 
@@ -48,7 +49,7 @@ function Phrase() {
 
 	return (
 		<div className={styles["container"]}>
-			<img className={styles["logo"]} src="../../../src/assets/SoftExtendedLogo.png" alt="Logo da Softexpert" />
+			<img className={styles["logo"]} src={SoftExtendedLogo} alt="Logo da Softexpert" />
 			<div className={styles["content"]}>
 				<span>Preencha com a frase do momento!</span>
 				<Input
