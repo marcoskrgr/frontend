@@ -13,22 +13,22 @@ export function AuthRepository() {
 	}
 
 	async function insertPhone(data) {
-		const response = await axiosInstance.post(`/auth/v2/insert-phone`, data);
+		const response = await axiosInstance.post(`/user/insert-phone`, data);
 		return response.data;
 	}
 
 	async function confirmPhone(data) {
-		const response = await axiosInstance.post(`/auth/v2/confirm-phone`, data);
+		const response = await axiosInstance.post(`/user/confirm-phone`, data);
 		return response.data;
 	}
 
 	async function resendCode() {
-		const response = await axiosInstance.post(`/auth/v2/resend-code`);
+		const response = await axiosInstance.post(`/user/resend-code`);
 		return response;
 	}
 
 	async function fetchUserData() {
-		const response = await axiosInstance.get('/auth/v2/user-details');
+		const response = await axiosInstance.get('/user/user-details');
 		return response.data;
 	}
 
