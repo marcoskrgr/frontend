@@ -55,8 +55,6 @@ function Map() {
 	const userTasks = userData?.tasks || [];
 	const currentTaskId = userTasks[userTasks.length - 1];
 
-	console.log("Current Task ID:", userTasks);
-
 	const getColumnCards = (columnTitle) => {
 		return cards.filter((card) => {
 			if (columnTitle === "In progress") return card.id === currentTaskId;
