@@ -47,7 +47,7 @@ a {
 }
 
 body {
-	background-color: #028013;
+	background-color: var(--soft-core-blue);
   overflow-x: hidden;
   overflow-y: auto;
 }
