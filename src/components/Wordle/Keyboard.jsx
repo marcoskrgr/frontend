@@ -10,21 +10,25 @@ const QWERTY = [
 ];
 
 function Keyboard({onKeyPress, guesses, getLetterColor}) {
-	const getKeyColor = key => {
-
-		guesses = guesses.flat()
-
+	const getKeyColor = (key) => {
 		if (key === "ENTER" || key === "BACKSPACE") return "";
-		for (let guess of guesses) {
+	
+		let bestColor = "";
+		const priority = { green: 3, goldenrod: 2, gray: 1 };
+	
+		for (let guess of guesses.flat()) {
 			if (guess.char.toUpperCase() === key) {
 				let color = getLetterColor(guess.status);
-				if (color === "gray") return "absent";
-				return color
+				if (!bestColor || priority[color] > priority[bestColor]) {
+					bestColor = color;
+				}
 			}
 		}
-		return "";
+	
+		if (bestColor === "gray") return "absent";
+		return bestColor;
 	};
-
+	
   const getKeyClasses = (key) => {
     const keyColor = getKeyColor(key);
     return classNames(

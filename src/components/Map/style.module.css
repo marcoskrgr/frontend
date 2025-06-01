@@ -174,7 +174,15 @@
 	border-radius: 14px;
 }
 
-.player-profile .name {
+.name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+
+.player-profile .name {	
 	border-bottom-left-radius: 0;
 }
 

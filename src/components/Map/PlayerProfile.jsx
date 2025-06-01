@@ -1,8 +1,8 @@
 import React from "react";
 /* import classNames from "classnames"; */
 
-import styles from "./style.module.css";
 import Ticket from "../../assets/Vector.svg";
+import styles from "./style.module.css";
 
 function PlayerProfile({name, tickets}) {
 	/* const profileClasses = classNames(styles["profile"], {
