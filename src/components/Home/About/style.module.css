@@ -2,9 +2,12 @@
 	width: 200px;
   margin-top: 24px;
   margin-bottom: 32px;
+}
+
+.container {
 	display: flex;
-	justify-content: start;
-	align-items: start;
+	flex-direction: column;
+	align-items: center;
 }
 
 .desc-container {
@@ -24,6 +27,7 @@
 	color: #0583f2;
 	display: inline;
 	white-space: nowrap;
+	font-weight: 600;
 }
 
 .titleCredits {
