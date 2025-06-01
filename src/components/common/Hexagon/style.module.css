@@ -1,0 +1,30 @@
+.hexagonWrapper {
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+}
+
+.hexagonBorder {
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  background: var(--gradient-001); /* cor da borda */
+  padding: 4px; /* espessura da borda */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hexagonContainer {
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.hexagonImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

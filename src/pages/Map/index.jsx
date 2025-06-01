@@ -24,6 +24,7 @@ const cards = [
 		tags: [{label: "TASK", color: "blue"}],
 		description: "Escrever documentação"
 	},
+	{id: 3, title: "Task #1", route: "/quiz", difficulty: "easy", description: "Responder o quiz de treinamento"},
 	{
 		id: 2,
 		title: "Task #2",
@@ -32,7 +33,6 @@ const cards = [
 		tags: [{label: "REFACTOR", color: "yellow"}],
 		description: "Pair programming com o scrum"
 	},
-	{id: 3, title: "Task #1", route: "/quiz", difficulty: "easy", description: "Responder o quiz de treinamento"}
 ];
 
 function Map() {
@@ -53,8 +53,9 @@ function Map() {
 	}, [userData]);
 
 	const userTasks = userData?.tasks || [];
-	const sortedTasks = [...userTasks].sort((a, b) => a - b);
-	const currentTaskId = sortedTasks[sortedTasks.length - 1];
+	const currentTaskId = userTasks[userTasks.length - 1];
+
+	console.log("Current Task ID:", userTasks);
 
 	const getColumnCards = (columnTitle) => {
 		return cards.filter((card) => {
@@ -64,6 +65,8 @@ function Map() {
 			return false;
 		});
 	};
+	
+	
 
 	const visibleColumns = columns.filter((column) => getColumnCards(column.title).length > 0);
 

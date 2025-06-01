@@ -7,17 +7,17 @@ import styles from "./style.module.css";
 
 function About() {
 	return (
-		<>
+		<div className={styles["container"]}>
 			<img className={styles["logo"]} src="../../../src/assets/SoftExtendedLogoBlue.png" alt="Logo da SoftExpert" />
 			<div className={styles["desc-container"]}>
 				<div className={styles["desc"]}>
-					O <span className={styles["strong-blue"]}>QuizGame</span> foi desenvolvido para ser apresentado no evento da Codecon 2025,
-					trazendo uma experiência interativa e envolvente para os participantes. Criado com o objetivo de testar conhecimentos de forma
-					dinâmica e divertida, o jogo desafia os jogadores com perguntas sobre tecnologia, programação e inovações do mundo digital.
+					Este jogo foi desenvolvido para ser apresentado em eventos, trazendo uma experiência interativa e envolvente para os
+					participantes. Criado com o objetivo de testar conhecimentos de forma dinâmica e divertida, o jogo desafia os jogadores com
+					perguntas sobre a <span className={styles["strong-blue"]}>SoftExpert</span>, tecnologia, programação e inovações do mundo digital.
 				</div>
 			</div>
 			<div className={styles["titleCredits"]}>
-				<p>E que rolem os créditos</p>
+				<p>E que rolem os créditos!</p>
 			</div>
 			<div className={styles["displayCredits"]}>
 				{credits.map((credit, index) => (
@@ -46,7 +46,7 @@ function About() {
 					</div>
 				))}
 			</div>
-		</>
+		</div>
 	);
 }
 

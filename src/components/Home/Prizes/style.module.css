@@ -1,19 +1,17 @@
-.logo-section {
+.instructions {
+	margin-bottom: 24px;
+}
+
+.container {
 	display: flex;
-	justify-content: center;
-	margin-top: 24px;
-	margin-bottom: 32px;
+	flex-direction: column;
+	align-items: center;
 }
 
 .logo {
-	display: flex;
-	align-items: center;
+	width: 200px;
   margin-top: 24px;
   margin-bottom: 32px;
-}
-
-.instructions {
-	margin-bottom: 24px;
 }
 
 .instructions h2 {
@@ -32,6 +30,7 @@
 
 .instructions li {
 	margin-bottom: 12px;
+	font-weight: 600;
 	font-size: 15px;
 }
 
