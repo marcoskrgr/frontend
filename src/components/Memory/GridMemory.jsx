@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
-import Hexagon from "./HexagonMemory";
-import styles from "./style.module.css";
 
+import Hexagon from "./HexagonMemory";
 import {GameRepository} from "../../repositories/games.js";
+
+import styles from "./style.module.css";
 
 function GridMemory() {
   const [cards, setCards] = useState([]);
@@ -18,8 +19,6 @@ function GridMemory() {
       const shuffled = response.cards.sort(() => 0.5 - Math.random()).slice(0, 18);
       setCards(shuffled);
       setAttempts(response.guesses)
-
-      console.log(response)
     }
     fetchData();
   }, []);

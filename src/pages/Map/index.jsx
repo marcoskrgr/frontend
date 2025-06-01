@@ -17,14 +17,14 @@ const columns = [
 
 const cards = [
 	{
-		id: 1,
+		id: 3,
 		title: "Task #3",
 		route: "/wordle",
 		difficulty: "hard",
 		tags: [{label: "TASK", color: "blue"}],
 		description: "Escrever documentação"
 	},
-	{id: 3, title: "Task #1", route: "/quiz", difficulty: "easy", description: "Responder o quiz de treinamento"},
+	{id: 1, title: "Task #1", route: "/quiz", difficulty: "easy", description: "Responder o quiz de treinamento"},
 	{
 		id: 2,
 		title: "Task #2",

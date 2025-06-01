@@ -84,10 +84,10 @@ export default function Wordle() {
 	};
 
 	return (
-		<>
-			<GameHeader task="Task 3" />
+		<div style={{ padding: "24px" }}>
+			<GameHeader task="Task #3" />
 			<Grid guesses={guesses} isGameOver={isGameOver}  currentGuess={currentGuess} getLetterColor={getColor} />
 			<Keyboard onKeyPress={handleKeyPress} guesses={guesses} getLetterColor={getColor} />
-		</>
+		</div>
 	);
 }
