@@ -36,24 +36,37 @@ function Hexagon({
     width: "100%",
     height: "100%",
     position: "relative",
-    transition: "transform 0.6s",
     transformStyle: "preserve-3d",
+    transition: "transform 0.6s",
     transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)",
   };
 
-  const faceStyle = (isBack) => ({
+  const faceBaseStyle = {
     position: "absolute",
     width: "100%",
     height: "100%",
-    backgroundImage: `url("${getBackgroundImage(isBack)}")`,
     backgroundSize: "100% 100%",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
-    backfaceVisibility: "hidden",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-  });
+    backfaceVisibility: "hidden",
+  };
+
+  const frontFaceStyle = {
+    ...faceBaseStyle,
+    backgroundImage: `url("${getBackgroundImage(false)}")`,
+    transform: "rotateY(0deg)",
+    zIndex: 2,
+  };
+
+  const backFaceStyle = {
+    ...faceBaseStyle,
+    backgroundImage: `url("${getBackgroundImage(true)}")`,
+    transform: "rotateY(180deg)",
+    zIndex: 1,
+  };
 
   const borderStyle = {
     position: "absolute",
@@ -70,31 +83,30 @@ function Hexagon({
     zIndex: 2,
   };
 
-  const imgStyleBack = srcBack => ({
+  const imgStyleBack = {
     width: "90%",
     height: "90%",
     zIndex: 2,
     backgroundImage: `url(${srcBack})`,
-    backgroundPosition: 'center',
-    backgroundSize: 'contain',
-    backgroundRepeat: 'no-repeat'
-  });
+    backgroundPosition: "center",
+    backgroundSize: "contain",
+    backgroundRepeat: "no-repeat",
+  };
 
   return (
     <div style={outerStyle} onClick={onClick}>
       <div style={flipContainerStyle}>
-        <div style={faceStyle(false)}>
+        <div style={frontFaceStyle}>
           <div style={borderStyle}></div>
           <img src={srcFront} alt={alt} style={imgStyle} />
         </div>
-        <div style={{ ...faceStyle(true), transform: "rotateY(180deg)" }}>
+        <div style={backFaceStyle}>
           <div style={borderStyle}></div>
-          <div style={imgStyleBack(srcBack)}></div>
+          <div style={imgStyleBack}></div>
         </div>
       </div>
     </div>
   );
 }
-
 
 export default Hexagon;

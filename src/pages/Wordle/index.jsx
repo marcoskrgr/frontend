@@ -1,11 +1,12 @@
-import { useState, useCallback, useEffect } from "react";
+import {useState, useCallback, useEffect} from "react";
 
 import Grid from "@components/Wordle";
 import Keyboard from "@components/Wordle/Keyboard";
 import GameHeader from "@components/common/GameHeader";
 
-import { LetterStatusEnum } from "../../constants/wordleConstants";
-import { GameRepository } from "../../repositories/games";
+import {LetterStatusEnum} from "../../constants/wordleConstants";
+import {GameRepository} from "../../repositories/games";
+import FinishModal from "@components/common/FinishModal";
 
 const CONFIG = {
 	MAX_ATTEMPTS: 6,
@@ -14,38 +15,50 @@ const CONFIG = {
 };
 
 const getDefaultGuess = () => {
-	return new Array(CONFIG.WORD_LENGTH).fill({ char: '' });
-}
+	return new Array(CONFIG.WORD_LENGTH).fill({char: ""});
+};
 
 const filledCharacterCount = (guess) => {
 	return guess.reduce((count, item) => {
-		return item.char === '' ? count - 1 : count;
+		return item.char === "" ? count - 1 : count;
 	}, CONFIG.WORD_LENGTH);
-}
+};
 
 const addGuessCharacter = (guess, char) => {
-	const idx = guess.findIndex(item => item.char === '');
+	const idx = guess.findIndex((item) => item.char === "");
 
 	if (idx === -1) return guess;
 
-	return guess.map((item, i) => i === idx ? { ...item, char } : item);
-}
+	return guess.map((item, i) => (i === idx ? {...item, char} : item));
+};
 
-const removeGuessCharacter = guess => {
-	return guess.map((item, i) => i === filledCharacterCount(guess) - 1 ? { ...item, char: '' } : item);
-}
+const removeGuessCharacter = (guess) => {
+	return guess.map((item, i) => (i === filledCharacterCount(guess) - 1 ? {...item, char: ""} : item));
+};
 
 export default function Wordle() {
 	const [guesses, setGuesses] = useState([]);
 	const [currentGuess, setCurrentGuess] = useState(getDefaultGuess());
 	const [isGameOver, setIsGameOver] = useState(false);
-	const { getTermData, termGuess } = GameRepository();
+	const [timer, setTimer] = useState(0);
+
+	const {getTermData, termGuess} = GameRepository();
+
+	useEffect(() => {
+		if (isGameOver) return;
+
+		const interval = setInterval(() => {
+			setTimer((prev) => prev + 1);
+		}, 1000);
+
+		return () => clearInterval(interval);
+	}, [isGameOver]);
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const { tries } = await getTermData();
-			setGuesses(tries)
-		}
+			const {tries} = await getTermData();
+			setGuesses(tries);
+		};
 		fetchData();
 	}, []);
 
@@ -54,16 +67,21 @@ export default function Wordle() {
 			if (isGameOver) return;
 
 			const normalizedKey = key.toUpperCase();
+
 			if (normalizedKey === "ENTER") {
 				if (filledCharacterCount(currentGuess) === CONFIG.WORD_LENGTH) {
 					const fullWord = currentGuess.reduce((word, item) => word + item.char, "");
 
-					const guessResult = await termGuess({ guess: fullWord });
+					const guessResult = await termGuess({guess: fullWord});
 
-					setGuesses((prev) => [...prev, guessResult]);
+					const newGuesses = [...guesses, guessResult];
+					setGuesses(newGuesses);
 					setCurrentGuess(getDefaultGuess());
 
-					if (guessResult.every(letter => letter.status === LetterStatusEnum.CORRECT)) {
+					const playerWon = guessResult.every((letter) => letter.status === LetterStatusEnum.CORRECT);
+					const maxAttemptsReached = newGuesses.length >= CONFIG.MAX_ATTEMPTS;
+
+					if (playerWon || maxAttemptsReached) {
 						setIsGameOver(true);
 					}
 				}
@@ -76,7 +94,7 @@ export default function Wordle() {
 		[currentGuess, guesses, isGameOver]
 	);
 
-	const getColor = status => {
+	const getColor = (status) => {
 		if (status === LetterStatusEnum.CORRECT) return "green";
 		if (status === LetterStatusEnum.INCORRECT_POSITION) return "goldenrod";
 		if (status === LetterStatusEnum.DONT_EXIST) return "gray";
@@ -84,10 +102,11 @@ export default function Wordle() {
 	};
 
 	return (
-		<div style={{ padding: "24px" }}>
-			<GameHeader task="Task #3" />
-			<Grid guesses={guesses} isGameOver={isGameOver}  currentGuess={currentGuess} getLetterColor={getColor} />
+		<div style={{padding: "24px"}}>
+			<GameHeader task="Task #3" timer={timer} />
+			<Grid guesses={guesses} isGameOver={isGameOver} currentGuess={currentGuess} getLetterColor={getColor} />
 			<Keyboard onKeyPress={handleKeyPress} guesses={guesses} getLetterColor={getColor} />
+			<FinishModal time={timer} showModal={isGameOver} />
 		</div>
 	);
 }

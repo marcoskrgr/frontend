@@ -4,6 +4,7 @@ import classNames from "classnames";
 import GameHeader from "@components/common/GameHeader";
 import {GameRepository} from "../../repositories/games";
 import Loading from "../../components/common/Button/Loading";
+import FinishModal from "@components/common/FinishModal";
 
 import styles from "./style.module.css";
 
@@ -15,16 +16,26 @@ export const Quiz = () => {
 	const correctAnswer = useRef(null);
 	const [showFeedback, setShowFeedback] = useState(false);
 	const {getQuizData, quizGuess} = GameRepository();
+	const [timer, setTimer] = useState(0);
 
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await getQuizData();
-
 			setCurrentQuestionIdx(response.currentQuestion);
 			setQuestions(response.questions);
 		};
 		fetchData();
 	}, []);
+
+	useEffect(() => {
+		if (ended) return;
+
+		const interval = setInterval(() => {
+			setTimer((prev) => prev + 1);
+		}, 1000);
+
+		return () => clearInterval(interval);
+	}, [ended]);
 
 	const handleAnswerClick = async (index) => {
 		if (showFeedback) return;
@@ -74,27 +85,28 @@ export const Quiz = () => {
 	return useMemo(() => {
 		if (!currentQuestion) return <Loading />;
 
-		if (ended) return <div>{"Terminoooou"}</div>;
-
 		return (
-			<div className={styles["container"]}>
-				<GameHeader task="Task #1" initialTime={0} />
-				<div className={styles["header"]}>
-					<h1 className={styles["question"]}>{currentQuestion?.text}</h1>
-					<div className={styles["line"]}></div>
+			<>
+				<div className={styles["container"]}>
+					<GameHeader task="Task #1" timer={timer} />
+					<div className={styles["header"]}>
+						<h1 className={styles["question"]}>{currentQuestion?.text}</h1>
+						<div className={styles["line"]}></div>
+					</div>
+					<div className={styles["answers-container"]}>
+						{currentQuestion.answers.map((ans, idx) => {
+							return (
+								<button key={idx} onClick={() => handleAnswerClick(idx)} disabled={showFeedback} className={getButtonClass(ans, idx)}>
+									<p>{ans.text}</p>
+								</button>
+							);
+						})}
+					</div>
 				</div>
-				<div className={styles["answers-container"]}>
-					{currentQuestion.answers.map((ans, idx) => {
-						return (
-							<button key={idx} onClick={() => handleAnswerClick(idx)} disabled={showFeedback} className={getButtonClass(ans, idx)}>
-								<p>{ans.text}</p>
-							</button>
-						);
-					})}
-				</div>
-			</div>
+				<FinishModal time={timer} showModal={ended} />
+			</>
 		);
-	}, [currentQuestion, showFeedback, ended]);
+	}, [currentQuestion, showFeedback, ended, timer]);
 };
 
 export default Quiz;

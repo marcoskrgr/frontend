@@ -1,7 +1,6 @@
 import React from "react";
 
 import Button from "./Button";
-import { LetterStatusEnum } from "../../constants/wordleConstants";
 
 import styles from "./styles.module.css";
 

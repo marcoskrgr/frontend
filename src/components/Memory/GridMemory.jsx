@@ -1,125 +1,126 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, {useEffect, useState, useRef} from "react";
 
 import Hexagon from "./HexagonMemory";
 import {GameRepository} from "../../repositories/games.js";
 
 import styles from "./style.module.css";
 
-function GridMemory() {
-  const [cards, setCards] = useState([]);
-  const selectedRef = useRef([]);
-  const [attempts, setAttempts] = useState(0);
-  const [gameFinished, setGameFinished] = useState(false);
-  const { getMemoryData, memoryGuess } = GameRepository();
+function GridMemory({setGameFinished}) {
+	const selectedRef = useRef([]);
+	const [cards, setCards] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await getMemoryData();
+	const {getMemoryData, memoryGuess} = GameRepository();
 
-      const shuffled = response.cards.sort(() => 0.5 - Math.random()).slice(0, 18);
-      setCards(shuffled);
-      setAttempts(response.guesses)
-    }
-    fetchData();
-  }, []);
+	function shuffleArray(array) {
+		const shuffled = [...array];
+		for (let i = shuffled.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+		}
+		return shuffled;
+	}
 
-  useEffect(() => {
-    if (cards.length > 0 && cards.every((card) => card.guessed)) {
-      setGameFinished(true);
-    }
-  }, [cards]);
+	useEffect(() => {
+		const fetchData = async () => {
+			const response = await getMemoryData();
 
-  const handleGuess = async(cardId, pairId) => {
-    if (selectedRef.current.length === 2) {
-      const [first, second] = selectedRef.current;
+			const shuffled = shuffleArray(response.cards).slice(0, 18);
+			setCards(shuffled);
+		};
+		fetchData();
+	}, []);
 
-      const checkGuess = await memoryGuess({ cardId: cards[first].id, pairId: cards[second].id })
+	useEffect(() => {
+		if (cards.length > 0 && cards.every((card) => card.guessed)) {
+			setGameFinished(true);
+		}
+	}, [cards]);
 
-      setTimeout(() => {
-        setCards((prevCards) => {
-          const updatedCards = [...prevCards];
+	const handleGuess = async () => {
+		if (selectedRef.current.length === 2) {
+			const [first, second] = selectedRef.current;
 
-          if (checkGuess) {
-            updatedCards[first].guessed = true;
-            updatedCards[second].guessed = true;
-          } else {
-            updatedCards[first].flipped = false;
-            updatedCards[second].flipped = false;
-          }
-          return updatedCards;
-        });
+			const checkGuess = await memoryGuess({
+				cardId: cards[first].id,
+				pairId: cards[second].id
+			});
 
-        setAttempts((prev) => prev + 1);
-        selectedRef.current = [];
-      }, 1000);
-    }
-  }
+			setTimeout(() => {
+				setCards((prevCards) => {
+					const updatedCards = [...prevCards];
 
-  const handleClick = (index) => {
-    if (cards[index].flipped || cards[index].matched || selectedRef.current.length === 2) return;
+					if (checkGuess) {
+						updatedCards[first].guessed = true;
+						updatedCards[second].guessed = true;
+					} else {
+						updatedCards[first].flipped = false;
+						updatedCards[second].flipped = false;
+					}
+					return updatedCards;
+				});
 
-    const updatedCards = [...cards];
-    updatedCards[index].flipped = true;
-    setCards(updatedCards);
-    // setSelected((prev) => [...prev, index]);
-    selectedRef.current = [...selectedRef.current, index];
-    handleGuess()
-  };
+				selectedRef.current = [];
+			}, 1000);
+		}
+	};
 
-  const renderRows = () => {
-    const rows = [];
-    for (let i = 0; i < 18; i += 7) {
-      const firstRow = cards.slice(i, i + 4);
-      rows.push(
-        <div key={`row-${i}`} className={styles["row-of-4"]}>
-          {firstRow.map((card, idx) => (
-            <Hexagon
-              key={card.id}
-              size={100}
-              srcBack={card.image}
-              flipped={card.flipped || card.guessed}
-              stage={card.guessed ? 3 : 2}
-              onClick={() => handleClick(i + idx)}
-            />
-          ))}
-        </div>
-      );
+	const handleClick = (index) => {
+		if (cards[index].flipped || cards[index].guessed || selectedRef.current.length === 2) return;
 
-      const secondRow = cards.slice(i + 4, i + 7);
-      if (secondRow.length > 0) {
-        rows.push(
-          <div key={`row-${i + 4}`} className={styles["row-of-3"]}>
-            {secondRow.map((card, idx) => (
-              <Hexagon
-                key={card.id}
-                size={100}
-                srcBack={card.image}
-                flipped={card.flipped || card.guessed}
-                stage={card.guessed ? 3 : 2}
-                onClick={() => handleClick(i + 4 + idx)}
-              />
-            ))}
-          </div>
-        );
-      }
-    }
-    return rows;
-  };
+		const updatedCards = [...cards];
+		updatedCards[index].flipped = true;
+		setCards(updatedCards);
 
-  return (
-    <div>
-      {gameFinished ? (
-        <>
-          <p className={styles["match"]}>VOCÊ FINALIZOU EM {attempts} TENTATIVAS!</p>
-        </>
-      ) : (
-        <p className={styles["match"]}>ESCOLHA 2 POSIÇÕES!</p>
-      )}
-      <div className={styles["grid-container"]}>
-        {renderRows()}
-      </div>
-    </div>
-  );
+		selectedRef.current = [...selectedRef.current, index];
+		handleGuess();
+	};
+
+	const renderRows = () => {
+		const rows = [];
+		for (let i = 0; i < 18; i += 7) {
+			const firstRow = cards.slice(i, i + 4);
+			rows.push(
+				<div key={`row-${i}`} className={styles["row-of-4"]}>
+					{firstRow.map((card, idx) => (
+						<Hexagon
+							key={card.id}
+							size={100}
+							srcBack={card.image}
+							flipped={card.flipped || card.guessed}
+							stage={card.guessed ? 3 : 2}
+							onClick={() => handleClick(i + idx)}
+						/>
+					))}
+				</div>
+			);
+
+			const secondRow = cards.slice(i + 4, i + 7);
+			if (secondRow.length > 0) {
+				rows.push(
+					<div key={`row-${i + 4}`} className={styles["row-of-3"]}>
+						{secondRow.map((card, idx) => (
+							<Hexagon
+								key={card.id}
+								size={100}
+								srcBack={card.image}
+								flipped={card.flipped || card.guessed}
+								stage={card.guessed ? 3 : 2}
+								onClick={() => handleClick(i + 4 + idx)}
+							/>
+						))}
+					</div>
+				);
+			}
+		}
+		return rows;
+	};
+
+	return (
+		<div>
+			<p className={styles["match"]}>ESCOLHA 2 POSIÇÕES!</p>
+			<div className={styles["grid-container"]}>{renderRows()}</div>
+		</div>
+	);
 }
 
 export default GridMemory;

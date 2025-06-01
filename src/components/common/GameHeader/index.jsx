@@ -1,23 +1,11 @@
-import React, {useState, useEffect} from "react";
-
-import {useAuthStore} from "@stores/useAuth";
+import React from "react";
+import { useAuthStore } from "@stores/useAuth";
 import Ticket from "../../../assets/Vector.svg";
 
 import style from "./style.module.css";
 
-
-function GameHeader({task, initialTime = 0}) {
-	const [timer, setTimer] = useState(initialTime);
-
+function GameHeader({ task, timer }) {
 	const userData = useAuthStore((state) => state.userData);
-
-	useEffect(() => {
-		const interval = setInterval(() => {
-			setTimer((prevTimer) => prevTimer + 1);
-		}, 1000);
-
-		return () => clearInterval(interval);
-	}, []);
 
 	const formatTime = (time) => {
 		const minutes = Math.floor(time / 60);
