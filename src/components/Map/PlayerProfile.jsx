@@ -11,16 +11,16 @@ function PlayerProfile({name, tickets}) {
  */
 	return (
 		<div className={styles["player-profile"]}>
-		{/* 	<div className={styles["player-image"]}>
+			{/* 	<div className={styles["player-image"]}>
 				{<div className={profileClasses}></div>}
 			</div> */}
-			<div className={styles["name-tickets"]}>
-				<div className={styles["name"]}>{name}</div>
-				<div className={styles["tickets"]}>
-					<img className={styles["icon"]} src={Ticket} />
-					{tickets}
-				</div>
+			{/* 			<div className={styles["name-tickets"]}> */}
+			<div className={styles["name"]}>{name}</div>
+			<div className={styles["tickets"]}>
+				<img className={styles["icon"]} src={Ticket} />
+				{tickets}
 			</div>
+			{/* 		</div> */}
 		</div>
 	);
 }
