@@ -13,6 +13,7 @@ function Modal({title, children, show, onClose}) {
 		<div className={modalClasses}>
 			<div className={styles["header"]} onClick={onClose}>
 				<h2>{title}</h2>
+				<i className="bx bx-x" onClick={onClose}></i>
 			</div>
 			<div className={styles["content"]}>{children}</div>
 		</div>
