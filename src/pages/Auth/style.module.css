@@ -6,6 +6,7 @@
 	padding: 20px 40px;
 	flex-direction: column;
 	gap: 15px;
+	overflow: auto;
 	justify-content: space-between;
 }
 
@@ -23,6 +24,11 @@
 	flex-direction: column;
 	gap: 10px;
 	align-items: center;
+	margin-top: 3vh;
+}
+
+.formFooter a {
+	text-decoration: underline;
 }
 
 .formFooter p {
@@ -87,4 +93,11 @@
 	font-family: "Inter";
 	color: white !important;
 	font-size: 12px;
+}
+
+.help-text span {
+	font-family: "Inter";
+	color: white !important;
+	font-size: 12px;
+	font-weight: 600;
 }

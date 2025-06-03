@@ -1,5 +1,6 @@
 .content {
   padding: 40px;
+  justify-content: space-between;
   display: flex;
   flex-direction: column;
   gap: 5vh;
@@ -10,5 +11,5 @@
 .columns {
   display: flex;
   flex-direction: column;
-  gap: 7vh;
+  gap: 10vh;
 }

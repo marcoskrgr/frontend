@@ -44,7 +44,7 @@ export function createAuthController() {
 			setLoading(false);
 		}
 	}
-
+/* 
 	async function insertPhone(data) {
 		try {
 			setLoading(true);
@@ -60,11 +60,11 @@ export function createAuthController() {
 			setLoading(false);
 		}
 	}
-
-	async function confirmPhone(data) {
+ */
+	async function confirmEmail(data) {
 		try {
 			setLoading(true);
-			const response = await authRepository.confirmPhone(data, getToken);
+			const response = await authRepository.confirmEmail(data, getToken);
 			setToken(response.token);
 			setUserData(jwtDecode(response.token));
 			return true;
@@ -107,9 +107,8 @@ export function createAuthController() {
 	return {
 		login,
 		register,
-		confirmPhone,
+		confirmEmail,
 		fetchUserData,
-		insertPhone,
 		resendCode,
 		loading
 	};

@@ -4,8 +4,9 @@ import {useNavigate} from "react-router-dom";
 import Card from "@components/Map/Card";
 import Column from "@components/Map/Column";
 import {useAuthStore} from "@stores/useAuth";
-import PlayerProfile from "@components/Map/PlayerProfile";
+import Button from "@components/common/Button";
 import {createAuthController} from "@controllers/auth";
+import PlayerProfile from "@components/Map/PlayerProfile";
 
 import styles from "./style.module.css";
 
@@ -17,14 +18,14 @@ const columns = [
 
 const cards = [
 	{
-		id: 3,
+		id: 1,
 		title: "Task #3",
 		route: "/wordle",
 		difficulty: "hard",
 		tags: [{label: "TASK", color: "blue"}],
 		description: "Escrever documentação"
 	},
-	{id: 1, title: "Task #1", route: "/quiz", difficulty: "easy", description: "Responder o quiz de treinamento"},
+	{id: 3, title: "Task #1", route: "/quiz", difficulty: "easy", description: "Responder o quiz de treinamento"},
 	{
 		id: 2,
 		title: "Task #2",
@@ -88,6 +89,12 @@ function Map() {
 					);
 				})}
 			</div>
+			<Button
+				type="primary"
+				size="medium"
+				text="Voltar para a home"
+				onClick={() => navigate("/")}
+			/>
 		</div>
 	);
 }

@@ -4,7 +4,7 @@ import {useNavigate, Link} from "react-router-dom";
 import Input from "@components/common/Input";
 import Button from "@components/common/Button";
 import {createAuthController} from "@controllers/auth";
-import {validateEmail, validatePassword} from "@components/common/Input/validTypes";
+import {formatPhone, validateEmail, validatePassword, validatePhone} from "@components/common/Input/validTypes";
 import SoftExtendedLogo from "../../../assets/SoftExtendedLogo.png";
 
 import styles from "../style.module.css";
@@ -13,6 +13,7 @@ const initialInputs = [
 	{id: "firstName", label: "Nome", isRequired: true, type: "text", value: ""},
 	{id: "lastName", label: "Sobrenome", isRequired: true, type: "text", value: ""},
 	{id: "email", label: "E-mail", isRequired: true, type: "email", value: ""},
+	{id: "phone", placeholder: "(99) 99999-9999", label: "Telefone", isRequired: true, type: "phone", value: ""},
 	{id: "password", label: "Senha", isRequired: true, type: "password", value: ""},
 	{id: "confPass", label: "Confirmar Senha", isRequired: true, type: "password", value: ""}
 ];
@@ -25,21 +26,26 @@ function Register() {
 
 	const handleInputChange = (e) => {
 		const {id, value} = e.target;
+
 		const updatedInputs = inputs.map((input) => {
 			if (input.id === id) {
+				let inputValue = value;
 				let error = "";
 
-				if (value.length > 0) {
-					if (id === "email" && !validateEmail(value)) {
-						error = "E-mail inválido";
-					} else if (id === "password" && !validatePassword(value)) {
-						error = "A senha deve ter pelo menos 8 dígitos, letras, números e um caracter especial!";
-					} else if (id === "confPass" && value !== inputs.find((i) => i.id === "password").value) {
-						error = "Senhas não coincidem";
+				if (id === "phone") {
+					inputValue = formatPhone(value);
+					if (inputValue.length > 0 && !validatePhone(inputValue)) {
+						error = "Telefone inválido";
 					}
+				} else if (id === "email" && value.length > 0 && !validateEmail(value)) {
+					error = "E-mail inválido";
+				} else if (id === "password" && value.length > 0 && !validatePassword(value)) {
+					error = "A senha deve ter pelo menos 8 dígitos, letras, números e um caracter especial!";
+				} else if (id === "confPass" && value !== inputs.find((i) => i.id === "password").value) {
+					error = "Senhas não coincidem";
 				}
 
-				return {...input, value, error};
+				return {...input, value: inputValue, error};
 			}
 			return input;
 		});
@@ -79,7 +85,7 @@ function Register() {
 			<img className={styles.logo} src={SoftExtendedLogo} alt="Logo da SoftExpert" />
 			<form className={styles.form} onSubmit={handleSubmit}>
 				<div className={styles["fields"]}>
-					{inputs.map(({id, label, type, value, error, isRequired}) => (
+					{inputs.map(({id, label, placeholder, type, value, error, isRequired}) => (
 						<Input
 							key={id}
 							id={id}
@@ -88,6 +94,7 @@ function Register() {
 							isRequired={isRequired}
 							value={value}
 							error={error}
+							placeholder={placeholder}
 							onChange={handleInputChange}
 						/>
 					))}

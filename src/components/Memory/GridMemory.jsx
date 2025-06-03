@@ -116,7 +116,7 @@ function GridMemory({setGameFinished}) {
 	};
 
 	return (
-		<div>
+		<div className={styles["content"]}>
 			<p className={styles["match"]}>ESCOLHA 2 POSIÇÕES!</p>
 			<div className={styles["grid-container"]}>{renderRows()}</div>
 		</div>
