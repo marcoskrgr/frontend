@@ -13,7 +13,7 @@ export default function ProtectedRoute() {
 	const location = useLocation();
 
 	if (!token || !userData) return <Navigate to="/register" replace />;
-	if (userData.fgEmailVerified !== 2) return <Navigate to="/confirm-email" replace />;
+	if (userData.fgEmailVerified === 1) return <Navigate to="/confirm-email" replace />;
 
 	const userTasks = userData.tasks || [];
 	const currentTaskId = userTasks[userTasks.length - 1];
