@@ -22,8 +22,9 @@ export function createAuthController() {
 			setUserData(jwtDecode(response.token));
 			return jwtDecode(response.token);
 		} catch (e) {
-			addToast(e.response?.data?.error || e.message);
-			return null;
+			console.error("Original error at login: ", e);
+			const error = getErrorMessage(e);
+			addToast(error);
 		} finally {
 			setLoading(false);
 		}
@@ -37,9 +38,9 @@ export function createAuthController() {
 			setUserData(jwtDecode(response.token));
 			return true;
 		} catch (e) {
-			console.error(e);
-			addToast(e.response?.data || e.message);
-			return false;
+			console.error("Original error at register: ", e);
+			const error = getErrorMessage(e);
+			addToast(error);
 		} finally {
 			setLoading(false);
 		}
@@ -69,9 +70,9 @@ export function createAuthController() {
 			setUserData(jwtDecode(response.token));
 			return true;
 		} catch (e) {
-			console.error(e);
-			addToast(e.response?.data || e.message);
-			return false;
+			console.error("Original error at confirmEmail: ", e);
+			const error = getErrorMessage(e);
+			addToast(error);
 		} finally {
 			setLoading(false);
 		}
@@ -83,9 +84,9 @@ export function createAuthController() {
 			await authRepository.resendCode();
 			return true;
 		} catch (e) {
-			console.error(e);
-			addToast(e.response?.data || e.message);
-			return false;
+			console.error("Original error at resendCode: ", e);
+			const error = getErrorMessage(e);
+			addToast(error);
 		} finally {
 			setLoading(false);
 		}
@@ -97,11 +98,27 @@ export function createAuthController() {
 			const response = await authRepository.fetchUserData();
 			setUserData(response);
 		} catch (e) {
-			console.error(e);
-			addToast(e.response?.data || e.message);
+			console.error("Original error at fetchUserData: ", e);
+			const error = getErrorMessage(e);
+			addToast(error);
 		} finally {
 			setLoading(false);
 		}
+	}
+
+	function getErrorMessage(error) {
+		let message;
+
+		if (error && error.response && error.response.data && typeof error.response.data.message === 'string') {
+			message = error.response.data.message;
+		} else if (error && typeof error.message === 'string') {
+			message = error.message;
+		} else if (typeof error === 'string') {
+			message = error;
+		} else {
+			message = "Ocorreu um erro desconhecido.";
+		}
+		return message;
 	}
 
 	return {
