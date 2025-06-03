@@ -55,7 +55,7 @@ function Login() {
 			if (response.fgPhoneVerified === 3) {
 				navigate("/map");
 			} else {
-				navigate("/confirm-phone");
+				navigate("/confirm-email");
 			}
 		}
 	};
