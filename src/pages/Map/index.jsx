@@ -54,7 +54,7 @@ function Map() {
 	}, [userData]);
 
 	const userTasks = userData?.tasks || [];
-	const currentTaskId = userTasks[userTasks.length - 1];
+	const currentTaskId = Math.max(...userTasks);
 
 	const getColumnCards = (columnTitle) => {
 		return cards.filter((card) => {
@@ -89,12 +89,7 @@ function Map() {
 					);
 				})}
 			</div>
-			<Button
-				type="primary"
-				size="medium"
-				text="Voltar para a home"
-				onClick={() => navigate("/")}
-			/>
+			<Button type="primary" size="medium" text="Voltar para a home" onClick={() => navigate("/")} />
 		</div>
 	);
 }
