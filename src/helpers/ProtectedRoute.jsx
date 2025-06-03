@@ -2,9 +2,9 @@ import {Navigate, Outlet, useLocation} from "react-router-dom";
 import {useAuthStore} from "@stores/useAuth";
 
 const cards = [
-	{id: 1, route: "/wordle"},
+	{id: 3, route: "/wordle"},
 	{id: 2, route: "/memory"},
-	{id: 3, route: "/quiz"}
+	{id: 1, route: "/quiz"}
 ];
 
 export default function ProtectedRoute() {
