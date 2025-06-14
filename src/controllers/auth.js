@@ -45,23 +45,7 @@ export function createAuthController() {
 			setLoading(false);
 		}
 	}
-/* 
-	async function insertPhone(data) {
-		try {
-			setLoading(true);
-			const response = await authRepository.insertPhone(data, getToken);
-			setToken(response.token);
-			setUserData(jwtDecode(response.token));
-			return true;
-		} catch (e) {
-			console.error(e);
-			addToast(e.response?.data || e.message);
-			return false;
-		} finally {
-			setLoading(false);
-		}
-	}
- */
+
 	async function confirmEmail(data) {
 		try {
 			setLoading(true);
@@ -107,18 +91,19 @@ export function createAuthController() {
 	}
 
 	function getErrorMessage(error) {
-		let message;
-
-		if (error && error.response && error.response.data && typeof error.response.data.message === 'string') {
-			message = error.response.data.message;
-		} else if (error && typeof error.message === 'string') {
-			message = error.message;
-		} else if (typeof error === 'string') {
-			message = error;
-		} else {
-			message = "Ocorreu um erro desconhecido.";
+		if (error?.response?.data?.message) {
+			return error.response.data.message;
 		}
-		return message;
+
+		if (typeof error?.response?.data === 'string') {
+			return error.response.data;
+		}
+
+		if (error?.message) {
+			return error.message;
+		}
+
+		return "Ocorreu um erro desconhecido. Por favor, tente novamente.";
 	}
 
 	return {
