@@ -7,20 +7,41 @@ import Button from "@components/common/Button";
 import SoftExtendedLogo from "../../assets/SoftExtendedLogo.png";
 
 import styles from "./style.module.css";
+import {GameRepository} from "@repositories/games.js";
+import {useToast} from "@components/common/Toast/ToastProvider.jsx";
 
 function Phrase() {
 	const navigate = useNavigate();
-	const [phrase, setPhrase] = useState("");
+	const [word, setWord] = useState("");
 	const [wasSubmitted, setWasSubmitted] = useState(false);
 	const [showError, setShowError] = useState(false);
 	const [buttonLabel, setButtonLabel] = useState("enviar");
+	const [isCorrect, setIsCorrect] = useState(false);
+	const {wordGuess} = GameRepository();
+	const { addToast } = useToast();
 
-	const correctPhrase = "we are experts and global";
-	const isCorrect = phrase.trim() === correctPhrase;
+	function getErrorMessage(error) {
+		if (error?.response?.data?.message) {
+			return error.response.data.message;
+		}
+
+		if (typeof error?.response?.data === 'string') {
+			return error.response.data;
+		}
+
+		if (error?.message) {
+			return error.message;
+		}
+
+		return "Ocorreu um erro desconhecido. Por favor, tente novamente.";
+	}
+
 
 	const handleChange = (e) => {
 		const value = e.target.value;
-		setPhrase(value);
+
+		console.log("value", value);
+		setWord(value);
 
 		if (showError) {
 			setShowError(false);
@@ -31,10 +52,20 @@ function Phrase() {
 		}
 	};
 
-	const handleSubmit = () => {
+	const handleSubmit = async (word) => {
+
+		let guessResult;
+		try {
+			guessResult = await wordGuess({
+				word: word.trim().toUpperCase()
+			});
+		} catch (error) {
+			getErrorMessage(guessResult);
+		}
+
 		setWasSubmitted(true);
 
-		if (isCorrect) {
+		if (guessResult.success) {
 			setButtonLabel(":)");
 			confetti({
 				particleCount: 150,
@@ -53,14 +84,14 @@ function Phrase() {
 			<div className={styles["content"]}>
 				<span>Preencha com a frase do momento!</span>
 				<Input
-					id="phrase"
+					id="word"
 					label="Digite aqui..."
-					value={phrase}
+					value={word}
 					isValid={wasSubmitted ? !showError : null}
 					onChange={handleChange}
 				/>
 				<Button
-					isDisabled={phrase.length < 1}
+					isDisabled={word.length < 1}
 					type="primary"
 					size="small"
 					text={buttonLabel}
@@ -71,7 +102,7 @@ function Phrase() {
 								: {backgroundImage: "linear-gradient(to top, #FF7D7E 0%, #B40048 100%)"}
 							: {}
 					}
-					onClick={handleSubmit}
+					onClick={() => handleSubmit(word)}
 				/>
 			</div>
 			<Button
