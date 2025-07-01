@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import About from "@components/Home/About";
 import Button from "@components/common/Button";
@@ -8,7 +8,7 @@ import Prizes from "@components/Home/Prizes";
 import Tickets from "@components/Home/Tickets";
 import SoftExtendedLogo from "../../assets/SoftExtendedLogo.png";
 import GameLogo from "../../assets/GameLogo.svg";
-import {useAuthStore} from "@stores/useAuth";
+import { useAuthStore } from "@stores/useAuth";
 
 import styles from "./style.module.css";
 
@@ -19,21 +19,23 @@ function Home() {
 	const getToken = useAuthStore((state) => state.token);
 	const userData = useAuthStore((state) => state.userData);
 
+	const handleNavigation = () => {
+		if (getToken === null) return navigate("/register");
+		if (level === 0) return navigate("/history");
+		return navigate("/map");
+	};
+
 	return (
 		<div className={styles["content"]}>
 			<img className={styles["logo-soft"]} src={SoftExtendedLogo} alt="Logo da SoftExpert" />
 			{userData?.tickets > 0 && <Tickets />}
 			<img className={styles["logo-game"]} src={GameLogo} alt="Logo do game" />
 			<div className={styles["buttons"]}>
-				{/* 			{level == 4 && (
-					<div className={styles["buttons-left"]}>
-						<Button type="primary" size="medium" icon="bxs-quote-alt-left" onClick={() => navigate("/phrase")} />
-					</div>
-				)} */}
-				<Button type="primary" size="large" icon="bx-play" onClick={() => (getToken === null ? navigate("/register") : navigate("/map"))} />
 				<div className={styles["buttons-left"]}>
+					<Button type="primary" size="medium" icon="bxs-quote-alt-left" onClick={() => navigate("/phrase")} />
 					<Button type="primary" size="medium" icon="bxl-instagram" onClick={() => window.open("https://www.instagram.com/softexpert/", "_blank")} />
 				</div>
+				<Button type="primary" size="large" icon="bx-play" onClick={() => (getToken === null ? navigate("/register") : navigate("/map"))} />
 				<div className={styles["buttons-right"]}>
 					<Button type="primary" size="medium" icon="bx-trophy" onClick={() => setIsPrizesModalOpen(true)} />
 					<Button type="primary" size="medium" icon="bx-help-circle" onClick={() => setIsAboutModalOpen(true)} />

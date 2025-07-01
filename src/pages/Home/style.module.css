@@ -3,7 +3,7 @@
 	display: flex;
 	height: -webkit-fill-available;
 	height: -moz-available;
-  height: 100%;
+	height: 100%;
 	justify-content: space-between;
 	flex-direction: column;
 	align-items: center;
@@ -26,6 +26,9 @@
 .buttons-right {
 	position: absolute;
 	right: -10px;
+}
+
+.buttons-left, .buttons-right {
 	display: flex;
 	flex-direction: column;
 	gap: 1vh;
