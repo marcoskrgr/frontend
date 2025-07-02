@@ -25,4 +25,4 @@ function GameHeader({ task, timer }) {
 	);
 }
 
-export default GameHeader;
+export default GameHeader; 
