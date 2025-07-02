@@ -31,12 +31,18 @@ export function GameRepository() {
 		return response.data;
 	}
 
+	async function wordGuess(data) {
+		const response = await axiosInstance.post('/game/word/guess', JSON.stringify(data));
+		return response.data;
+	}
+
 	return {
 		getTermData,
 		termGuess,
 		getQuizData,
 		quizGuess,
 		getMemoryData,
-		memoryGuess
+		memoryGuess,
+		wordGuess
 	};
 }
