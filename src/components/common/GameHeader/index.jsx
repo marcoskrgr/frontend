@@ -1,12 +1,9 @@
 import React from "react";
-import { useAuthStore } from "@stores/useAuth";
-import Ticket from "../../../assets/Vector.svg";
+import Modal from "@components/Home/Modal";
 
 import style from "./style.module.css";
 
-function GameHeader({ task, timer }) {
-	const userData = useAuthStore((state) => state.userData);
-
+export default function GameHeader({ task, timer, ContentHelp, isHelpOpen, setIsHelpOpen }) {
 	const formatTime = (time) => {
 		const minutes = Math.floor(time / 60);
 		const seconds = time % 60;
@@ -14,15 +11,22 @@ function GameHeader({ task, timer }) {
 	};
 
 	return (
-		<div className={style["header"]}>
-			<div>
-				<img className={style["icon"]} src={Ticket} />
-				<span>{userData.tickets}</span>
+		<>
+			<div className={style.header}>
+				<i className="bx bx-help-circle" onClick={() => setIsHelpOpen(true)}></i>
+				<span className={style.task}>{task}</span>
+				<span>{formatTime(timer)}</span>
 			</div>
-			<span className={style["task"]}>{task}</span>
-			<span>{formatTime(timer)}</span>
-		</div>
+
+			<Modal
+				onClose={() => setIsHelpOpen(false)}
+				show={isHelpOpen}
+				title="Ajuda"
+			>
+				<div className={style.modalContent}>
+					<ContentHelp />
+				</div>
+			</Modal>
+		</>
 	);
 }
-
-export default GameHeader; 

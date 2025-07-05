@@ -1,0 +1,32 @@
+
+.image {
+  width: 100%;
+  margin: 20px 0;
+}
+
+.imageHalf {
+  width: 48%;
+  margin: 10px 1%;
+}
+
+.answerImages {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.sectionSpacing {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.modalContent ul,
+.modalContent ol {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.modalContent p {
+  line-height: 1.6;
+}
