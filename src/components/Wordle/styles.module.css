@@ -196,3 +196,45 @@
 .key:active {
   transform: scale(0.95);
 }
+
+/* style.module.css */
+
+.sectionSpacing {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.answerImages {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.imageHalf {
+  max-width: 45%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .answerImages {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .imageHalf {
+    max-width: 80%;
+  }
+}
