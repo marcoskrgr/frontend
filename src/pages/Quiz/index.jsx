@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef} from "react";
+import { useState, useEffect, useRef } from "react";
 import classNames from "classnames";
 
 import Help from "@components/Quiz/Help";
@@ -8,21 +8,29 @@ import GameHeader from "@components/common/GameHeader";
 import Loading from "@components/common/Button/Loading";
 import AnswerButton from "@components/Quiz/AnswerButton";
 import FinishModal from "@components/common/FinishModal";
-import {GameRepository} from "../../repositories/games";
+import { GameRepository } from "../../repositories/games";
 
 import styles from "./style.module.css";
 
-const NpsInput = ({type, value, onChange, onSubmit}) => {
+const NpsInput = ({ type, value, onChange, onSubmit }) => {
+	const isNumberInvalid = type === "number" && (value < 1 || value > 10);
+	const isTextInvalid = type !== "number" && (!value || value.trim().length === 0);
+
+	const isDisabled = isNumberInvalid || isTextInvalid;
+
 	return (
 		<div className={styles["nps-input-wrapper"]}>
 			<Input
 				id="nps-input"
-				label=""
 				type={type}
-				showButton={type == "number"}
-				min={type === "number" ? 0 : undefined}
-				error={type === "number" && (value < 1 || value > 10) ? "Valor deve ser entre 1 e 10" : null}
+				showButton={type === "number"}
+				min={1}
 				max={type === "number" ? 10 : undefined}
+				error={
+					type === "number" && isNumberInvalid
+						? "Valor deve ser entre 1 e 10"
+						: null
+				}
 				value={value}
 				onChange={(valOrEvent) => {
 					const newVal = typeof valOrEvent === "object" ? valOrEvent.target.value : valOrEvent;
@@ -30,10 +38,10 @@ const NpsInput = ({type, value, onChange, onSubmit}) => {
 				}}
 			/>
 			<Button
-				isDisabled={type === "number" && (value < 1 || value > 10)}
-				onClick={type === "number" && (value < 1 || value > 10) ? () => {} : onSubmit}
-				text="Proxíma"
-				customStyle={{flex: "1"}}
+				isDisabled={isDisabled}
+				onClick={isDisabled ? () => { } : onSubmit}
+				text="Próxima"
+				customStyle={{ flex: "1" }}
 				type="primary"
 				size="medium"
 			/>
@@ -52,7 +60,7 @@ export const Quiz = () => {
 	const [timer, setTimer] = useState(0);
 	const correctAnswer = useRef(null);
 
-	const {getQuizData, quizGuess} = GameRepository();
+	const { getQuizData, quizGuess } = GameRepository();
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -77,14 +85,14 @@ export const Quiz = () => {
 
 		setSelectedAnswer(index);
 		const chosen = currentQuestion.answers[index];
-		correctAnswer.current = await quizGuess({answer: chosen.id});
+		correctAnswer.current = await quizGuess({ answer: chosen.id });
 
 		setShowFeedback(true);
 		setTimeout(() => handleNextQuestion(), 1500);
 	};
 
 	const handleNpsAnswer = async () => {
-		await quizGuess({answer: npsResponse});
+		await quizGuess({ answer: npsResponse });
 		handleNextQuestion();
 	};
 

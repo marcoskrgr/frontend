@@ -17,29 +17,27 @@ function ConfirmEmail() {
 
 	const [code, setCode] = useState("");
 	const [wasSubmitted, setWasSubmitted] = useState(false);
-	const [showError, setShowError] = useState(false);
 	const [isCorrect, setIsCorrect] = useState(false);
 	const [buttonLabel, setButtonLabel] = useState("confirmar");
 	const [resendTimer, setResendTimer] = useState(0);
 
 	const handleCodeChange = (e) => {
 		setCode(e.target.value);
-		setShowError(false);
 		setButtonLabel("confirmar");
 		setWasSubmitted(false);
 	};
 
 	const handleCodeSubmit = async () => {
-		setWasSubmitted(true);
 		const response = await confirmEmail({ code });
+
 		if (response) {
 			setIsCorrect(true);
 			setButtonLabel(":)");
 			confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 } });
 		} else {
 			setButtonLabel(":(");
-			setShowError(true);
 		}
+		setWasSubmitted(true);
 	};
 
 	const handleResendCode = () => {
@@ -77,6 +75,7 @@ function ConfirmEmail() {
 						inputMode="numeric"
 						isValid={wasSubmitted ? isCorrect : null}
 						onChange={handleCodeChange}
+						error={wasSubmitted && !isCorrect ? "Código inválido" : null}
 						disabled={isCorrect}
 					/>
 					<span className={styles["help-text"]}>Enviado para {userData.email}. <span>Verifique o Spam</span></span>
@@ -89,7 +88,6 @@ function ConfirmEmail() {
 					customStyle={getButtonStyle()}
 					onClick={handleCodeSubmit}
 				/>
-
 				<Button
 					isDisabled={resendTimer > 0 || isCorrect}
 					type="primary"
