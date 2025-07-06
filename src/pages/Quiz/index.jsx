@@ -21,7 +21,7 @@ const NpsInput = ({type, value, onChange, onSubmit}) => {
 				type={type}
 				showButton={type == "number"}
 				min={type === "number" ? 0 : undefined}
-				error={type === "number" && (value < 1 || value > 10) ? "Valor deve ser entre 1 e 10" : undefined}
+				error={type === "number" && (value < 1 || value > 10) ? "Valor deve ser entre 1 e 10" : null}
 				max={type === "number" ? 10 : undefined}
 				value={value}
 				onChange={(valOrEvent) => {

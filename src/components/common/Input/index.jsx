@@ -20,8 +20,8 @@ function Input({
 	...props
 }) {
 	const inputClass = classNames(styles.gradient, {
-		[styles.invalid]: isValid === false || error,
-		[styles.valid]: isValid === true && !error
+		[styles.invalid]: isValid === false || error === true,
+		[styles.valid]: isValid === true && error === false
 	});
 
 	const isNumberInput = type === "number";
@@ -71,7 +71,7 @@ function Input({
 					</div>
 				)}
 			</div>
-			{error && <p className={styles.error}>{error}</p>}
+			{error !== null && <p className={styles.error}>{error}</p>}
 		</div>
 	);
 }
