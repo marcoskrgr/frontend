@@ -1,31 +1,64 @@
-import { useState, useEffect, useMemo, useCallback, useRef } from "react";
+import {useState, useEffect, useRef} from "react";
 import classNames from "classnames";
 
+import Help from "@components/Quiz/Help";
+import Input from "@components/common/Input";
+import Button from "@components/common/Button";
 import GameHeader from "@components/common/GameHeader";
-import { GameRepository } from "../../repositories/games";
-import Loading from "../../components/common/Button/Loading";
+import Loading from "@components/common/Button/Loading";
+import AnswerButton from "@components/Quiz/AnswerButton";
 import FinishModal from "@components/common/FinishModal";
+import {GameRepository} from "../../repositories/games";
 
 import styles from "./style.module.css";
-import Help from "@components/Quiz/Help";
+
+const NpsInput = ({type, value, onChange, onSubmit}) => {
+	return (
+		<div className={styles["nps-input-wrapper"]}>
+			<Input
+				id="nps-input"
+				label=""
+				type={type}
+				showButton={type == "number"}
+				min={type === "number" ? 0 : undefined}
+				error={type === "number" && (value < 1 || value > 10) ? "Valor deve ser entre 1 e 10" : undefined}
+				max={type === "number" ? 10 : undefined}
+				value={value}
+				onChange={(valOrEvent) => {
+					const newVal = typeof valOrEvent === "object" ? valOrEvent.target.value : valOrEvent;
+					onChange(type === "number" ? Number(newVal) : newVal);
+				}}
+			/>
+			<Button
+				isDisabled={type === "number" && (value < 1 || value > 10)}
+				onClick={type === "number" && (value < 1 || value > 10) ? () => {} : onSubmit}
+				text="Proxíma"
+				customStyle={{flex: "1"}}
+				type="primary"
+				size="medium"
+			/>
+		</div>
+	);
+};
 
 export const Quiz = () => {
-	const [currentQuestionIdx, setCurrentQuestionIdx] = useState(0);
 	const [questions, setQuestions] = useState([]);
+	const [currentQuestionIdx, setCurrentQuestionIdx] = useState(0);
 	const [selectedAnswer, setSelectedAnswer] = useState(null);
-	const [ended, setEnded] = useState(false);
-	const correctAnswer = useRef(null);
 	const [showFeedback, setShowFeedback] = useState(false);
-	const { getQuizData, quizGuess } = GameRepository();
-	const [timer, setTimer] = useState(0);
+	const [ended, setEnded] = useState(false);
 	const [isHelpOpen, setIsHelpOpen] = useState(false);
-	const [npsResponse, setNpsResponse] = useState(0);
+	const [npsResponse, setNpsResponse] = useState("");
+	const [timer, setTimer] = useState(0);
+	const correctAnswer = useRef(null);
+
+	const {getQuizData, quizGuess} = GameRepository();
 
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await getQuizData();
-			setCurrentQuestionIdx(response.currentQuestion);
 			setQuestions(response.questions);
+			setCurrentQuestionIdx(response.currentQuestion);
 		};
 		fetchData();
 	}, []);
@@ -33,31 +66,27 @@ export const Quiz = () => {
 	useEffect(() => {
 		if (ended || isHelpOpen) return;
 
-		const interval = setInterval(() => {
-			setTimer((prev) => prev + 1);
-		}, 1000);
-
+		const interval = setInterval(() => setTimer((prev) => prev + 1), 1000);
 		return () => clearInterval(interval);
 	}, [ended, isHelpOpen]);
 
+	const currentQuestion = questions[currentQuestionIdx];
+
 	const handleAnswerClick = async (index) => {
 		if (showFeedback) return;
-		setSelectedAnswer(index);
 
-		const chosen = questions[currentQuestionIdx].answers[index];
-		correctAnswer.current = await quizGuess({ answer: chosen.id });
+		setSelectedAnswer(index);
+		const chosen = currentQuestion.answers[index];
+		correctAnswer.current = await quizGuess({answer: chosen.id});
 
 		setShowFeedback(true);
-
-		setTimeout(() => {
-			handleNextQuestion();
-		}, 1500);
+		setTimeout(() => handleNextQuestion(), 1500);
 	};
 
 	const handleNpsAnswer = async () => {
-		await quizGuess({ answer: npsResponse });
+		await quizGuess({answer: npsResponse});
 		handleNextQuestion();
-	}
+	};
 
 	const handleNextQuestion = () => {
 		const next = currentQuestionIdx + 1;
@@ -68,119 +97,71 @@ export const Quiz = () => {
 		}
 		setSelectedAnswer(null);
 		setShowFeedback(false);
+		setNpsResponse("");
 	};
 
-	const getButtonClass = useCallback(
-		(answer, index) => {
-			if (!showFeedback) {
-				return classNames(styles["answer-button"], styles["gradient-border"], styles["answer-button-normal"]);
-			}
-
-			if (index === selectedAnswer) {
-				return classNames(
-					styles["answer-button"],
-					answer.id === correctAnswer.current ? styles["answer-selected-correct"] : styles["answer-selected-incorrect"]
-				);
-			}
-
+	const getButtonClass = (answer, index) => {
+		const baseClass = styles["answer-button"];
+		if (!showFeedback) {
+			return classNames(baseClass, styles["gradient-border"], styles["answer-button-normal"]);
+		}
+		if (index === selectedAnswer) {
 			return classNames(
-				styles["answer-button"],
-				answer.id === correctAnswer.current ? styles["answer-correct"] : styles["answer-incorrect"]
+				baseClass,
+				answer.id === correctAnswer.current ? styles["answer-selected-correct"] : styles["answer-selected-incorrect"]
 			);
-		},
-		[showFeedback, selectedAnswer]
-	);
+		}
+		return classNames(baseClass, answer.id === correctAnswer.current ? styles["answer-correct"] : styles["answer-incorrect"]);
+	};
 
-	const currentQuestion = useMemo(() => questions[currentQuestionIdx], [questions, currentQuestionIdx]);
+	useEffect(() => {
+		if (currentQuestion?.npsQuestion && currentQuestion?.npsType === "number") {
+			setNpsResponse(1);
+		}
+	}, [currentQuestion]);
 
-	const getNormalAnswersDisplay = useCallback( answers => answers.map((ans, idx) => (
-			<button
-				key={idx}
+	const renderAnswers = () => {
+		if (!currentQuestion) return null;
+
+		if (currentQuestion.npsQuestion) {
+			return (
+				<NpsInput
+					type={currentQuestion.npsType === "text" ? "long_text" : currentQuestion.npsType}
+					value={npsResponse}
+					onChange={setNpsResponse}
+					onSubmit={handleNpsAnswer}
+				/>
+			);
+		}
+
+		return currentQuestion.answers.map((ans, idx) => (
+			<AnswerButton
+				key={ans.id}
+				answer={ans}
+				index={idx}
 				onClick={() => handleAnswerClick(idx)}
 				disabled={showFeedback}
 				className={getButtonClass(ans, idx)}
-			>
-				<p>{ans.text}</p>
-			</button>
-	)),[handleAnswerClick, showFeedback, getButtonClass]);
-	
-	const getNPSAnswersDisplay = useCallback(currentQuestion => {
-
-		const setNpsValue = (value) => {
-			if (value < 0 || value > 10) {
-				console.warn("NPS value must be between 0 and 10");
-				return;
-			}
-			setNpsResponse(value);
-		}
-
-		if (currentQuestion.npsType === "number") {
-			return (
-				<>
-					<p className={styles["question"]}>Valor selecionado: {npsResponse ? npsResponse : '0' }</p>
-					<input
-						type="number"
-						value={npsResponse}
-						max={10}
-						min={0}
-						onChange={e => setNpsValue(e.target.value)}
-					/>
-					<button
-						className={classNames(styles["answer-button"], styles["gradient-border"], styles["answer-button-normal"])}
-						onClick={handleNpsAnswer}
-					>
-						Responder
-					</button>
-				</>
-			);
-		}
-
-		return (
-			<>
-				<p className={styles["question"]}>Deixe sua opnião:</p>
-				<input
-					type="text"
-					value={npsResponse}
-						onChange={e => setNpsValue(e.target.value)}
-				/>
-				<button
-					className={classNames(styles["answer-button"], styles["gradient-border"], styles["answer-button-normal"])}
-					onClick={handleNpsAnswer}
-				>
-					Responder
-				</button>
-			</>
-		)
-
-	},[npsResponse, setNpsResponse, handleNpsAnswer])
-
-	const getAnswersDisplay = useCallback((currentQuestion) => {
-		if (!currentQuestion.npsQuestion) {
-			return getNormalAnswersDisplay(currentQuestion.answers);
-		}
-		
-		return getNPSAnswersDisplay(currentQuestion);
-
-	}, [getNPSAnswersDisplay, getNormalAnswersDisplay, currentQuestion]);
+			/>
+		));
+	};
 
 	if (!currentQuestion) return <Loading />;
 
 	return (
 		<>
 			<div className={styles["container"]}>
-				<GameHeader
-					task="Task #1"
-					timer={timer}
-					ContentHelp={Help}
-					isHelpOpen={isHelpOpen}
-					setIsHelpOpen={setIsHelpOpen}
-				/>
-				<div className={styles["header"]}>
-					<h1 className={styles["question"]}>{currentQuestion?.text}</h1>
-					<div className={styles["line"]}></div>
-				</div>
-				<div className={styles["answers-container"]}>
-					{getAnswersDisplay(currentQuestion)}
+				<GameHeader task="Task #1" timer={timer} ContentHelp={Help} isHelpOpen={isHelpOpen} setIsHelpOpen={setIsHelpOpen} />
+				<div className={styles["content"]}>
+					<div className={styles["header"]}>
+						<h1 className={styles["question"]}>{currentQuestion.npsQuestion ? "Queremos saber sua opinião!" : currentQuestion.text}</h1>
+						{currentQuestion.npsQuestion ? (
+							<p className={styles["sub-question"]}>{currentQuestion.text}</p>
+						) : (
+							<div className={styles["line"]}></div>
+						)}
+					</div>
+					<div className={styles["answers-container"]}>{renderAnswers()}</div>
 				</div>
 			</div>
 			<FinishModal time={timer} showModal={ended} />

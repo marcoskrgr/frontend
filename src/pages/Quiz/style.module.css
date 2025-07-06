@@ -11,6 +11,14 @@
 	gap: 1vh;
 }
 
+.content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
+	padding-bottom: 105px;
+}
+
 .question {
 	font-size: 25px;
 	color: #ffffff;
@@ -141,6 +149,12 @@
 	vertical-align: middle;
 }
 
+.sub-question {
+	font-family: "Inter";
+	text-align: center;
+	color: white !important
+}
+
 .next-button {
 	margin-top: 2rem;
 	padding: 0.75rem 1.5rem;
@@ -167,4 +181,10 @@
 
 .answer-button:active {
 	transform: scale(0.98);
+}
+
+.nps-input-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 34px;
 }
