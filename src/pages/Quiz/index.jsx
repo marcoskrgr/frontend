@@ -19,6 +19,7 @@ export const Quiz = () => {
 	const { getQuizData, quizGuess } = GameRepository();
 	const [timer, setTimer] = useState(0);
 	const [isHelpOpen, setIsHelpOpen] = useState(false);
+	const [npsResponse, setNpsResponse] = useState(0);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -52,6 +53,11 @@ export const Quiz = () => {
 			handleNextQuestion();
 		}, 1500);
 	};
+
+	const handleNpsAnswer = async () => {
+		await quizGuess({ answer: npsResponse });
+		handleNextQuestion();
+	}
 
 	const handleNextQuestion = () => {
 		const next = currentQuestionIdx + 1;
@@ -87,6 +93,76 @@ export const Quiz = () => {
 
 	const currentQuestion = useMemo(() => questions[currentQuestionIdx], [questions, currentQuestionIdx]);
 
+	const getNormalAnswersDisplay = useCallback( answers => answers.map((ans, idx) => (
+			<button
+				key={idx}
+				onClick={() => handleAnswerClick(idx)}
+				disabled={showFeedback}
+				className={getButtonClass(ans, idx)}
+			>
+				<p>{ans.text}</p>
+			</button>
+	)),[handleAnswerClick, showFeedback, getButtonClass]);
+	
+	const getNPSAnswersDisplay = useCallback(currentQuestion => {
+
+		const setNpsValue = (value) => {
+			if (value < 0 || value > 10) {
+				console.warn("NPS value must be between 0 and 10");
+				return;
+			}
+			setNpsResponse(value);
+		}
+
+		if (currentQuestion.npsType === "number") {
+			return (
+				<>
+					<p className={styles["question"]}>Valor selecionado: {npsResponse ? npsResponse : '0' }</p>
+					<input
+						type="number"
+						value={npsResponse}
+						max={10}
+						min={0}
+						onChange={e => setNpsValue(e.target.value)}
+					/>
+					<button
+						className={classNames(styles["answer-button"], styles["gradient-border"], styles["answer-button-normal"])}
+						onClick={handleNpsAnswer}
+					>
+						Responder
+					</button>
+				</>
+			);
+		}
+
+		return (
+			<>
+				<p className={styles["question"]}>Deixe sua opnião:</p>
+				<input
+					type="text"
+					value={npsResponse}
+						onChange={e => setNpsValue(e.target.value)}
+				/>
+				<button
+					className={classNames(styles["answer-button"], styles["gradient-border"], styles["answer-button-normal"])}
+					onClick={handleNpsAnswer}
+				>
+					Responder
+				</button>
+			</>
+		)
+
+	},[npsResponse, setNpsResponse, handleNpsAnswer])
+
+	const getAnswersDisplay = useCallback((currentQuestion) => {
+		if (!currentQuestion.npsQuestion) {
+			return getNormalAnswersDisplay(currentQuestion.answers);
+		}
+		
+		return getNPSAnswersDisplay(currentQuestion);
+
+	}, [getNPSAnswersDisplay, getNormalAnswersDisplay, currentQuestion]);
+
 	if (!currentQuestion) return <Loading />;
 
 	return (
@@ -104,16 +180,7 @@ export const Quiz = () => {
 					<div className={styles["line"]}></div>
 				</div>
 				<div className={styles["answers-container"]}>
-					{currentQuestion.answers.map((ans, idx) => (
-						<button
-							key={idx}
-							onClick={() => handleAnswerClick(idx)}
-							disabled={showFeedback}
-							className={getButtonClass(ans, idx)}
-						>
-							<p>{ans.text}</p>
-						</button>
-					))}
+					{getAnswersDisplay(currentQuestion)}
 				</div>
 			</div>
 			<FinishModal time={timer} showModal={ended} />
