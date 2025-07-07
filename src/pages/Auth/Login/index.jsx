@@ -52,7 +52,7 @@ function Login() {
 
 		const response = await login(userData);
 		if (response) {
-			if (response.fgPhoneVerified === 3) {
+			if (response.fgEmailVerified === 2) {
 				navigate("/map");
 			} else {
 				navigate("/confirm-email");

@@ -40,7 +40,7 @@ const NpsInput = ({ type, value, onChange, onSubmit }) => {
 			<Button
 				isDisabled={isDisabled}
 				onClick={isDisabled ? () => { } : onSubmit}
-				text="Próxima"
+				text={type === "number" ? "Próxima" : "Finalizar"}
 				customStyle={{ flex: "1" }}
 				type="primary"
 				size="medium"
@@ -124,7 +124,7 @@ export const Quiz = () => {
 
 	useEffect(() => {
 		if (currentQuestion?.npsQuestion && currentQuestion?.npsType === "number") {
-			setNpsResponse(1);
+			setNpsResponse(10);
 		}
 	}, [currentQuestion]);
 
