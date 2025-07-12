@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 import About from "@components/Home/About";
 import Button from "@components/common/Button";
@@ -8,14 +8,16 @@ import Prizes from "@components/Home/Prizes";
 import Tickets from "@components/Home/Tickets";
 import SoftExtendedLogo from "../../assets/SoftExtendedLogo.png";
 import GameLogo from "../../assets/GameLogo.svg";
-import { useAuthStore } from "@stores/useAuth";
+import {useAuthStore} from "@stores/useAuth";
 
 import styles from "./style.module.css";
+import Term from "@components/Home/Term";
 
 function Home() {
 	const navigate = useNavigate();
 	const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
 	const [isPrizesModalOpen, setIsPrizesModalOpen] = useState(false);
+	const [isTermModalOpen, setIsTermModalOpen] = useState(false);
 	const getToken = useAuthStore((state) => state.token);
 	const userData = useAuthStore((state) => state.userData);
 
@@ -26,13 +28,18 @@ function Home() {
 			<img className={styles["logo-game"]} src={GameLogo} alt="Logo do game" />
 			<div className={styles["buttons"]}>
 				<div className={styles["buttons-left"]}>
-					<Button type="primary" size="medium" icon="bxs-quote-alt-left" onClick={() => navigate("/phrase")} />
-					<Button type="primary" size="medium" icon="bxl-instagram" onClick={() => window.open("https://www.instagram.com/softexpert/", "_blank")} />
+					<Button type="primary" size="medium" icon="bxs-quote-alt-left" onClick={() => (getToken === null ? setIsTermModalOpen(true) : navigate("/phrase"))} />
+					<Button
+						type="primary"
+						size="medium"
+						icon="bxl-instagram"
+						onClick={() => window.open("https://www.instagram.com/softexpert/", "_blank")}
+					/>
 				</div>
-				<Button type="primary" size="large" icon="bx-play" onClick={() => (getToken === null ? navigate("/register") : navigate("/map"))} />
+				<Button type="primary" size="large" icon="bx-play" onClick={() => (getToken === null ? setIsTermModalOpen(true) : navigate("/map"))} />
 				<div className={styles["buttons-right"]}>
 					{/* Modal que aprensenta os prêmios, voltar quando passar a fase de teste */}
-					{/* <Button type="primary" size="medium" icon="bx-trophy" onClick={() => setIsPrizesModalOpen(true)} /> */} 
+					{/* <Button type="primary" size="medium" icon="bx-trophy" onClick={() => setIsPrizesModalOpen(true)} /> */}
 					<Button type="primary" size="medium" icon="bx-help-circle" onClick={() => setIsAboutModalOpen(true)} />
 				</div>
 			</div>
@@ -41,6 +48,9 @@ function Home() {
 			</Modal>
 			<Modal title="Prêmios" show={isPrizesModalOpen} onClose={() => setIsPrizesModalOpen(false)}>
 				<Prizes />
+			</Modal>
+			<Modal title="Termos e Condições" show={isTermModalOpen} onClose={() => setIsTermModalOpen(false)}>
+				<Term onConfirm={() => navigate("/register")} onReject={() => setIsTermModalOpen(false)} />
 			</Modal>
 		</div>
 	);

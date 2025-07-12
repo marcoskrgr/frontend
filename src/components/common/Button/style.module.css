@@ -5,6 +5,10 @@
   height: fit-content;
 }
 
+.btn span {
+  font-family: "Bungee", sans-serif !important;
+}
+
 .btn-primary {
   border: 3px solid white;
   background-image: var(--gradient-001);
@@ -24,6 +28,26 @@
   transition: all .4s ease-in-out;
 }
 
+.btn-secondary {
+  border: 3px solid white;
+  background-image: var(--gradient-red);
+  border-radius: 10px;
+  background-size: 300% 100%;
+  moz-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+
+.btn-secondary:hover {
+  background-position: 100% 0;
+  moz-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+
+
 .btn-tertiary {
   border: 3px solid white;
   background: var(--soft-core-blue);
@@ -35,7 +59,7 @@
   transition: all .4s ease-in-out;
 }
 
-.btn-tertiary > i {
+.btn-tertiary>i {
   color: white !important
 }
 
@@ -47,7 +71,8 @@
   transition: all .4s ease-in-out;
 }
 
-.btn-primary * {
+.btn-primary *,
+.btn-secondary * {
   color: white;
 }
 
@@ -104,6 +129,7 @@
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }

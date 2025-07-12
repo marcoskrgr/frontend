@@ -29,15 +29,15 @@ function About() {
 									<Hexagon size={100} src={credit.profile} />
 								</div>
 								<div className={styles["text"]}>
-									<div className={styles["name"]}>{credit.name}</div>
-									<div className={styles["position"]}>{credit.position}</div>
+									<p className={styles["name"]}>{credit.name}</p>
+									<p className={styles["position"]}>{credit.position}</p>
 								</div>
 							</>
 						) : (
 							<>
 								<div className={styles["text"]}>
-									<div className={styles["name"]}>{credit.name}</div>
-									<div className={styles["position"]}>{credit.position}</div>
+									<p className={styles["name"]}>{credit.name}</p>
+									<p className={styles["position"]}>{credit.position}</p>
 								</div>
 								<div className={styles["hex"]}>
 									<Hexagon size={100} src={credit.profile} />

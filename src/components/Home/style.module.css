@@ -80,11 +80,12 @@
   padding: 23px;
 }
 
-.modal .content * {
+.modal .content p, .modal .content h2{
   font-family: "Inter", sans-serif !important;
 }
 
 .modal .header h2 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin: 0;
+  width: 71%;
 }
