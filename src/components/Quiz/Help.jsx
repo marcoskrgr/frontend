@@ -22,7 +22,7 @@ function Help() {
         <li>💙 Cultura e valores da empresa</li>
         <li>🚀 Inovações e certificações</li>
       </ul>
-      <p className={style.sectionSpacing}>
+      <p>
         💡 Seja você um colaborador, parceiro ou apenas curioso, este quiz é uma ótima forma de aprender mais sobre a organização e mostrar o quanto você conhece!
       </p>
 
@@ -39,7 +39,7 @@ function Help() {
         <img src={answerCorrectImage} className={style.imageHalf} alt="Resposta correta" />
         <img src={answerIncorrectImage} className={style.imageHalf} alt="Resposta incorreta" />
       </div>
-      <p className={style.sectionSpacing}>
+      <p >
         🏁 O jogo termina quando todas as perguntas forem respondidas. Boa sorte!
       </p>
     </>

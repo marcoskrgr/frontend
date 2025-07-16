@@ -6,29 +6,34 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	align-items: center;
 	margin: 3vh 0;
 	gap: 1vh;
+}
+
+.header .question-index {
+	font-size: 16px;
+	color: #ffffff;
+	text-align: center;
+	font-family: "Inter" !important;
 }
 
 .content {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-start;
 	height: 100%;
-	padding-bottom: 105px;
 }
 
 .question {
 	font-size: 25px;
 	color: #ffffff;
-	margin-bottom: 1rem;
+	text-align: center;
 	line-height: 35px;
 	max-width: 100%;
+	font-weight: normal;
 	overflow-wrap: break-word;
 	word-break: break-word;
 	letter-spacing: 0%;
-	text-align: center;
 	vertical-align: middle;
 }
 

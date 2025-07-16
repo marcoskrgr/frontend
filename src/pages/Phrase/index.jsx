@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useState} from "react";
+import {useNavigate} from "react-router-dom";
 import confetti from "canvas-confetti";
 
 import Input from "@components/common/Input";
 import Button from "@components/common/Button";
 import SoftExtendedLogo from "../../assets/SoftExtendedLogo.png";
-import { GameRepository } from "@repositories/games.js";
+import {GameRepository} from "@repositories/games.js";
 
 import styles from "./style.module.css";
 
 function Word() {
 	const navigate = useNavigate();
-	const { wordGuess } = GameRepository();
+	const {wordGuess} = GameRepository();
 
 	const [word, setWord] = useState("");
 	const [wasSubmitted, setWasSubmitted] = useState(false);
@@ -39,13 +39,13 @@ function Word() {
 	const handleSubmit = async () => {
 		setWasSubmitted(true);
 		try {
-			const result = await wordGuess({ word: word.trim().toUpperCase() });
+			const result = await wordGuess({word: word.trim().toUpperCase()});
 
 			if (result.success) {
 				setIsCorrect(true);
 				setMessage(result.message);
 				setButtonLabel(":)");
-				confetti({ particleCount: 150, spread: 100, origin: { y: 0.6 } });
+				confetti({particleCount: 150, spread: 100, origin: {y: 0.6}});
 			} else {
 				showErrorToast(result.message);
 			}
@@ -56,10 +56,10 @@ function Word() {
 	};
 
 	const getButtonStyle = () => {
-		if (!wasSubmitted) return {};
+		if (!wasSubmitted) return {width: "100%"};
 		return isCorrect
-			? { backgroundImage: "linear-gradient(to top, #00E883 0%, #009182 100%)" }
-			: { backgroundImage: "linear-gradient(to top, #FF7D7E 0%, #B40048 100%)" };
+			? {backgroundImage: "linear-gradient(to top, #00E883 0%, #009182 100%)", width: "100%"}
+			: {backgroundImage: "linear-gradient(to top, #FF7D7E 0%, #B40048 100%)", width: "100%"};
 	};
 
 	return (
@@ -84,12 +84,7 @@ function Word() {
 				/>
 				{message && <span className={styles.message}>{message}</span>}
 			</div>
-			<Button
-				type="primary"
-				size="small"
-				text="Voltar para a home"
-				onClick={() => navigate("/")}
-			/>
+			<Button type="primary" size="small" text="Voltar para a home" onClick={() => navigate("/")} />
 		</div>
 	);
 }

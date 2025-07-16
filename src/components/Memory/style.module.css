@@ -86,9 +86,12 @@
 	text-align: center;
 	margin: 50px 0;
 }
+
 .sectionSpacing {
   margin-top: 16px;
   margin-bottom: 12px;
+	font-family: "Bungee", sans-serif !important;
+	color: var(--future-flow);
   line-height: 1.6;
 }
 

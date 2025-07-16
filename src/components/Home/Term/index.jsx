@@ -1,12 +1,10 @@
 import React, {useState} from "react";
 
-import Hexagon from "../../common/Hexagon";
-import SoftExpertLogoBlue from "../../../assets/SoftExtendedLogoBlue.png";
 import Button from "@components/common/Button";
 
 import styles from "./style.module.css";
 
-function Term({onConfirm, onReject}) {
+function Term({onConfirm}) {
 	const [confirmTerm, setConfirmTerm] = useState(false);
 
 	return (

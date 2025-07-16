@@ -30,7 +30,7 @@ const cards = [
 		id: 2,
 		title: "Task #2",
 		route: "/memory",
-		difficulty: "easy",
+		difficulty: "medium",
 		tags: [{label: "REFACTOR", color: "yellow"}],
 		description: "Pair programming com o scrum"
 	}
@@ -89,7 +89,7 @@ function Map() {
 					);
 				})}
 			</div>
-			<Button type="primary" size="medium" text="Voltar para a home" onClick={() => navigate("/")} />
+			<Button type="primary" customStyle={{width: "100%"}} size="medium" text="Voltar para a home" onClick={() => navigate("/")} />
 		</div>
 	);
 }

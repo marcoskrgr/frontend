@@ -1,26 +1,41 @@
 .header {
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
   align-items: center;
-  margin-bottom: 2vh;
+  justify-content: space-between;
 }
 
-.header .left > div {
+.subheader {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
-.header img {
+.tickets img {
   width: 20px;
+  margin-right: 7px;
 }
 
-.header * {
-  color: white !important;
+.header #home {
+  font-size: 27px;
 }
 
-.task:nth-child(2) {
-  font-size: 25px;
+.ticket, .task {
+  color: #ffffff;
+}
+
+.ticket {
+  font-size: 19px;
+}
+
+/* .header img {
+  width: 20px;
+} */
+
+.task {
+  font-size: 22px;
   font-weight: bold;
 }
 
@@ -42,4 +57,8 @@ span {
   height: 100%;
   padding: 15px;
   overflow-y: auto;
+}
+
+.modalContent li  {
+  font-family: "Inter";
 }

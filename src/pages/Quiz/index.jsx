@@ -163,12 +163,11 @@ export const Quiz = () => {
 				<GameHeader task="Task #1" timer={timer} ContentHelp={Help} isHelpOpen={isHelpOpen} setIsHelpOpen={setIsHelpOpen} />
 				<div className={styles["content"]}>
 					<div className={styles["header"]}>
+						<span className={styles["question-index"]}>
+							Questão {currentQuestionIdx + 1} de {questions.length}
+						</span>
 						<h1 className={styles["question"]}>{currentQuestion.npsQuestion ? "Queremos saber sua opinião!" : currentQuestion.text}</h1>
-						{currentQuestion.npsQuestion ? (
-							<p className={styles["sub-question"]}>{currentQuestion.text}</p>
-						) : (
-							<div className={styles["line"]}></div>
-						)}
+						{currentQuestion.npsQuestion && <p className={styles["sub-question"]}>{currentQuestion.text}</p>}
 					</div>
 					<div className={styles["answers-container"]}>{renderAnswers()}</div>
 				</div>
