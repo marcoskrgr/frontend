@@ -82,22 +82,24 @@ function ConfirmEmail() {
 						Enviado para {userData.email}. <span>Verifique o Spam</span>
 					</span>
 				</div>
-				<Button
+				<div className={styles["buttons"]}>
+					<Button
 					isDisabled={code.length < 4 || isCorrect}
 					type="primary"
 					size="small"
 					text={buttonLabel}
 					customStyle={getButtonStyle()}
 					onClick={handleCodeSubmit}
-				/>
-				<Button
-					isDisabled={resendTimer > 0 || isCorrect}
-					type="primary"
-					size="small"
-					text={resendTimer > 0 ? `Reenviar (${resendTimer}s)` : "Reenviar código"}
-					customStyle={{width: "100%", marginTop: "0.5rem"}}
-					onClick={handleResendCode}
-				/>
+					/>
+					<Button
+						isDisabled={resendTimer > 0 || isCorrect}
+						type="primary"
+						size="small"
+						text={resendTimer > 0 ? `Reenviar (${resendTimer}s)` : "Reenviar código"}
+						customStyle={{ width: "100%", marginTop: "0.5rem" }}
+						onClick={handleResendCode}
+					/>
+				</div>
 			</div>
 			<div>
 				{isCorrect && (
