@@ -1,13 +1,14 @@
-import { useState, useCallback, useEffect } from "react";
+import {useState, useCallback, useEffect} from "react";
 
 import Grid from "@components/Wordle";
 import Keyboard from "@components/Wordle/Keyboard";
 import GameHeader from "@components/common/GameHeader";
 
-import { LetterStatusEnum } from "../../constants/wordleConstants";
-import { GameRepository } from "../../repositories/games";
+import {LetterStatusEnum} from "../../constants/wordleConstants";
+import {GameRepository} from "../../repositories/games";
 import FinishModal from "@components/common/FinishModal";
 import Help from "@components/Wordle/Help";
+import {useAuthStore} from "@stores/useAuth";
 
 const CONFIG = {
 	MAX_ATTEMPTS: 6,
@@ -15,44 +16,39 @@ const CONFIG = {
 	SECRET_WORD: "LIVRO"
 };
 
-const getDefaultGuess = () => new Array(CONFIG.WORD_LENGTH).fill({ char: "" });
+const getDefaultGuess = () => new Array(CONFIG.WORD_LENGTH).fill({char: ""});
 
-const filledCharacterCount = (guess) =>
-	guess.reduce((count, item) => (item.char === "" ? count - 1 : count), CONFIG.WORD_LENGTH);
+const filledCharacterCount = (guess) => guess.reduce((count, item) => (item.char === "" ? count - 1 : count), CONFIG.WORD_LENGTH);
 
 const addGuessCharacter = (guess, char) => {
 	const idx = guess.findIndex((item) => item.char === "");
 	if (idx === -1) return guess;
-	return guess.map((item, i) => (i === idx ? { ...item, char } : item));
+	return guess.map((item, i) => (i === idx ? {...item, char} : item));
 };
 
-const removeGuessCharacter = (guess) =>
-	guess.map((item, i) => (i === filledCharacterCount(guess) - 1 ? { ...item, char: "" } : item));
+const removeGuessCharacter = (guess) => guess.map((item, i) => (i === filledCharacterCount(guess) - 1 ? {...item, char: ""} : item));
 
 export default function Wordle() {
 	const [guesses, setGuesses] = useState([]);
 	const [currentGuess, setCurrentGuess] = useState(getDefaultGuess());
 	const [isGameOver, setIsGameOver] = useState(false);
-	const [timer, setTimer] = useState(0);
-	const [isHelpOpen, setIsHelpOpen] = useState(false); // 👈 Estado para controle da ajuda
+	const [isHelpOpen, setIsHelpOpen] = useState(false);
+	const markLastTaskAsPlayed = useAuthStore((state) => state.markLastTaskAsPlayed);
 
-	const { getTermData, termGuess } = GameRepository();
+	const {getTermData, termGuess} = GameRepository();
 
 	useEffect(() => {
-		if (isGameOver || isHelpOpen) return; // pausa timer se jogo acabou ou modal aberto
-
-		const interval = setInterval(() => {
-			setTimer((prev) => prev + 1);
-		}, 1000);
-
-		return () => clearInterval(interval);
-	}, [isGameOver, isHelpOpen]);
+		if (isGameOver) {
+			markLastTaskAsPlayed();
+		}
+	}, [isGameOver]);
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const { tries } = await getTermData();
+			const {tries} = await getTermData();
 			setGuesses(tries);
 		};
+
 		fetchData();
 	}, []);
 
@@ -66,7 +62,7 @@ export default function Wordle() {
 				if (filledCharacterCount(currentGuess) === CONFIG.WORD_LENGTH) {
 					const fullWord = currentGuess.reduce((word, item) => word + item.char, "");
 
-					const guessResult = await termGuess({ guess: fullWord });
+					const guessResult = await termGuess({guess: fullWord});
 
 					const newGuesses = [...guesses, guessResult];
 					setGuesses(newGuesses);
@@ -96,17 +92,11 @@ export default function Wordle() {
 	};
 
 	return (
-		<div style={{ padding: "24px" }}>
-			<GameHeader
-				task="Task #3"
-				timer={timer}
-				isHelpOpen={isHelpOpen}
-				setIsHelpOpen={setIsHelpOpen}
-				ContentHelp={Help}
-			/>
+		<div style={{padding: "24px"}}>
+			<GameHeader task="Task #3" isHelpOpen={isHelpOpen} setIsHelpOpen={setIsHelpOpen} ContentHelp={Help} />
 			<Grid guesses={guesses} isGameOver={isGameOver} currentGuess={currentGuess} getLetterColor={getColor} />
 			<Keyboard onKeyPress={handleKeyPress} guesses={guesses} getLetterColor={getColor} />
-			<FinishModal time={timer} showModal={isGameOver} />
+			<FinishModal showModal={isGameOver} />
 		</div>
 	);
 }

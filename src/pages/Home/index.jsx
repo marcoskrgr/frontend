@@ -49,9 +49,6 @@ function Home() {
 			<Modal title="Prêmios" show={isPrizesModalOpen} onClose={() => setIsPrizesModalOpen(false)}>
 				<Prizes />
 			</Modal>
-			<Modal title="Termos e Condições" show={isTermModalOpen} onClose={() => setIsTermModalOpen(false)}>
-				<Term onConfirm={() => navigate("/register")} onReject={() => setIsTermModalOpen(false)} />
-			</Modal>
 		</div>
 	);
 }

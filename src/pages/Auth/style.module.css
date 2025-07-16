@@ -19,16 +19,41 @@
 	width: 290px;
 }
 
+.term, .checkbox label {
+	font-family: "Inter";
+	color: white;
+	font-size: 13px;
+}
+
+.term {
+	text-decoration: underline;
+	text-align: center;
+}
+
+.term {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.checkbox {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	justify-content: center;
+	margin: 6px 0;
+}
+
 .formFooter {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
-	align-items: center;
 	margin-top: 3vh;
 }
 
 .formFooter a {
 	text-decoration: underline;
+	text-align: center;
 }
 
 .formFooter p {

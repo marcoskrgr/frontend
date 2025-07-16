@@ -11,6 +11,7 @@ import FinishModal from "@components/common/FinishModal";
 import {GameRepository} from "../../repositories/games";
 
 import styles from "./style.module.css";
+import { useAuthStore } from "@stores/useAuth";
 
 const NpsInput = ({type, value, onChange, onSubmit, isLoading}) => {
 	const isNumberInvalid = type === "number" && (value < 1 || value > 10);
@@ -36,7 +37,7 @@ const NpsInput = ({type, value, onChange, onSubmit, isLoading}) => {
 				isDisabled={isDisabled || isLoading}
 				onClick={isDisabled ? () => {} : onSubmit}
 				text={isLoading ? "Enviando..." : type === "number" ? "Próxima" : "Finalizar"}
-				customStyle={{flex: "1"}}
+				customStyle={{flex: "1", width: "100%"}}
 				type="primary"
 				size="medium"
 			/>

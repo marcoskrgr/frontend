@@ -8,6 +8,8 @@ import {formatPhone, validateEmail, validatePassword, validatePhone} from "@comp
 import SoftExtendedLogo from "../../../assets/SoftExtendedLogo.png";
 
 import styles from "../style.module.css";
+import Modal from "@components/Home/Modal";
+import Term from "@components/Home/Term";
 
 const initialInputs = [
 	{id: "firstName", label: "Nome", isRequired: true, type: "text", value: ""},
@@ -21,6 +23,8 @@ const initialInputs = [
 function Register() {
 	const navigate = useNavigate();
 	const [inputs, setInputs] = useState(initialInputs);
+	const [confirmTerm, setConfirmTerm] = useState(false);
+	const [isTermModalOpen, setIsTermModalOpen] = useState(false);
 
 	const {register} = createAuthController();
 
@@ -83,7 +87,7 @@ function Register() {
 	return (
 		<div className={styles["container"]}>
 			<img className={styles.logo} src={SoftExtendedLogo} alt="Logo da SoftExpert" />
-			<form className={styles.form} onSubmit={handleSubmit}>
+			<div className={styles.form}>
 				<div className={styles["fields"]}>
 					{inputs.map(({id, label, placeholder, type, value, error, isRequired}) => (
 						<Input
@@ -99,9 +103,17 @@ function Register() {
 						/>
 					))}
 				</div>
+				<checkbox className={styles.checkbox}>
+					<input type="checkbox" id="confirmTerm" onChange={(e) => setConfirmTerm(e.target.checked)} />
+					<label htmlFor="confirmTerm">Concordo com os termos e condições. </label>
+				</checkbox>
+				<span className={styles["term"]} onClick={() => setIsTermModalOpen(true)}>Ler termos e condições </span>
+				<Modal title="Termos e Condições" show={isTermModalOpen} onClose={() => setIsTermModalOpen(false)}>
+					<Term onConfirm={() => setIsTermModalOpen(false)} />
+				</Modal>
 				<div className={styles.formFooter}>
 					<Button
-						isDisabled={!canSubmit}
+						isDisabled={!canSubmit || !confirmTerm}
 						type="primary"
 						size="small"
 						text="Continuar"
@@ -112,7 +124,7 @@ function Register() {
 						já possui login?
 					</Link>
 				</div>
-			</form>
+			</div>
 		</div>
 	);
 }

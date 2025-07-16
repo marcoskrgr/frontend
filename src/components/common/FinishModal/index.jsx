@@ -7,7 +7,7 @@ import Button from "../Button";
 import styles from "./styles.module.css";
 import confetti from "canvas-confetti";
 
-function FinishModal({ time, showModal }) {
+function FinishModal({ time = 0, showModal }) {
 	const navigate = useNavigate();
 
 	const formatTime = (time) => {

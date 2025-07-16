@@ -40,6 +40,7 @@ function Map() {
 	const navigate = useNavigate();
 	const {fetchUserData} = createAuthController();
 	const userData = useAuthStore((state) => state.userData);
+	const wasLastTaskMarked = useAuthStore((state) => state.wasLastTaskMarked);
 	const contentRef = useRef(null);
 	const lastCardRef = useRef(null);
 
@@ -57,6 +58,11 @@ function Map() {
 	const currentTaskId = Math.max(...userTasks);
 
 	const getColumnCards = (columnTitle) => {
+		if (wasLastTaskMarked) {
+			if (columnTitle === "Done") return cards;
+			return [];
+		}
+
 		return cards.filter((card) => {
 			if (columnTitle === "In progress") return card.id === currentTaskId;
 			if (columnTitle === "Done") return userTasks.includes(card.id) && card.id !== currentTaskId;

@@ -1,12 +1,8 @@
-import React, {useState} from "react";
-
-import Button from "@components/common/Button";
+import React from "react";
 
 import styles from "./style.module.css";
 
-function Term({onConfirm}) {
-	const [confirmTerm, setConfirmTerm] = useState(false);
-
+function Term() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.instructions}>
@@ -22,14 +18,6 @@ function Term({onConfirm}) {
 					adipisicing elit. Perferendis deleniti quaerat corporis culpa consequatur aliquam autem excepturi, eligendi similique commodi
 					quos, illo sit voluptatem accusamus minus eveniet, ut qui officiis.
 				</p>
-
-			</div>
-			<checkbox className={styles.checkbox}>
-				<input type="checkbox" id="confirmTerm" onChange={(e) => setConfirmTerm(e.target.checked)} />
-				<label htmlFor="confirmTerm">Concordo com os termos e condições</label>
-			</checkbox>
-			<div className={styles.buttons}>
-				<Button text="Prosseguir" customStyle={{width: "100%"}} isDisabled={!confirmTerm} type="primary" size="small" onClick={onConfirm} />
 			</div>
 		</div>
 	);
