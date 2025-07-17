@@ -1,0 +1,111 @@
+.tickets {
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+  align-items: center;
+}
+
+.tickets-length {
+  display: flex;
+  gap: 10px;
+}
+
+.tickets-length .ticket-icon {
+  width: 30px;
+}
+
+.tickets span:nth-child(1) {
+  color: var(--text-gray);
+  font-size: 1.2rem;
+}
+
+.tickets-length span:nth-child(2) {
+  color: var(--expert-horizon);
+  font-size: 1.6rem;
+}
+
+.tickets-length span:nth-child(3) {
+  font-size: 1.6rem;
+  color: white;
+}
+
+.modal {
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  background-color: white;
+  z-index: 99999999;
+  transition: all 0.5s ease-in-out;
+  overflow-y: auto;
+  margin: 10px;
+  width: -moz-available;
+  width: -webkit-fill-available;
+  overflow: hidden;
+  border-radius: 21px;
+}
+
+.background {
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.295);
+  width: 100%;
+  width: -moz-available;
+  width: -webkit-fill-available;
+  position: absolute;
+  top: 0;
+  display: none;
+  left: 0;
+}
+
+.modal.show, .background.show {
+  display: block;
+}
+
+.modal .header {
+  background: var(--gradient-001);
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 50% 100%, 0% 70%);
+}
+
+
+.modal .header i {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+}
+
+.modal .content {
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 23px;
+}
+
+.modal .content p {
+  margin-bottom: 10px;
+}
+
+.modal .content p,
+.modal .content h2 {
+  font-family: "Inter", sans-serif;
+}
+
+.modal .header h2 {
+  font-size: 1.5rem;
+  margin: 0;
+  width: 71%;
+}

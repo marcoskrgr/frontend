@@ -7,14 +7,8 @@ import Button from "../Button";
 import styles from "./styles.module.css";
 import confetti from "canvas-confetti";
 
-function FinishModal({ time = 0, showModal }) {
+function FinishModal({ showModal }) {
 	const navigate = useNavigate();
-
-	const formatTime = (time) => {
-		const minutes = Math.floor(time / 60);
-		const seconds = time % 60;
-		return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-	};
 
 	const modalClasses = classNames(styles["all"], {
 		[styles["show"]]: showModal

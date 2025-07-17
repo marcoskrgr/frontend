@@ -11,11 +11,13 @@ import GameLogo from "../../assets/GameLogo.svg";
 import {useAuthStore} from "@stores/useAuth";
 
 import styles from "./style.module.css";
+import LogoutModal from "@components/Home/LogoutModal/LogoutModal";
 
 function Home() {
 	const navigate = useNavigate();
 	const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
 	const [isPrizesModalOpen, setIsPrizesModalOpen] = useState(false);
+	const [isOpenConfirmDialog, setIsOpenConfirmDialog] = useState(false);
 	const getToken = useAuthStore((state) => state.token);
 	const userData = useAuthStore((state) => state.userData);
 
@@ -26,7 +28,7 @@ function Home() {
 			<img className={styles["logo-game"]} src={GameLogo} alt="Logo do game" />
 			<div className={styles["buttons"]}>
 				<div className={styles["buttons-left"]}>
-					<Button type="primary" size="medium" icon="bxs-quote-alt-left" onClick={() => (getToken === null ? navigate("/register") : navigate("/phrase"))} />
+					{getToken !== null && <Button type="primary" size="medium" icon="bxs-quote-alt-left" onClick={() => navigate("/phrase")} />}
 					<Button
 						type="primary"
 						size="medium"
@@ -38,6 +40,7 @@ function Home() {
 				<div className={styles["buttons-right"]}>
 					<Button type="primary" size="medium" icon="bx-trophy" onClick={() => setIsPrizesModalOpen(true)} />
 					<Button type="primary" size="medium" icon="bx-help-circle" onClick={() => setIsAboutModalOpen(true)} />
+					{getToken !== null && <Button type="primary" size="medium" icon="bx-log-out" onClick={() => setIsOpenConfirmDialog(true)} />}
 				</div>
 			</div>
 			<Modal title="Sobre" show={isAboutModalOpen} onClose={() => setIsAboutModalOpen(false)}>
@@ -46,6 +49,7 @@ function Home() {
 			<Modal title="Prêmios" show={isPrizesModalOpen} onClose={() => setIsPrizesModalOpen(false)}>
 				<Prizes />
 			</Modal>
+			<LogoutModal show={isOpenConfirmDialog} onClose={() => setIsOpenConfirmDialog(false)} />
 		</div>
 	);
 }
