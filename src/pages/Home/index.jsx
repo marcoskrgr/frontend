@@ -17,7 +17,6 @@ function Home() {
 	const navigate = useNavigate();
 	const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
 	const [isPrizesModalOpen, setIsPrizesModalOpen] = useState(false);
-	const [isTermModalOpen, setIsTermModalOpen] = useState(false);
 	const getToken = useAuthStore((state) => state.token);
 	const userData = useAuthStore((state) => state.userData);
 
@@ -28,7 +27,7 @@ function Home() {
 			<img className={styles["logo-game"]} src={GameLogo} alt="Logo do game" />
 			<div className={styles["buttons"]}>
 				<div className={styles["buttons-left"]}>
-					<Button type="primary" size="medium" icon="bxs-quote-alt-left" onClick={() => (getToken === null ? setIsTermModalOpen(true) : navigate("/phrase"))} />
+					<Button type="primary" size="medium" icon="bxs-quote-alt-left" onClick={() => (getToken === null ? navigate("/register") : navigate("/phrase"))} />
 					<Button
 						type="primary"
 						size="medium"
@@ -36,7 +35,7 @@ function Home() {
 						onClick={() => window.open("https://www.instagram.com/softexpert/", "_blank")}
 					/>
 				</div>
-				<Button type="primary" size="large" icon="bx-play" onClick={() => (getToken === null ? setIsTermModalOpen(true) : navigate("/map"))} />
+				<Button type="primary" size="large" icon="bx-play" onClick={() => (getToken === null ? navigate("/register") : navigate("/map"))} />
 				<div className={styles["buttons-right"]}>
 					{/* Modal que aprensenta os prêmios, voltar quando passar a fase de teste */}
 					{/* <Button type="primary" size="medium" icon="bx-trophy" onClick={() => setIsPrizesModalOpen(true)} /> */}
