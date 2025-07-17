@@ -8,8 +8,6 @@ import {formatPhone, validateEmail, validatePassword, validatePhone} from "@comp
 import SoftExtendedLogo from "../../../assets/SoftExtendedLogo.png";
 
 import styles from "../style.module.css";
-import Modal from "@components/Home/Modal";
-import Term from "@components/Home/Term";
 
 const initialInputs = [
 	{id: "firstName", label: "Nome", isRequired: true, type: "text", value: ""},
@@ -105,12 +103,11 @@ function Register() {
 				</div>
 				<checkbox className={styles.checkbox}>
 					<input type="checkbox" id="confirmTerm" onChange={(e) => setConfirmTerm(e.target.checked)} />
-					<label htmlFor="confirmTerm">Concordo com os termos e condições. </label>
+					<label htmlFor="confirmTerm">Concordo com os Termos e Condições de Uso e Política de Privacidade. </label>
 				</checkbox>
-				<span className={styles["term"]} onClick={() => setIsTermModalOpen(true)}>Ler termos e condições </span>
-				<Modal title="Termos e Condições" show={isTermModalOpen} onClose={() => setIsTermModalOpen(false)}>
-					<Term onConfirm={() => setIsTermModalOpen(false)} />
-				</Modal>
+				<a className={styles["term"]} href="/TermoSoftChallenge.pdf" target="_blank" rel="noopener noreferrer">
+					Ler Termos e Condições de Uso e Política de Privacidade
+				</a>
 				<div className={styles.formFooter}>
 					<Button
 						isDisabled={!canSubmit || !confirmTerm}

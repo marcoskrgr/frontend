@@ -6,19 +6,24 @@ import SoftExpertLogoBlue from "../../../assets/SoftExtendedLogoBlue.png";
 import styles from "./style.module.css";
 
 function Prizes() {
-
 	const prizesToWin = [
 		{
 			id: 1,
-			name: "Alexa",
-			src:"https://api.store.vivo.com.br/medias/96Wx96H-22021855-1-.jpg?context=bWFzdGVyfGF6dXJlaW1hZ2VzfDg2OTB8aW1hZ2UvanBlZ3xhR1kwTDJnMVpTODRPVGc1TWpVek1EYzBPVGMwTHprMlYzZzVOa2hmTWpJd01qRTROVFZmSUNBb01Ta3VhbkJufDA5OTRiYmExMDQ0N2MzNzA4OTJkNGJhNGM2ODczYTg2OGRjY2NiOWY4ZWQzZjNhYjlmZjFlMTA5MTA5MDVlNTk",
-			description: "Dispositivo inteligente com assistente virtual da Amazon, ideal para controlar sua casa por voz, ouvir músicas e obter informações em tempo real."
+			name: "Kindle",
+			src: "https://a-static.mlcdn.com.br/800x560/kindle-11a-16gb-modelo-2024-com-tela-antirreflexo-luz-frontal-ajustavel-e-bateria-de-longa-duracao-cor-verde-b0cp31qs6r-amazon-amazon/mirandacomputacao/48997/1e910d8dd8c9ca518fc1ade77fd19245.jpeg",
+			description: "Kindle 11ª (16GB modelo 2024), com Tela Antirreflexo, Luz Frontal Ajustável e Bateria de Longa Duração - Cor Verde."
 		},
 		{
 			id: 2,
-			name: "Mochila",
-			src:"https://images4.kabum.com.br/produtos/fotos/131924/mochila-lenovo-casual-b210-ate-15-6-para-notebook-gx40q17225_1636135061_g.jpg",
-			description: "Mochila espaçosa e durável, com compartimento para notebook e bolsos organizadores, ideal para estudos, trabalho ou viagens curtas."
+			name: "Mini Projetor",
+			src: "https://imgs.search.brave.com/_cLKn4Y-juz9xWioeNpeTnYYREnwDhwNTdY2rxAh2G8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMtbmEuc3NsLWlt/YWdlcy1hbWF6b24u/Y29tL2ltYWdlcy9J/LzQxQlJoRWxGcmRM/LmpwZw",
+			description: "Mini Projetor Portátil 4k Android Full Hd Smart Wifi Cinema Cor Branco."
+		},
+		{
+			id: 3,
+			name: "Fone de Ouvido",
+			src: "https://a-static.mlcdn.com.br/800x560/fone-de-ouvido-jbl-tune-520bt-sem-fio-com-microfone-cores/supryshop/jbl520btpreto/b5af5aba577ac3628bcea3210f5d4d4d.jpeg",
+			description: "JBL, Fone de Ouvido On ear, Tune 520BT - Preto."
 		}
 	];
 
@@ -42,7 +47,7 @@ function Prizes() {
 					<div key={index} className={styles["prize-item"]}>
 						<div className={styles["prize-icon"]}>
 							<Hexagon src={prize.src} size={150} />
-					</div>
+						</div>
 						<div className={styles["prize-info"]}>
 							<h3>{prize.name}</h3>
 							<p>{prize.description}</p>

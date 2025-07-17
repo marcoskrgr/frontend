@@ -11,7 +11,6 @@ import GameLogo from "../../assets/GameLogo.svg";
 import {useAuthStore} from "@stores/useAuth";
 
 import styles from "./style.module.css";
-import Term from "@components/Home/Term";
 
 function Home() {
 	const navigate = useNavigate();
@@ -37,8 +36,7 @@ function Home() {
 				</div>
 				<Button type="primary" size="large" icon="bx-play" onClick={() => (getToken === null ? navigate("/register") : navigate("/map"))} />
 				<div className={styles["buttons-right"]}>
-					{/* Modal que aprensenta os prêmios, voltar quando passar a fase de teste */}
-					{/* <Button type="primary" size="medium" icon="bx-trophy" onClick={() => setIsPrizesModalOpen(true)} /> */}
+					<Button type="primary" size="medium" icon="bx-trophy" onClick={() => setIsPrizesModalOpen(true)} />
 					<Button type="primary" size="medium" icon="bx-help-circle" onClick={() => setIsAboutModalOpen(true)} />
 				</div>
 			</div>
