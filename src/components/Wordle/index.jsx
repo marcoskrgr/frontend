@@ -7,19 +7,42 @@ import styles from "./styles.module.css";
 const MAX_ATTEMPTS = 6;
 const WORD_LENGTH = 5;
 
-function Grid({guesses, currentGuess, getLetterColor, isGameOver}) {
+function Grid({ guesses, currentGuess, getLetterColor, isGameOver, activeIndex, setActiveIndex }) {
 	return (
 		<div className={styles.grid}>
-			<span className={styles["label"]}>Descubra a palavra do mundo tech</span>
-			{Array.from({length: MAX_ATTEMPTS}).map((_, rowIndex) => {
-				const guess = guesses[rowIndex] || (rowIndex === guesses.length ? currentGuess : new Array(WORD_LENGTH).fill({char: ""}));
+			<span className={styles.label}>Descubra a palavra do mundo tech</span>
+
+			{Array.from({ length: MAX_ATTEMPTS }).map((_, rowIndex) => {
 				const isActiveRow = !isGameOver && rowIndex === guesses.length;
+				const guess =
+					guesses[rowIndex] ||
+					(isActiveRow ? currentGuess : new Array(WORD_LENGTH).fill({ char: "" }));
 
 				return (
-					<div key={`row-${rowIndex}`} className={`${styles.row} ${isActiveRow ? styles.activeRow : ""}`}>
-						{guess.map(({char, status}, colIndex) => {
+					<div
+						key={`row-${rowIndex}`}
+						className={`${styles.row} ${isActiveRow ? styles.activeRow : ""}`}
+					>
+						{guess.map(({ char, status }, colIndex) => {
 							const color = rowIndex < guesses.length ? getLetterColor(status) : "";
-							return <Button key={`${rowIndex}-${colIndex}`} letter={char} color={color} />;
+							const isActiveCell = isActiveRow && activeIndex === colIndex;
+
+							return (
+								<div
+									key={`${rowIndex}-${colIndex}`}
+									onClick={() => {
+										if (isActiveRow) {
+											setActiveIndex(colIndex);
+										}
+									}}
+									style={{
+										cursor: isActiveRow ? "pointer" : "default",
+										position: "relative",
+									}}
+								>
+									<Button letter={char} color={color} isActive={isActiveCell} />
+								</div>
+							);
 						})}
 					</div>
 				);

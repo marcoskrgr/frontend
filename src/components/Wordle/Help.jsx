@@ -37,6 +37,8 @@ function Help() {
 			<ol start="3">
 				<li>🎯 Continue tentando até acertar a palavra ou esgotar as 6 tentativas.</li>
 			</ol>
+			<p className={style.sectionSpacing}>Atenção ‼️</p>
+			<p>A palavra vai ser do mundo tech, logo pode ser tanto em inglês quanto em português.</p>
 			<div className={style.answerImages}></div>
 			<p>🏁 O jogo termina quando você acerta a palavra ou usa todas as tentativas. Boa sorte e divirta-se! 🚀</p>
 		</>

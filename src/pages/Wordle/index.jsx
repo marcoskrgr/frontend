@@ -20,15 +20,17 @@ const getDefaultGuess = () => new Array(CONFIG.WORD_LENGTH).fill({char: ""});
 
 const filledCharacterCount = (guess) => guess.reduce((count, item) => (item.char === "" ? count - 1 : count), CONFIG.WORD_LENGTH);
 
-const addGuessCharacter = (guess, char) => {
-	const idx = guess.findIndex((item) => item.char === "");
-	if (idx === -1) return guess;
-	return guess.map((item, i) => (i === idx ? {...item, char} : item));
+const addGuessCharacter = (guess, char, index) => {
+	return guess.map((item, i) => (i === index ? { ...item, char } : item));
 };
 
-const removeGuessCharacter = (guess) => guess.map((item, i) => (i === filledCharacterCount(guess) - 1 ? {...item, char: ""} : item));
+const removeGuessCharacter = (guess, index) => {
+	return guess.map((item, i) => (i === index ? { ...item, char: "" } : item));
+};
+
 
 export default function Wordle() {
+	const [activeIndex, setActiveIndex] = useState(0);
 	const [guesses, setGuesses] = useState([]);
 	const [currentGuess, setCurrentGuess] = useState(getDefaultGuess());
 	const [isGameOver, setIsGameOver] = useState(false);
@@ -67,6 +69,7 @@ export default function Wordle() {
 					const newGuesses = [...guesses, guessResult];
 					setGuesses(newGuesses);
 					setCurrentGuess(getDefaultGuess());
+					setActiveIndex((0));
 
 					const playerWon = guessResult.every((letter) => letter.status === LetterStatusEnum.CORRECT);
 					const maxAttemptsReached = newGuesses.length >= CONFIG.MAX_ATTEMPTS;
@@ -76,12 +79,14 @@ export default function Wordle() {
 					}
 				}
 			} else if (normalizedKey === "BACKSPACE") {
-				setCurrentGuess((prev) => removeGuessCharacter(prev));
-			} else if (filledCharacterCount(currentGuess) < CONFIG.WORD_LENGTH && /^[A-Z]$/.test(normalizedKey)) {
-				setCurrentGuess((prev) => addGuessCharacter(prev, normalizedKey));
+				setCurrentGuess((prev) => removeGuessCharacter(prev, activeIndex));
+				setActiveIndex((prev) => Math.max(prev - 1, 0));
+			} else if (/^[A-Z]$/.test(normalizedKey)) {
+				setCurrentGuess((prev) => addGuessCharacter(prev, normalizedKey, activeIndex));
+				setActiveIndex((prev) => Math.min(prev + 1, CONFIG.WORD_LENGTH - 1));
 			}
 		},
-		[currentGuess, guesses, isGameOver]
+		[currentGuess, guesses, isGameOver, activeIndex]
 	);
 
 	const getColor = (status) => {
@@ -94,7 +99,14 @@ export default function Wordle() {
 	return (
 		<div style={{padding: "24px"}}>
 			<GameHeader task="Task #3" isHelpOpen={isHelpOpen} setIsHelpOpen={setIsHelpOpen} ContentHelp={Help} />
-			<Grid guesses={guesses} isGameOver={isGameOver} currentGuess={currentGuess} getLetterColor={getColor} />
+			<Grid
+				guesses={guesses}
+				isGameOver={isGameOver}
+				currentGuess={currentGuess}
+				getLetterColor={getColor}
+				activeIndex={activeIndex}
+				setActiveIndex={setActiveIndex}
+			/>
 			<Keyboard onKeyPress={handleKeyPress} guesses={guesses} getLetterColor={getColor} />
 			<FinishModal showModal={isGameOver} />
 		</div>
