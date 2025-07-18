@@ -254,7 +254,7 @@
 
   .key {
     width: 7vw;
-    height: 13vw;
+    height: 12vw;
     font-size: 1.8em;
     border-radius: 32px;
     margin: .8vw;
@@ -298,8 +298,8 @@
   }
 
   .grid .row {
-    gap: 2vw;
-    margin-bottom: 1vh;
+    gap: 1vw;
+    margin-bottom: 0vh;
   }
 
   .keyboard {
