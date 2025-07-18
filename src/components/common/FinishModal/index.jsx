@@ -20,7 +20,7 @@ function FinishModal({ showModal }) {
 		}
 	}, [showModal])
 
-	return (
+	return  (
 		<div className={modalClasses}>
 			<div className={styles["content"]}></div>
 			<div className={styles["modal"]}>

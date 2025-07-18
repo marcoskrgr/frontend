@@ -1,5 +1,6 @@
 .container {
 	padding: 24px;
+	overflow: auto;
 }
 
 .header {
