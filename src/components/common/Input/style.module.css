@@ -82,6 +82,11 @@ input[type="number"] {
 	-moz-appearance: textfield;
 }
 
+.error {
+	color: red !important;
+	font-weight: 600 !important;
+}
+
 @media (min-width: 2000px) {
 	.input {
 		height: 6vh;

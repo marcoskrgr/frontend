@@ -22,6 +22,7 @@ function Register() {
 	const navigate = useNavigate();
 	const [inputs, setInputs] = useState(initialInputs);
 	const [confirmTerm, setConfirmTerm] = useState(false);
+	const [isLoading, setIsLoading] = useState(false)
 
 	const {register} = createAuthController();
 
@@ -66,17 +67,18 @@ function Register() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
+		setIsLoading(true)
 		const userData = {};
+
 		inputs.forEach(({id, value}) => {
 			if (id !== "confPass") {
 				userData[id] = value;
 			}
 		});
-
 		const response = await register(userData);
 
 		if (response) {
+			setIsLoading(false)
 			navigate("/confirm-email");
 		}
 	};
@@ -109,10 +111,10 @@ function Register() {
 				</a>
 				<div className={styles.formFooter}>
 					<Button
-						isDisabled={!canSubmit || !confirmTerm}
+						isDisabled={!canSubmit || !confirmTerm || isLoading}
 						type="primary"
 						size="small"
-						text="Continuar"
+						text={isLoading ? "Carregando..." : "Continuar"}
 						onClick={handleSubmit}
 						customStyle={{width: "100%"}}
 					/>
