@@ -37,6 +37,7 @@ function Hexagon({
     height: "100%",
     position: "relative",
     transformStyle: "preserve-3d",
+    aspectRatio: 1,
     transition: "transform 0.6s",
     transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)",
   };
