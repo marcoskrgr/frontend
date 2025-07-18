@@ -32,7 +32,7 @@ export default function GameHeader({task, ContentHelp, isHelpOpen, setIsHelpOpen
 
 	return (
 		<div className={style.header}>
-			<Button dropdownOptions={options} onSelectOption={handleSelectOption} type="primary" size="medium" icon="bx-menu" />
+			<Button dropdownOptions={options} onSelectOption={handleSelectOption} type="primary" size="small" icon="bx-menu" />
 			<span className={style.task}>{task}</span>
 			<div className={style["tickets"]}>
 				<img className={style["icon"]} src={Ticket} />

@@ -69,12 +69,19 @@ span {
     width: 60%;
   }
 
+
   .task {
     font-size: 3em !important;
   }
 
+  .tickets {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .tickets img {
-    width: 120px;
+    width: 8vw;
     margin-right: 2vw;
   }
 
