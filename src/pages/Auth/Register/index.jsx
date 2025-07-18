@@ -78,9 +78,9 @@ function Register() {
 		const response = await register(userData);
 
 		if (response) {
-			setIsLoading(false)
 			navigate("/confirm-email");
 		}
+		setIsLoading(false)
 	};
 
 	return (
