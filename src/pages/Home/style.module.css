@@ -50,7 +50,7 @@
 	left: 0;
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 1000px) {
 	.content .logo-soft:nth-child(1) {
 		width: 68%;
 	}

@@ -64,7 +64,7 @@ span {
   font-family: "Inter";
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 1000px) {
   .logo {
     width: 60%;
   }

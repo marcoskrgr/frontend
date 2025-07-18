@@ -31,7 +31,7 @@ function Prizes() {
 
 	useEffect(() => {
 		const updateSize = () => {
-			const isLargeScreen = window.innerWidth >= 1100;
+			const isLargeScreen = window.innerWidth >= 1000;
 			setHexagonSize(isLargeScreen ? 700 : 150);
 		};
 

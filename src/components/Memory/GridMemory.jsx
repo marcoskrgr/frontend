@@ -9,7 +9,7 @@ import styles from "./style.module.css";
 function GridMemory({setGameFinished}) {
 	const selectedRef = useRef([]);
 	const [cards, setCards] = useState([]);
-	const [hexagonSize, setHexagonSize] = useState(window.innerWidth > 1100 ? 500 : 100);
+	const [hexagonSize, setHexagonSize] = useState(window.innerWidth > 1000 ? 500 : 100);
 
 	const {getMemoryData, memoryGuess} = GameRepository();
 
@@ -29,7 +29,7 @@ function GridMemory({setGameFinished}) {
 
 	useEffect(() => {
 		const handleResize = () => {
-			setHexagonSize(window.innerWidth > 1100 ? 500 : 100);
+			setHexagonSize(window.innerWidth > 1000 ? 500 : 100);
 		};
 
 		window.addEventListener("resize", handleResize);

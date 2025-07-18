@@ -34,7 +34,7 @@
 }
 
 
-@media (min-width: 1100px) {
+@media (min-width: 1000px) {
   .modalContent {
     display: flex;
     flex-direction: column;
