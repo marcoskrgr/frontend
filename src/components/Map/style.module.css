@@ -224,7 +224,7 @@
 }
 
 
-@media (min-width: 2000px) {
+@media (min-width: 1100px) {
 	.column .title {
 		padding-right: 1vw;
 		border-right: 1vw solid white;

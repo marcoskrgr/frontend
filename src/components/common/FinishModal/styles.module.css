@@ -132,7 +132,7 @@
   margin-bottom: 14px;
 }
 
-@media (min-width: 2000px) {
+@media (min-width: 1100px) {
   .modal .header h2 {
     font-size: 3rem !important;
     margin-bottom: 1em;

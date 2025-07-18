@@ -14,7 +14,7 @@
   gap: 3vh;
 }
 
-@media (min-width: 2000px) {
+@media (min-width: 1100px) {
   .content {
     padding: 6vw;
   }

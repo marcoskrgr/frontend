@@ -27,7 +27,7 @@
   text-align: center;
 }
 
-@media (min-width: 2000px) {
+@media (min-width: 1100px) {
   .container .logo {
     width: 60%;
   }
