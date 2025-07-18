@@ -31,15 +31,15 @@
 .sectionSpacing {
   margin-top: 16px;
   margin-bottom: 12px;
-	font-family: "Bungee", sans-serif !important;
-	color: var(--future-flow);
+  font-family: "Bungee", sans-serif !important;
+  color: var(--future-flow);
   line-height: 1.6;
 }
 
 .label {
   margin: 3vh 0;
   color: white;
-	text-align: center;
+  text-align: center;
 }
 
 .input:disabled {
@@ -246,6 +246,73 @@
 
 .active {
   border: 2px solid rgba(255, 255, 255, 0.719);
+}
+
+
+/* Responsive adjustments */
+@media (min-width: 2000px) {
+
+  .key {
+    width: 7vw;
+    height: 13vw;
+    font-size: 1.8em;
+    border-radius: 32px;
+    margin: .8vw;
+  }
+
+  .label {
+    font-size: 2em !important;
+    padding-inline: 3vw;
+    margin: 2vh 0;
+  }
+
+  .cell {
+    width: 12vw;
+    font-size: 2.5em;
+    height: 12vw;
+    border-radius: 32px;
+  }
+
+  .cell::before,
+  .key::before {
+    content: "";
+    position: absolute;
+    top: -1vw;
+    left: -1vw;
+    right: -1vw;
+    bottom: -1vw;
+    z-index: -1;
+    border-radius: 1vw;
+  }
+
+  .cell::after,
+  .key::after {
+    content: "";
+    position: absolute;
+    top: 1vw;
+    left: 1vw;
+    right: 1vw;
+    bottom: 1vw;
+    z-index: -1;
+    border-radius: 1vw;
+  }
+
+  .grid .row {
+    gap: 2vw;
+    margin-bottom: 1vh;
+  }
+
+  .keyboard {
+    margin-top: 1vh !important;
+  }
+
+  .active {
+    border: 1vw solid rgba(255, 255, 255, 0.719);
+  }
+
+  .enter {
+    width: 21vw;
+  }
 }
 
 /* Responsive adjustments */

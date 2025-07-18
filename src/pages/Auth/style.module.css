@@ -12,14 +12,15 @@
 
 .logo {
 	width: 225px;
-  margin: 15px 0;
+	margin: 15px 0;
 }
 
 .logoLogin {
 	width: 290px;
 }
 
-.term, .checkbox label {
+.term,
+.checkbox label {
 	font-family: "Inter";
 	color: white;
 	font-size: 13px;
@@ -131,4 +132,41 @@
 	display: flex;
 	flex-direction: column;
 	gap: 1dvh;
+}
+
+@media (min-width: 2000px) {
+	.logo {
+		width: 60%;
+	}
+
+	.fields {
+		gap: 3vh;
+	}
+
+	.checkbox {
+		gap: 3vw;
+		margin: 2vh 0;
+	}
+
+	.checkbox input {
+		width: 7vw;
+		height: 5vw;
+	}
+
+	.container {
+		padding: 5vw;
+	}
+
+	.logoLogin {
+		margin: 3vh 0;
+		width: 80%;
+	}
+
+	.a {
+		margin: 2vh 0;
+	}
+
+	.help-text {
+		margin-top: 1vh;
+	}
 }

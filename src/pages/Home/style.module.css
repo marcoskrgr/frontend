@@ -38,7 +38,8 @@
 	border-top-left-radius: 0;
 }
 
-.buttons-left, .buttons-right {
+.buttons-left,
+.buttons-right {
 	display: flex;
 	flex-direction: column;
 	gap: 1vh;
@@ -47,4 +48,14 @@
 .buttons-left {
 	position: absolute;
 	left: 0;
+}
+
+@media (min-width: 2000px) {
+	.content .logo-soft:nth-child(1) {
+		width: 68%;
+	}
+	
+	.content {
+		padding: 7vh 0;
+	}
 }

@@ -14,8 +14,8 @@
 
 .logo {
 	width: 200px;
-  margin-top: 24px;
-  margin-bottom: 32px;
+	margin-top: 24px;
+	margin-bottom: 32px;
 }
 
 .instructions h2 {
@@ -33,7 +33,6 @@
 
 .instructions li {
 	margin-bottom: 12px;
-	font-weight: 600;
 	font-size: 15px;
 }
 
@@ -57,7 +56,6 @@
 
 .prize-info {
 	padding-top: 4px;
-	line-height: 19px;
 	font-weight: 400;
 }
 
@@ -66,10 +64,41 @@
 	font-size: 14px;
 	margin-bottom: 4px;
 	font-weight: 600;
-	line-height: 27px;
 }
 
 .prize-info p {
 	font-size: 12px;
 	color: #555;
+}
+
+
+@media (min-width: 2000px) {
+	.logo {
+		width: 60%;
+		margin-top: 24px;
+		margin-bottom: 32px;
+	}
+
+	.container {
+		width: 100%;
+	}
+
+	.instructions h2,
+	.prizes h2 {
+		margin: 2vh 0;
+		line-height: normal;
+	}
+
+	.prize-item {
+		margin-bottom: 4vh;
+	}
+
+
+	.prize-info h3 {
+		font-size: 14px;
+	}
+
+	.prize-icon {
+		margin-right: 2vw;
+	}
 }

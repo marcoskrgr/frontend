@@ -5,20 +5,7 @@ import Button from "../Button";
 
 import styles from "./style.module.css";
 
-function Input({
-	id,
-	label,
-	value,
-	onChange,
-	error,
-	isValid,
-	customStyle = {},
-	showButton = false,
-	type = "text",
-	min,
-	max,
-	...props
-}) {
+function Input({id, label, value, onChange, error, isValid, customStyle = {}, showButton = false, type = "text", min, max, ...props}) {
 	const inputClass = classNames(styles.gradient, {
 		[styles.invalid]: isValid === false || error === true,
 		[styles.valid]: isValid === true && error === false
@@ -34,7 +21,7 @@ function Input({
 			return;
 		}
 
-		onChange({ target: { value: newValue } });
+		onChange({target: {value: newValue}});
 	};
 
 	return (
@@ -44,16 +31,16 @@ function Input({
 			</label>
 			<div className={styles["input-wrapper"]}>
 				<div className={inputClass} style={customStyle}>
-					{type === "long_text" ?
+					{type === "long_text" ? (
 						<textarea
 							id={id}
-							className={styles.input}
+							className={`${styles.input} ${styles.textarea}`}
 							value={value}
-							style={{ height: "300px", resize: "none", padding: "10px" }}
 							onChange={onChange}
 							{...props}
 						/>
-						: <input
+					) : (
+						<input
 							id={id}
 							type={type}
 							className={styles.input}
@@ -62,7 +49,8 @@ function Input({
 							max={isNumberInput ? max : undefined}
 							onChange={onChange}
 							{...props}
-						/>}
+						/>
+					)}
 				</div>
 				{isNumberInput && showButton && (
 					<div className={styles["buttons"]}>

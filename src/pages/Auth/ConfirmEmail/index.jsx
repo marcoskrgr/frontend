@@ -78,9 +78,9 @@ function ConfirmEmail() {
 						error={wasSubmitted && !isCorrect ? "Código inválido" : null}
 						disabled={isCorrect}
 					/>
-					<span className={styles["help-text"]}>
+					<p className={styles["help-text"]}>
 						Enviado para {userData.email}. <span>Verifique o Spam</span>
-					</span>
+					</p>
 				</div>
 				<div className={styles["buttons"]}>
 					<Button

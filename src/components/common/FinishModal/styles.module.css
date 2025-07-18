@@ -126,3 +126,36 @@
   font-size: 1.5rem;
   margin-bottom: 14px;
 }
+
+@media (min-width: 2000px) {
+  .modal .header h2 {
+    font-size: 3rem !important;
+    margin-bottom: 1em;
+  }
+
+
+  .modal .header {
+    padding: 6vw;
+  }
+
+  .messageHeader {
+    margin-top: 3vh;
+    font-size: 2.6em !important;
+  }
+
+  .message {
+    padding-inline: 7vw;
+    font-size: 2.1em !important;
+  }
+
+  .modal {
+    border-top-right-radius: 4vw;
+    border-top-left-radius: 4vw;
+    overflow: hidden;
+  }
+
+  .buttons {
+    gap: 3vw;
+    margin-top: 2vh;
+  }
+}

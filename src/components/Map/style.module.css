@@ -33,15 +33,19 @@
 	0% {
 		transform: translateX(0);
 	}
+
 	25% {
 		transform: translateX(-5px);
 	}
+
 	50% {
 		transform: translateX(5px);
 	}
+
 	75% {
 		transform: translateX(-5px);
 	}
+
 	100% {
 		transform: translateX(0);
 	}
@@ -156,10 +160,11 @@
 }
 
 .player-profile {
-/* 	position: fixed;
+	/* 	position: fixed;
 	z-index: 10;
 	top: 25px; */
 }
+
 /* 
 .name-tickets {
 	margin-left: 58px;
@@ -176,19 +181,22 @@
 }
 
 .name {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 100%;
+	width: fit-content;
+	display: flex;
 }
 
 
-.player-profile .name {	
+.player-profile .name {
 	border-bottom-left-radius: 0;
 }
 
 .player-profile .tickets {
 	width: fit-content;
+	padding-top: 2vh !important;
 	border-top: 0;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
@@ -213,4 +221,77 @@
 	margin-right: 14px;
 	padding-right: 7px;
 	font-size: 18px;
+}
+
+
+@media (min-width: 2000px) {
+	.column .title {
+		padding-right: 1vw;
+		border-right: 1vw solid white;
+	}
+
+	.name,
+	.tickets {
+		font-size: 2.3em !important;
+		border: 22px solid var(--expert-vision) !important;
+		padding: 2vw !important;
+		border-radius: 4vw !important;
+	}
+
+	/* .tickets {
+		padding-top: 2vh !important;
+	} */
+
+	.tickets img {
+		width: 125px !important;
+		margin-right: 2vw !important;
+	}
+
+	.player-profile .name {
+		width: 100%;
+		border-bottom-left-radius: 0 !important;
+	}
+
+	.player-profile .tickets {
+		width: fit-content;
+		border-top: 0 !important;
+		border-top-left-radius: 0 !important;
+		border-top-right-radius: 0 !important;
+	}
+
+	.title {
+		font-size: 2em !important;
+	}
+
+	.card {
+		border-radius: 1vw;
+		border-left: 1.5vw solid;
+		padding: 3.5vw;
+	}
+
+	.easy {
+		border-color: var(--green);
+	}
+
+	.medium {
+		border-color: var(--yellow);
+	}
+
+	.hard {
+		border-color: var(--red);
+	}
+
+	.cards {
+		padding: 2vw;
+	}
+
+	.tag {
+		font-size: 1.4em;
+		padding: 1vw;
+		border-radius: 1vw;
+	}
+
+	.card .content {
+		gap: 1vh;
+	}
 }

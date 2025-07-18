@@ -9,6 +9,7 @@ import styles from "./style.module.css";
 function GridMemory({setGameFinished}) {
 	const selectedRef = useRef([]);
 	const [cards, setCards] = useState([]);
+	const [hexagonSize, setHexagonSize] = useState(window.innerWidth > 2000 ? 500 : 100);
 
 	const {getMemoryData, memoryGuess} = GameRepository();
 
@@ -25,6 +26,15 @@ function GridMemory({setGameFinished}) {
 	// 	// Retorna os primeiros 18 cards SEM embaralhar, mantendo a ordem
 	// 	return array.slice(0, 18);
 	// }
+
+	useEffect(() => {
+		const handleResize = () => {
+			setHexagonSize(window.innerWidth > 2000 ? 500 : 100);
+		};
+
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -90,7 +100,7 @@ function GridMemory({setGameFinished}) {
 					{firstRow.map((card, idx) => (
 						<Hexagon
 							key={card.id}
-							size={100}
+							size={hexagonSize}
 							srcBack={card.image}
 							flipped={card.flipped || card.guessed}
 							stage={card.guessed ? 3 : 2}
@@ -107,7 +117,7 @@ function GridMemory({setGameFinished}) {
 						{secondRow.map((card, idx) => (
 							<Hexagon
 								key={card.id}
-								size={100}
+								size={hexagonSize}
 								srcBack={card.image}
 								flipped={card.flipped || card.guessed}
 								stage={card.guessed ? 3 : 2}

@@ -10,6 +10,8 @@ import FinishModal from "@components/common/FinishModal";
 import Help from "@components/Wordle/Help";
 import {useAuthStore} from "@stores/useAuth";
 
+import styles from "./style.module.css"
+
 const CONFIG = {
 	MAX_ATTEMPTS: 6,
 	WORD_LENGTH: 5,
@@ -97,7 +99,7 @@ export default function Wordle() {
 	};
 
 	return (
-		<div style={{padding: "24px"}}>
+		<div className={styles["container"]}>
 			<GameHeader task="Task #3" isHelpOpen={isHelpOpen} setIsHelpOpen={setIsHelpOpen} ContentHelp={Help} />
 			<Grid
 				guesses={guesses}

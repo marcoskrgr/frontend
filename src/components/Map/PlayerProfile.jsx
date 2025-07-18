@@ -15,7 +15,7 @@ function PlayerProfile({name, tickets}) {
 				{<div className={profileClasses}></div>}
 			</div> */}
 			{/* 			<div className={styles["name-tickets"]}> */}
-			<div className={styles["name"]}>{name}</div>
+			<span className={styles["name"]}>{name}</span>
 			<div className={styles["tickets"]}>
 				<img className={styles["icon"]} src={Ticket} />
 				{tickets}

@@ -193,3 +193,41 @@
 	flex-direction: column;
 	gap: 34px;
 }
+
+@media (min-width: 2000px) {
+	.container {
+		padding: 6vw;
+	}
+
+	.question {
+		font-size: 3em;
+		line-height: normal;
+	}
+
+	.question-index {
+		font-size: 2em !important;
+	}
+
+	.answer-button {
+		padding: 7vw;
+		line-height: normal;
+		border-radius: 3vw;
+	}
+
+	.answer-button::after,
+	.answer-correct::after,
+	.answer-selected-correct::after,
+	.answer-selected-incorrect::after {
+		border-radius: 2vw !important;
+		padding: 1vw !important;
+	}
+
+	.answer-button p {
+		font-size: 6.5em !important;
+		line-height: normal;
+	}
+
+	.nps-input-wrapper {
+		gap: 2vh;
+	}
+}

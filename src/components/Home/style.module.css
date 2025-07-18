@@ -80,7 +80,8 @@
   padding: 23px;
 }
 
-.modal .content p, .modal .content h2{
+.modal .content p,
+.modal .content h2 {
   font-family: "Inter", sans-serif;
 }
 
@@ -88,4 +89,28 @@
   font-size: 1.5rem;
   margin: 0;
   width: 71%;
+}
+
+@media (min-width: 2000px) {
+  .modal .header h2 {
+    font-size: 3rem !important;
+  }
+
+  .modal .header {
+    padding: 6vw 0;
+  }
+
+  .modal .content {
+    padding: 5vw;
+  }
+
+  .tickets span {
+    font-size: 2em !important;
+  }
+
+  .tickets img {
+    width: 125px;
+    margin-right: 2vw;
+  }
+
 }

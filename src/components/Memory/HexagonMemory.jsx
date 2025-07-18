@@ -13,7 +13,7 @@ function Hexagon({
   flipped = false,
   onClick,
 }) {
-  const dimensionW = "78px";
+  const dimensionW = typeof size === "number" ? `${size * 0.79}px` : size;
   const dimensionH = typeof size === "number" ? `${size * 0.866}px` : size;
 
   const borderWidth = 3.5;

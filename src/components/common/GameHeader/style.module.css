@@ -22,7 +22,8 @@
   font-size: 27px;
 }
 
-.ticket, .task {
+.ticket,
+.task {
   color: #ffffff;
 }
 
@@ -59,6 +60,31 @@ span {
   overflow-y: auto;
 }
 
-.modalContent li  {
+.modalContent li {
   font-family: "Inter";
+}
+
+@media (min-width: 2000px) {
+  .logo {
+    width: 60%;
+  }
+
+  .task {
+    font-size: 3em !important;
+  }
+
+  .tickets img {
+    width: 120px;
+    margin-right: 2vw;
+  }
+
+  .ticket {
+    font-size: 2em !important;
+  }
+
+  	.modalContent {
+		display: flex;
+		flex-direction: column;
+		gap: 2vh;
+	}
 }

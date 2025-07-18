@@ -1,7 +1,7 @@
 .logo {
 	width: 200px;
-  margin-top: 24px;
-  margin-bottom: 32px;
+	margin-top: 24px;
+	margin-bottom: 32px;
 }
 
 .container {
@@ -19,7 +19,6 @@
 .desc {
 	text-align: left;
 	font-family: "Inter", Helvetica, sans-serif, sans-serif !important;
-	font-weight: 550;
 	white-space: normal;
 }
 
@@ -44,7 +43,8 @@
 }
 
 
-.credit-left, .credit-right {
+.credit-left,
+.credit-right {
 	border-radius: 8px;
 	display: flex;
 	gap: 10px;
@@ -94,4 +94,24 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+@media (min-width: 2000px) {
+	.logo {
+		width: 60%;
+	}
+
+	.strong-blue {
+		font-size: 1em !important;
+	}
+
+	.titleCredits {
+		margin: 4vh;
+	}
+
+	.credit-left,
+	.credit-right {
+		gap: 2vw;
+
+	}
 }

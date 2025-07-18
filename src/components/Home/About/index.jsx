@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 
 import Hexagon from "../../common/Hexagon";
 import {credits} from "./credits";
@@ -7,15 +7,26 @@ import SoftExpertLogoBlue from "../../../assets/SoftExtendedLogoBlue.png";
 import styles from "./style.module.css";
 
 function About() {
+	const [hexagonSize, setHexagonSize] = useState(window.innerWidth > 2000 ? 500 : 100);
+
+	useEffect(() => {
+		const handleResize = () => {
+			setHexagonSize(window.innerWidth > 2000 ? 500 : 100);
+		};
+
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
+
 	return (
 		<div className={styles["container"]}>
 			<img className={styles["logo"]} src={SoftExpertLogoBlue} alt="Logo da SoftExpert" />
 			<div className={styles["desc-container"]}>
-				<div className={styles["desc"]}>
+				<p className={styles["desc"]}>
 					Este jogo foi desenvolvido para ser apresentado em eventos, trazendo uma experiência interativa e envolvente para os
 					participantes. Criado com o objetivo de testar conhecimentos de forma dinâmica e divertida, o jogo desafia os jogadores com
-					perguntas sobre a <span className={styles["strong-blue"]}>SoftExpert</span>, tecnologia, programação e inovações do mundo digital.
-				</div>
+					perguntas sobre a <p className={styles["strong-blue"]}>SoftExpert</p>, tecnologia, programação e inovações do mundo digital.
+				</p>
 			</div>
 			<div className={styles["titleCredits"]}>
 				<p>E que rolem os créditos!</p>
@@ -26,7 +37,7 @@ function About() {
 						{index % 2 === 0 ? (
 							<>
 								<div className={styles["hex"]}>
-									<Hexagon size={100} src={credit.profile} />
+									<Hexagon size={hexagonSize} src={credit.profile} />
 								</div>
 								<div className={styles["text"]}>
 									<p className={styles["name"]}>{credit.name}</p>
@@ -40,7 +51,7 @@ function About() {
 									<p className={styles["position"]}>{credit.position}</p>
 								</div>
 								<div className={styles["hex"]}>
-									<Hexagon size={100} src={credit.profile} />
+									<Hexagon size={hexagonSize} src={credit.profile} />
 								</div>
 							</>
 						)}

@@ -33,8 +33,8 @@ function LogoutModal({show, onClose}) {
 					<i className="bx bx-x" onClick={onClose}></i>
 				</div>
 				<div className={styles["content"]}>
-					<p>Só vamos considerar um resultado.</p>
-					<Button type="primary" size="medium" customStyle={{width: "100%"}} onClick={handleLogout} text="Desconectar conta" />
+					<p>Só vamos considerar o resultado de uma conta.</p>
+					<Button type="primary" size="small" customStyle={{width: "100%"}} onClick={handleLogout} text="Desconectar conta" />
 				</div>
 			</div>
 		</>

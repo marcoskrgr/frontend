@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import Hexagon from "../../common/Hexagon";
 import SoftExpertLogoBlue from "../../../assets/SoftExtendedLogoBlue.png";
@@ -27,6 +27,20 @@ function Prizes() {
 		}
 	];
 
+	const [hexagonSize, setHexagonSize] = useState(150);
+
+	useEffect(() => {
+		const updateSize = () => {
+			const isLargeScreen = window.innerWidth >= 2000;
+			setHexagonSize(isLargeScreen ? 700 : 150);
+		};
+
+		updateSize();
+
+		window.addEventListener("resize", updateSize); 
+		return () => window.removeEventListener("resize", updateSize);
+	}, []);
+
 	return (
 		<div className={styles.container}>
 			<img src={SoftExpertLogoBlue} className={styles["logo"]} alt="SoftExpert Logo" />
@@ -46,7 +60,7 @@ function Prizes() {
 				{prizesToWin.map((prize, index) => (
 					<div key={index} className={styles["prize-item"]}>
 						<div className={styles["prize-icon"]}>
-							<Hexagon src={prize.src} size={150} />
+							<Hexagon src={prize.src} size={hexagonSize} />
 						</div>
 						<div className={styles["prize-info"]}>
 							<h3>{prize.name}</h3>

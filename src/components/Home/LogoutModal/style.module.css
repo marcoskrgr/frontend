@@ -58,7 +58,8 @@
   left: 0;
 }
 
-.modal.show, .background.show {
+.modal.show,
+.background.show {
   display: block;
 }
 
@@ -97,6 +98,7 @@
 
 .modal .content p {
   margin-bottom: 10px;
+  text-align: center;
 }
 
 .modal .content p,
@@ -108,4 +110,23 @@
   font-size: 1.5rem;
   margin: 0;
   width: 71%;
+}
+
+@media (min-width: 2000px) {
+  .modal {
+    margin: 5vw;
+    border-radius: 2vw;
+  }
+
+  .modal .content p {
+    margin: 3vh;
+  }
+
+  .modal .content {
+    padding: 4vw;
+  }
+
+  .modal .header {
+    padding: 4vw;
+  }
 }

@@ -38,6 +38,12 @@ textarea {
 	padding-inline: 10px;
 }
 
+.textarea {
+	height: 300px;
+	resize: none;
+	padding: 10px;
+}
+
 .gradient {
 	display: flex;
 	width: 100%;
@@ -50,26 +56,54 @@ textarea {
 .label {
 	color: var(--soft-white);
 	margin-bottom: 4px;
+	font-size: 17px;
+
 }
 
 .input::placeholder {
-  color: #9bb0da;
+	color: #9bb0da;
 }
 
 .invalid {
-  background: linear-gradient(to top, #FF7D7E 0%, #B40048 100%) !important;
+	background: linear-gradient(to top, #FF7D7E 0%, #B40048 100%) !important;
 }
 
 .valid {
-  background: linear-gradient(to top, #00E883 0%, #009182 100%) !important;
+	background: linear-gradient(to top, #00E883 0%, #009182 100%) !important;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+	-webkit-appearance: none;
+	margin: 0;
 }
 
 input[type="number"] {
-  -moz-appearance: textfield;
+	-moz-appearance: textfield;
+}
+
+@media (min-width: 2000px) {
+	.input {
+		height: 6vh;
+		border-radius: 2vw;
+		padding-inline: 2vw;
+	}
+
+	.gradient {
+		border-radius: 2vw;
+		padding: .6vw;
+	}
+
+	.label {
+		margin-bottom: 1vw;
+	}
+
+	.error {
+		margin-top: 1vw;
+	}
+
+	.textarea {
+		height: 40vh;
+		padding: 2vw;
+	}
 }

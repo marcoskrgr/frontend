@@ -22,7 +22,6 @@ function Register() {
 	const navigate = useNavigate();
 	const [inputs, setInputs] = useState(initialInputs);
 	const [confirmTerm, setConfirmTerm] = useState(false);
-	const [isTermModalOpen, setIsTermModalOpen] = useState(false);
 
 	const {register} = createAuthController();
 
